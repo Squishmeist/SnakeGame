@@ -35,7 +35,7 @@ public class MyFrame extends JPanel implements KeyListener
 	public void loadFrame()
 	{
 		/*
-		 * Komið í veg fyrir að myndin blikki.
+		 * Prevent the image from flashing.
 		 */
 		this.setDoubleBuffered(true);
 		jFrame.add(this);
@@ -100,7 +100,7 @@ public class MyFrame extends JPanel implements KeyListener
 
 	public static class MySnake extends SnakeObject implements movable
 	{
-		// Leikjabreytan.
+		// The game variable.
 		private int speed_XY;
 		private int length;
 		private int num; // ?
@@ -145,7 +145,8 @@ public class MyFrame extends JPanel implements KeyListener
 
 		public void keyPressed(KeyEvent e)
 		{
-			// athugaðu lykilinn
+
+			// check the key
 			switch (e.getKeyCode())
 			{
 			case KeyEvent.VK_UP:
@@ -204,7 +205,7 @@ public class MyFrame extends JPanel implements KeyListener
 
 		public void move()
 		{
-			// láta kvikindið hreyfa sig
+			// make the swarm move
 			if (up)
 			{
 				y -= speed_XY;

@@ -5,7 +5,8 @@ public class Snake {
 		private static final long serialVersionUID = -3641221053272056036L;
 
 
-    // TODO: það þarf endurnýjun
+
+    // TODO: it needs a refresh
 
     public static int moving;
 
