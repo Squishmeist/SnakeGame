@@ -17,6 +17,9 @@ public class MusicPlayer extends Thread
 		this.filename = filename;
 	}
 
+	/**
+	 * creates new player object to access BufferedInputStream and play music
+	 */
 	public void play()
 	{
 		new Thread()
@@ -39,8 +42,11 @@ public class MusicPlayer extends Thread
 		}.start();
 	}
 
-
-
+	/**
+	 * @param filename
+	 * creates new object musicPlayer passing filename
+	 * calls play method from MusicPlayer class
+	 */
 	public static void getMusicPlay(String filename)
 	{
 		MusicPlayer musicPlayer = new MusicPlayer(filename);

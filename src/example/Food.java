@@ -21,6 +21,26 @@ public class Food extends MyFrame.SnakeObject
 		this.y = (int) (Math.random() * (560 - h - 40));
 	}
 
+	/**
+	 * @param mySnake
+	 *
+	 * calls getRectangle method in MyFrame class
+	 * 		returns x y w h variables for mySnake
+	 * 		returns x y w h variables for food
+	 *
+	 * checks that the variables for mySnake and food are the same
+	 * and that l is true (meaning food exists)
+	 * and mySnake.l is true (meaning snake exists)
+	 *
+	 * l = false removes the food image from frame
+	 * calls changeLength method in MyFrame class
+	 * 		calls getLength method in MyFrame class
+	 * 			returns length
+	 * 		increments length by 1
+	 * 		updates mySnake length to updated length
+	 *
+	 * 	mySnake.score increments score variable by 521
+	 */
 	public void eaten(MyFrame.MySnake mySnake)	{
 
 		if (mySnake.getRectangle().intersects(this.getRectangle()) && l && mySnake.l)		{
@@ -29,6 +49,15 @@ public class Food extends MyFrame.SnakeObject
 			mySnake.score += 521;
 		}
 	}
+
+	/**
+	 * @param g
+	 *
+	 * i is random image from collection of food images (0 to 10)
+	 * x y are random coordinates on the frame
+	 *
+	 * draws food image based on above variables
+	 */
 	@Override
 	public void draw(Graphics g)
 	{

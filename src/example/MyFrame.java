@@ -27,11 +27,22 @@ public class MyFrame extends JPanel implements KeyListener
 
 	public JFrame jFrame = new JFrame();
 
+	/**
+	 * sets icon images to file - images/snake-logo.png
+	 */
 	public MyFrame()
 	{
 		jFrame.setIconImage(Toolkit.getDefaultToolkit().getImage(MyFrame.class.getResource("images/snake-logo.png")));
 	}
 
+	/**
+	 * sets title name that appears at top of the window
+	 * sets size of game window
+	 * sets location of window to default position
+	 * adds window listener interface to define events for opening and closing the window
+	 * set visible shows window on screen
+	 * new thread begins execution
+	 */
 	public void loadFrame()
 	{
 		/*
@@ -57,6 +68,17 @@ public class MyFrame extends JPanel implements KeyListener
 
 		new MyThread().start();
 	}
+
+	/**
+	 * runs loop while true
+	 * repaint refreshes window
+	 * sleep ceases execution for 30 milliseconds
+	 *
+	 * every 30 milliseconds repaints screen to show snake movement
+	 * repaint function in Play class (paint method)
+	 *
+	 * catch (Exception) in other method and ends the program
+	 */
 	class MyThread extends Thread
 	{
 		@Override
@@ -98,6 +120,9 @@ public class MyFrame extends JPanel implements KeyListener
 
 	}
 
+	/**
+	 *
+	 */
 	public static class MySnake extends SnakeObject implements movable
 	{
 		// The game variable.
@@ -133,11 +158,17 @@ public class MyFrame extends JPanel implements KeyListener
 
 		}
 
+		/**
+		 * @return length
+		 */
 		public int getLength()
 		{
 			return length;
 		}
 
+		/**
+		 * @param length
+		 */
 		public void changeLength(int length)
 		{
 			this.length = length;
@@ -203,6 +234,17 @@ public class MyFrame extends JPanel implements KeyListener
 		}
 
 
+		/**
+		 * checks which key is pressed
+		 * 		if up key is pressed
+		 *			sets y -= XY_speed(5) spaces
+		 *		if down key is pressed
+		 *			sets y += XY_speed(5) spaces
+		 *		if left key is pressed
+		 *      	sets x -= XY_speed(5) spaces
+		 *      if right key is pressed
+		 *         	sets x += XY_speed(5) spaces
+		 */
 		public void move()
 		{
 			// make the swarm move
@@ -222,6 +264,20 @@ public class MyFrame extends JPanel implements KeyListener
 
 		}
 
+		/**
+		 * @param g
+		 *  calls outofBounds method - checks snake is within predefined window size
+		 *  calls eatBody method - checks if snake body is increasing in size
+		 *
+		 *  adds new point x and y to bodyPoints
+		 *  	if bodyPoints size is equal to current length + 1 * (width / speed)
+		 *		removes index 0 if snake reaches max size
+		 *		draws snake head
+		 *
+		 *  calls drawBody method in MyFrame Class - draws snake body
+		 *
+		 *  calls move method - checks which key is pressed
+		 */
 		@Override
 		public void draw(Graphics g)
 		{
@@ -240,6 +296,9 @@ public class MyFrame extends JPanel implements KeyListener
 			move();
 		}
 
+		/**
+		 * checks same value but not same object?
+		 */
 		public void eatBody()
 		{
 			for (Point point : bodyPoints)
@@ -254,6 +313,14 @@ public class MyFrame extends JPanel implements KeyListener
 			}
 		}
 
+		/**
+		 * @param g
+		 *
+		 * gets length of bodyPoints - 1 - (width/speed)
+		 * 		loops length number of times
+		 * 		gets x y of i point
+		 * 		draws snake body
+		 */
 		public void drawBody(Graphics g)
 		{
 			int length = bodyPoints.size() - 1 - num;
@@ -265,6 +332,10 @@ public class MyFrame extends JPanel implements KeyListener
 			}
 		}
 
+		/**
+		 * if snake is outofBounds sets l to false
+		 * ends game
+		 */
 		private void outofBounds()
 		{
 			boolean xOut = (x <= 0 || x >= (870 - w));

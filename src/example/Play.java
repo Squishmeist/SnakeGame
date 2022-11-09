@@ -32,6 +32,31 @@ public class Play extends MyFrame
 		mySnake.keyPressed(e);
 	}
 
+	/**
+	 * @param g the <code>Graphics</code> context in which to paint
+	 *
+	 * displays background image on window
+	 * determines state of the game
+	 *
+	 * snake.l is true
+	 *
+	 * mySnake.draw - called draw method in MyFrame class
+	 * 	 	snake.l = true
+	 *
+	 * 	        calls draw method in MyFrame - draws mySnake
+	 *
+	 * 	        if food.l = true
+	 * 	        	calls draw method in Food class
+	 * 	        	calls eaten method in Food class
+	 *
+	 * 	    	else food.l = false
+	 * 	        	creates new object
+	 *
+	 *		snake.l = false
+	 *	        outputs fail image to screen
+	 *
+	 *	calls drawScore method in Play class - sets font, colour and displays score on screen in x y coordinates
+	 */
 	@Override
 	public void paint(Graphics g)
 	{
@@ -57,6 +82,12 @@ public class Play extends MyFrame
 		drawScore(g);
 	}
 
+	/**
+	 * @param g
+	 *  sets font
+	 * 	sets colour
+	 * 	displays mySnake.score variable in x y coordinates on screen
+	 */
 	public void drawScore(Graphics g)
 	{
 		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
@@ -64,6 +95,11 @@ public class Play extends MyFrame
 		g.drawString("SCORE : " + mySnake.score, 20, 40);
 	}
 
+	/**
+	 * @param args
+	 * creates new play object using loadFrame method in MyFrame class
+	 * runs getMusicPlay method from MusicPlayer class passing filename "frogger.mp3"
+	 */
 	public static void main(String[] args)
 	{
 		new Play().loadFrame();
