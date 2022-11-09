@@ -15,9 +15,9 @@ import javax.swing.JPanel;
 /**
  * 
  * @Project Snakee
- * @Description Hladdu leikinn og endurnýjaðu hann stöðugt
- * @Author Sigurður Sigurðardóttir
- * @version Ekki viss
+ * @Description Load the game and refresh it constantly
+ * @Author Ainsley Lee
+ * @version 1
  */ 
 
 
