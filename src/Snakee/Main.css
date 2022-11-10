@@ -1,0 +1,6 @@
+#start-pane{
+    -fx-background-image: url("images/start-scene.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 870 560;
+    -fx-background-position: center center;
+}

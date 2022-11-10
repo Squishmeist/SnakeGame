@@ -4,4 +4,7 @@ module COMP2013.Coursework {
     opens Snakee;
     opens Snakee.images;
     opens Snakee.sounds;
+
+    requires javafx.fxml;
+    requires javafx.controls;
 }

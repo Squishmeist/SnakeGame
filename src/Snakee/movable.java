@@ -2,7 +2,7 @@ package Snakee;
 
 /**
  * 
- * @Project Snakee
+ * @Project StartScreen
  * @Description The first interface
  * @Author Ainsley Lee
  * @version 1

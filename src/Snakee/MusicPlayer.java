@@ -6,7 +6,7 @@ import java.io.FileInputStream;
 import javazoom.jl.player.Player;
 
 /**
- * @Project Snakee
+ * @Project StartScreen
  * @Description Music Player
  * @Author Ainsley Lee
  * @version 3

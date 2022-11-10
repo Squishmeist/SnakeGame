@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 /**
- * @Project Snakee
+ * @Project StartScreen
  * @Description Play the game
  * @Author Ainsley Lee
  * @version 3
@@ -106,7 +106,7 @@ public class Play extends MyFrame
 	public static void main(String[] args)
 	{
 		new Play().loadFrame();
-		MusicPlayer.getMusicPlay("src/Snakee/sounds/frogger.mp3");
+		MusicPlayer.getMusicPlay("src/StartScreen/sounds/frogger.mp3");
 
 	}
 /*	

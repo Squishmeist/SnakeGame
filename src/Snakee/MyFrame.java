@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 /**
  * 
- * @Project Snakee
+ * @Project StartScreen
  * @Description Load the game and refresh it constantly
  * @Author Ainsley Lee
  * @version 3
@@ -49,7 +49,7 @@ public class MyFrame extends JPanel implements KeyListener
 		jFrame.add(this);
 		jFrame.addKeyListener(this);
 
-		jFrame.setTitle("Snakee Yipee");
+		jFrame.setTitle("StartScreen Yipee");
 		jFrame.setSize(870, 560);
 		jFrame.setLocationRelativeTo(null);
 		jFrame.addWindowListener(new WindowAdapter()// loka

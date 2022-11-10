@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * @Project Snakee
+ * @Project StartScreen
  * @Description My Snake
  * @Author Ainsley Lee
  * @version 3
