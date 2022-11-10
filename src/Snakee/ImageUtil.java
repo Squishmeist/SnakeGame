@@ -32,6 +32,6 @@ public class ImageUtil
 		images.put("15", GameUtil.getImage("Snakee/images/food-strawberry.png"));
 		images.put("16", GameUtil.getImage("Snakee/images/food-watermelon.png"));
 		images.put("UI-background", GameUtil.getImage("Snakee/images/UI-background.png"));
-		images.put("game-scene-01", GameUtil.getImage("Snakee/images/game-scene-01.jpg"));
+		images.put("end-scene", GameUtil.getImage("Snakee/images/end-scene.png"));
 	}
 }

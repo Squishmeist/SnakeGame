@@ -22,7 +22,7 @@ public class Play extends MyFrame
 	public Food food = new Food();
 
 	public Image background = ImageUtil.images.get("UI-background");
-	public Image fail = ImageUtil.images.get("game-scene-01");
+	public Image fail = ImageUtil.images.get("end-scene");
 
 	@Override
 	public void keyPressed(KeyEvent e)
