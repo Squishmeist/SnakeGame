@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.List;
 
-public class MySnake extends MyFrame.SnakeObject implements movable
+public class MySnake extends SnakeObject implements movable
 {
     // The game variable.
     private int speed_XY;
