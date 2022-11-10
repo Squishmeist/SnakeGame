@@ -41,12 +41,12 @@ public class Food extends MyFrame.SnakeObject
 	 *
 	 * 	mySnake.score increments score variable by 521
 	 */
-	public void eaten(MyFrame.MySnake mySnake)	{
+	public void eaten(MySnake mySnake)	{
 
 		if (mySnake.getRectangle().intersects(this.getRectangle()) && l && mySnake.l)		{
 			this.l = false;
-			mySnake.changeLength(mySnake.getLength() + 1);
-			mySnake.score += 521;
+			MySnake.changeLength(mySnake.getLength() + 1);
+			MySnake.score += 521;
 		}
 	}
 
