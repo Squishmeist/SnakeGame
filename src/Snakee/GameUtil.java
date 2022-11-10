@@ -44,10 +44,10 @@ public class GameUtil
 
 	}
 
-	public static Image resizeImage(Image image)
+	public static Image resizeImage(Image imagePassed,int resizeWidth,int resizeHeight)
 	{
-		Image originalImage = image.getScaledInstance(870, 560, Image.SCALE_SMOOTH);
-		BufferedImage resizedImage = new BufferedImage(870, 560, BufferedImage.TYPE_INT_ARGB);
+		Image originalImage = imagePassed.getScaledInstance(resizeWidth, resizeHeight, Image.SCALE_SMOOTH);
+		BufferedImage resizedImage = new BufferedImage(resizeWidth, resizeHeight, BufferedImage.TYPE_INT_ARGB);
 
 		Graphics2D g2d = resizedImage.createGraphics();
 		g2d.drawImage(originalImage, 0, 0, null);

@@ -25,7 +25,7 @@ public class Play extends MyFrame
 	public Image background = ImageUtil.images.get("UI-background");
 	//public Image fail = ImageUtil.images.get("end-scene");
 
-	public Image fail = GameUtil.resizeImage(ImageUtil.images.get("end-scene"));
+	public Image fail = GameUtil.resizeImage(ImageUtil.images.get("end-scene"), 870, 560);
 
 
 	@Override
