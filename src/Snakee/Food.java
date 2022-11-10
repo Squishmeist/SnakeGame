@@ -7,7 +7,7 @@ import java.util.Random;
  * @Project Snakee
  * @Description Food
  * @Author Ainsley Lee
- * @version 2
+ * @version 3
  */
 
 

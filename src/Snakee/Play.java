@@ -5,12 +5,13 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 /**
  * @Project Snakee
  * @Description Play the game
  * @Author Ainsley Lee
- * @version 2
+ * @version 3
  */ 
 
 public class Play extends MyFrame
@@ -22,7 +23,10 @@ public class Play extends MyFrame
 	public Food food = new Food();
 
 	public Image background = ImageUtil.images.get("UI-background");
-	public Image fail = ImageUtil.images.get("game-scene-01");
+	//public Image fail = ImageUtil.images.get("end-scene");
+
+	public Image fail = GameUtil.resizeImage(ImageUtil.images.get("end-scene"));
+
 
 	@Override
 	public void keyPressed(KeyEvent e)
@@ -102,7 +106,7 @@ public class Play extends MyFrame
 	public static void main(String[] args)
 	{
 		new Play().loadFrame();
-		MusicPlayer.getMusicPlay("src/example/sounds/frogger.mp3");
+		MusicPlayer.getMusicPlay("src/Snakee/sounds/frogger.mp3");
 
 	}
 /*	

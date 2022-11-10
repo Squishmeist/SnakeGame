@@ -1,12 +1,11 @@
 package Snakee;
 
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 
 public class GameUtil
 {
@@ -44,4 +43,17 @@ public class GameUtil
 	return i;
 
 	}
+
+	public static Image resizeImage(Image image)
+	{
+		Image originalImage = image.getScaledInstance(870, 560, Image.SCALE_SMOOTH);
+		BufferedImage resizedImage = new BufferedImage(870, 560, BufferedImage.TYPE_INT_ARGB);
+
+		Graphics2D g2d = resizedImage.createGraphics();
+		g2d.drawImage(originalImage, 0, 0, null);
+		g2d.dispose();
+
+		return resizedImage;
+	}
+
 }

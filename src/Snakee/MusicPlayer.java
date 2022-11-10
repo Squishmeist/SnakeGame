@@ -9,7 +9,7 @@ import javazoom.jl.player.Player;
  * @Project Snakee
  * @Description Music Player
  * @Author Ainsley Lee
- * @version 2
+ * @version 3
  */
 
 
@@ -38,7 +38,9 @@ public class MusicPlayer extends Thread
 				{
 					//BufferedInputStream buffer = new BufferedInputStream(new FileInputStream(filename));
 					player = new Player(new BufferedInputStream(new FileInputStream(filename)));
-					player.play();
+					while(true){
+						player.play();
+					}
 
 				} catch (Exception e)
 				{
