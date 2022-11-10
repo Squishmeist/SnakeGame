@@ -9,7 +9,7 @@ import javazoom.jl.player.Player;
  * @Project Snakee
  * @Description Music Player
  * @Author Ainsley Lee
- * @version 2
+ * @version 3
  */
 
 

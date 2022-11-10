@@ -14,7 +14,7 @@ import javax.swing.JPanel;
  * @Project Snakee
  * @Description Load the game and refresh it constantly
  * @Author Ainsley Lee
- * @version 2
+ * @version 3
  */ 
 
 
