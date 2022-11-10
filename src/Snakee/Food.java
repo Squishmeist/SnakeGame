@@ -1,9 +1,15 @@
-package example;
+package Snakee;
 
 import java.awt.Graphics;
 import java.util.Random;
-import java.awt.Graphics2D;
-import java.awt.Image;
+
+/**
+ * @Project Snakee
+ * @Description Food
+ * @Author Ainsley Lee
+ * @version 2
+ */
+
 
 public class Food extends SnakeObject
 {

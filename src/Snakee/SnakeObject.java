@@ -1,6 +1,14 @@
-package example;
+package Snakee;
 
 import java.awt.*;
+
+/**
+ * @Project Snakee
+ * @Description Snake Object
+ * @Author Ainsley Lee
+ * @version 2
+ */
+
 
 public abstract class SnakeObject
 {

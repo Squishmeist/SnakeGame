@@ -1,11 +1,17 @@
-package example;
+package Snakee;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
-import java.util.Random;
-import java.awt.Graphics2D;
 
 import javazoom.jl.player.Player;
+
+/**
+ * @Project Snakee
+ * @Description Music Player
+ * @Author Ainsley Lee
+ * @version 2
+ */
+
 
 public class MusicPlayer extends Thread
 {

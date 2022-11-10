@@ -1,13 +1,10 @@
-package example;
+package Snakee;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
-import java.util.LinkedList;
-import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,7 +14,7 @@ import javax.swing.JPanel;
  * @Project Snakee
  * @Description Load the game and refresh it constantly
  * @Author Ainsley Lee
- * @version 1
+ * @version 2
  */ 
 
 

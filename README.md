@@ -15,9 +15,9 @@ but not completed and I have been tasked with the objective to maintain and exte
 ## How to install and run the project
 Install using:
 ```
-$ example
-$ example
-$ example
+$ Snakee
+$ Snakee
+$ Snakee
 ```
 
 ## How to use the project (i.e. how to play the game)

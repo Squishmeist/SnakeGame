@@ -1,10 +1,18 @@
-package example;
+package Snakee;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.List;
+
+/**
+ * @Project Snakee
+ * @Description My Snake
+ * @Author Ainsley Lee
+ * @version 2
+ */
+
 
 public class MySnake extends SnakeObject implements movable
 {

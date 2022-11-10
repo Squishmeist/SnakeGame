@@ -1,4 +1,4 @@
-package example;
+package Snakee;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -7,11 +7,10 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 
 /**
- * 
  * @Project Snakee
  * @Description Play the game
  * @Author Ainsley Lee
- * @version 1
+ * @version 2
  */ 
 
 public class Play extends MyFrame
