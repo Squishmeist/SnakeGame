@@ -1,4 +1,4 @@
-package Snakee;
+package Snakee.SourceCode;
 
 import java.awt.*;
 

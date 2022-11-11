@@ -1,4 +1,6 @@
-package Snakee;
+package Snakee.SourceCode;
+
+import Snakee.GameFrame;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -13,7 +15,7 @@ import java.awt.event.KeyEvent;
  * @version 4
  */ 
 
-public class Play extends MyFrame
+public class Play extends GameFrame
 {
 
 	private static final long serialVersionUID = -3641221053272056036L;
@@ -91,17 +93,9 @@ public class Play extends MyFrame
 	 */
 	public void drawScore(Graphics g)
 	{
-		String playerName = StartScene.getPlayerName();
 		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 		g.setColor(Color.MAGENTA);
-		g.drawString("PLAYER : " + playerName, 20, 40);
 		g.drawString("SCORE : " + mySnake.score, 20, 80);
-	}
-
-	public static void start()
-	{
-		new Play().loadFrame();
-		MusicPlayer.getMusicPlay("src/Snakee/sounds/frogger.mp3");
 	}
 
 	/**

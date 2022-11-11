@@ -1,12 +1,11 @@
 package Snakee;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
-import javax.swing.*;
 
 /**
  * 
@@ -17,7 +16,7 @@ import javax.swing.*;
  */ 
 
 
-public class MyFrame extends JPanel implements KeyListener
+public class GameFrame extends JPanel implements KeyListener
 {
 	private static final long serialVersionUID = -3149926831770554380L;
 
@@ -26,20 +25,12 @@ public class MyFrame extends JPanel implements KeyListener
 	/**
 	 * sets icon images to file - images/snake-logo.png
 	 */
-	public MyFrame()
+	public GameFrame()
 	{
-		jFrame.setIconImage(Toolkit.getDefaultToolkit().getImage(MyFrame.class.getResource("images/snake-logo.png")));
+		jFrame.setIconImage(Toolkit.getDefaultToolkit().getImage(GameFrame.class.getResource("images/snake-logo.png")));
 		loadFrame();
 	}
 
-	/**
-	 * sets title name that appears at top of the window
-	 * sets size of game window
-	 * sets location of window to default position
-	 * adds window listener interface to define events for opening and closing the window
-	 * set visible shows window on screen
-	 * new thread begins execution
-	 */
 	public void loadFrame()
 	{
 		/*
@@ -67,16 +58,6 @@ public class MyFrame extends JPanel implements KeyListener
 
 	}
 
-	/**
-	 * runs loop while true
-	 * repaint refreshes window
-	 * sleep ceases execution for 30 milliseconds
-	 *
-	 * every 30 milliseconds repaints screen to show snake movement
-	 * repaint function in Play class (paint method)
-	 *
-	 * catch (Exception) in other method and ends the program
-	 */
 	class MyThread extends Thread
 	{
 		@Override
