@@ -34,13 +34,14 @@ public class GameSceneController implements Initializable {
     private double x;
     //y coordinates of snake
     private double y;
-    private Snake.Direction direction;
+    private Snake.Direction direction = Snake.Direction.RIGHT;
 
     //Direction snake is moving at start
     //private SnakeDirection direction = SnakeDirection.RIGHT;
 
     //Number of times the snakes moved
     private int gameTicks;
+
 
     Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), e -> {
         moveSnakeHead(snakeHead);
