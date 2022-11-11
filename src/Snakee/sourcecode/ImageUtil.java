@@ -1,4 +1,4 @@
-package Snakee.SourceCode;
+package Snakee.sourcecode;
 
 import java.awt.Image;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package Snakee.SourceCode;
+package Snakee.sourcecode;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;

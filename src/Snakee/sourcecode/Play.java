@@ -1,6 +1,4 @@
-package Snakee.SourceCode;
-
-import Snakee.GameFrame;
+package Snakee.sourcecode;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -15,7 +13,7 @@ import java.awt.event.KeyEvent;
  * @version 4
  */ 
 
-public class Play extends GameFrame
+public class Play extends MyFrame
 {
 
 	private static final long serialVersionUID = -3641221053272056036L;
