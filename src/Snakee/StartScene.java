@@ -16,7 +16,7 @@ import javafx.event.EventHandler;
 import javax.swing.*;
 
 
-public class StartScreen extends Application {
+public class StartScene extends Application {
 
     static String playerName;
     @Override
@@ -70,7 +70,7 @@ public class StartScreen extends Application {
         //Adds scene to the stage
         stage.setScene(scene);
         scene.getStylesheets().add
-                (StartScreen.class.getResource("Main.css").toExternalForm());
+                (StartScene.class.getResource("Main.css").toExternalForm());
         //Displays the contents of the stage
         stage.show();
     }

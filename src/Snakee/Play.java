@@ -7,7 +7,7 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 
 /**
- * @Project StartScreen
+ * @Project StartScene
  * @Description Play the game
  * @Author Ainsley Lee
  * @version 4
@@ -91,11 +91,17 @@ public class Play extends MyFrame
 	 */
 	public void drawScore(Graphics g)
 	{
-		String playerName = StartScreen.getPlayerName();
+		String playerName = StartScene.getPlayerName();
 		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 		g.setColor(Color.MAGENTA);
 		g.drawString("PLAYER : " + playerName, 20, 40);
 		g.drawString("SCORE : " + mySnake.score, 20, 80);
+	}
+
+	public static void start()
+	{
+		new Play().loadFrame();
+		MusicPlayer.getMusicPlay("src/Snakee/sounds/frogger.mp3");
 	}
 
 	/**

@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.util.Random;
 
 /**
- * @Project StartScreen
+ * @Project StartScene
  * @Description Food
  * @Author Ainsley Lee
  * @version 3

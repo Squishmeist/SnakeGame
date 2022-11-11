@@ -3,7 +3,7 @@ package Snakee;
 import java.awt.*;
 
 /**
- * @Project StartScreen
+ * @Project StartScene
  * @Description Snake Object
  * @Author Ainsley Lee
  * @version 2
