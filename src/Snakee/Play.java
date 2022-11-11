@@ -106,9 +106,9 @@ public class Play extends MyFrame
 	public static void main(String[] args)
 	{
 		new Play().loadFrame();
-		MusicPlayer.getMusicPlay("src/StartScreen/sounds/frogger.mp3");
-
+		MusicPlayer.getMusicPlay("src/Snakee/sounds/frogger.mp3");
 	}
+
 /*	
 	public static void main(String[] args)
 	{

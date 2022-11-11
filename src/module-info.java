@@ -7,4 +7,5 @@ module COMP2013.Coursework {
 
     requires javafx.fxml;
     requires javafx.controls;
+    requires javafx.swing;
 }

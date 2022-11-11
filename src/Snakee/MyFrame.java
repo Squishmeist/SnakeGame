@@ -6,8 +6,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * 
@@ -30,6 +29,7 @@ public class MyFrame extends JPanel implements KeyListener
 	public MyFrame()
 	{
 		jFrame.setIconImage(Toolkit.getDefaultToolkit().getImage(MyFrame.class.getResource("images/snake-logo.png")));
+		loadFrame();
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class MyFrame extends JPanel implements KeyListener
 		jFrame.add(this);
 		jFrame.addKeyListener(this);
 
-		jFrame.setTitle("StartScreen Yipee");
+		jFrame.setTitle("Snakee Yipee");
 		jFrame.setSize(870, 560);
 		jFrame.setLocationRelativeTo(null);
 		jFrame.addWindowListener(new WindowAdapter()// loka
@@ -64,6 +64,7 @@ public class MyFrame extends JPanel implements KeyListener
 		jFrame.setVisible(true);
 
 		new MyThread().start();
+
 	}
 
 	/**
