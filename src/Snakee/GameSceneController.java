@@ -25,20 +25,16 @@ public class GameSceneController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
-
     @FXML
     Label playernameLabel;
-
     @FXML
     private Circle snakeHead;
 
     //x coordinates of snake
     private double x;
-
     //y coordinates of snake
     private double y;
-
-    private boolean up, down, left, right;
+    private Snake.Direction direction;
 
     //Direction snake is moving at start
     //private SnakeDirection direction = SnakeDirection.RIGHT;
@@ -48,63 +44,45 @@ public class GameSceneController implements Initializable {
 
     Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), e -> {
         moveSnakeHead(snakeHead);
-        //boolean canChangeDirection = true;
-        //System.out.println((xPos + snakeHead.getX()) + "-----" + (yPos + snakeHead.getY()));
         gameTicks++;
     }));
 
     @FXML
     public void keyPressed(KeyEvent event){
-        if(event.getCode() == KeyCode.W){
+        if(event.getCode() == KeyCode.W && direction != direction.DOWN){
             System.out.println("Pressed W");
-            up = true;
-            down = false;
-            left = false;
-            right = false;
-            //snakeHead.setCenterY(y-=5);
+            direction = direction.UP;
         }
 
-        if(event.getCode() == KeyCode.S){
+        if(event.getCode() == KeyCode.S && direction != direction.UP){
             System.out.println("Pressed S");
-            up = false;
-            down = true;
-            left = false;
-            right = false;
-            //snakeHead.setCenterY(y+=5);
+            direction = direction.DOWN;
         }
 
-        if(event.getCode() == KeyCode.A){
+        if(event.getCode() == KeyCode.A && direction != direction.RIGHT){
             System.out.println("Pressed A");
-            up = false;
-            down = false;
-            left = true;
-            right = false;
-            //snakeHead.setCenterX(x-=5);
+            direction = direction.LEFT;
         }
 
-        if(event.getCode() == KeyCode.D){
+        if(event.getCode() == KeyCode.D && direction != direction.LEFT){
             System.out.println("Pressed D");
-            up = false;
-            down = false;
-            left = false;
-            right = true;
-            //snakeHead.setCenterX(x+=5);
+            direction = direction.RIGHT;
         }
     }
 
     //Snake head is moved in the direction specified
     private void moveSnakeHead(Circle snakeHead) {
-        if (up == true) {
-            y = y - 2;
+        if (direction == direction.UP) {
+            y -= 2;
             snakeHead.setTranslateY(y);
-        } else if (down == true) {
-            y = y + 2;
+        } else if (direction == direction.DOWN) {
+            y += 2;
             snakeHead.setTranslateY(y);
-        } else if (left == true) {
-            x = x - 2;
+        } else if (direction == direction.LEFT) {
+            x -=  2;
             snakeHead.setTranslateX(x);
-        } else if (right == true) {
-            x = x + 2;
+        } else if (direction == direction.RIGHT) {
+            x += 2;
             snakeHead.setTranslateX(x);
         }
     }
@@ -114,6 +92,7 @@ public class GameSceneController implements Initializable {
         playernameLabel.setText("PLAYER : " + playerName);
     }
 
+    //Switch to StartScene
     public void switchToStartScene(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("StartScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
