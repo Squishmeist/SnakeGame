@@ -5,13 +5,12 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 
 /**
  * @Project StartScreen
  * @Description Play the game
  * @Author Ainsley Lee
- * @version 3
+ * @version 4
  */ 
 
 public class Play extends MyFrame
@@ -26,7 +25,6 @@ public class Play extends MyFrame
 	//public Image fail = ImageUtil.images.get("end-scene");
 
 	public Image fail = GameUtil.resizeImage(ImageUtil.images.get("end-scene"), 870, 560);
-
 
 	@Override
 	public void keyPressed(KeyEvent e)
@@ -93,9 +91,11 @@ public class Play extends MyFrame
 	 */
 	public void drawScore(Graphics g)
 	{
+		String playerName = StartScreen.getPlayerName();
 		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
 		g.setColor(Color.MAGENTA);
-		g.drawString("SCORE : " + mySnake.score, 20, 40);
+		g.drawString("PLAYER : " + playerName, 20, 40);
+		g.drawString("SCORE : " + mySnake.score, 20, 80);
 	}
 
 	/**

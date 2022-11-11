@@ -7,7 +7,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 import javafx.scene.image.Image;
@@ -18,20 +17,52 @@ import javax.swing.*;
 
 
 public class StartScreen extends Application {
+
+    static String playerName;
     @Override
     public void start(Stage stage) {
         Platform.setImplicitExit(false);
+        GridPane grid = new GridPane();
+        //Creates a scene object
+        Scene scene = new Scene(grid, 870, 560);
 
-        //BUTTON CREATED
+
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(25, 25, 25, 25));
+
+        //Creates text object
+        Text scenetitle = new Text("Snakee");
+        scenetitle.setId("title-text");
+        grid.add(scenetitle, 0, 0, 2, 1);
+
+        //Label
+        Label playerName = new Label("Player Name:");
+        grid.add(playerName, 0, 1);
+
+        TextField playerTextField = new TextField();
+        grid.add(playerTextField, 1, 1);
+
         Button startButton = new Button("Start");
-        startButton.setOnAction(e -> {
-            SwingUtilities.invokeLater(Play::new);
-            stage.hide();
+        HBox hbBtn = new HBox(10);
+        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
+        hbBtn.getChildren().add(startButton);
+        grid.add(hbBtn, 1, 4);
+
+        final Text actiontarget = new Text();
+        grid.add(actiontarget, 1, 6);
+
+        startButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                setPlayerName(playerTextField.getText());
+                SwingUtilities.invokeLater(Play::new);
+                stage.hide();
+            }
         });
 
-        StackPane root = new StackPane(startButton);
-        //Creates a scene object
-        Scene scene = new Scene(root, 870, 560);
+
         //Sets stage title
         stage.setTitle("Snake Yipee");
         //Sets stage icon
@@ -42,6 +73,14 @@ public class StartScreen extends Application {
                 (StartScreen.class.getResource("Main.css").toExternalForm());
         //Displays the contents of the stage
         stage.show();
+    }
+
+    public void setPlayerName(String passedPlayerName){
+        playerName = passedPlayerName;
+    }
+
+    public static String getPlayerName(){
+        return playerName;
     }
 
     public static void main(String[] args) {

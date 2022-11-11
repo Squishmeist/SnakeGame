@@ -13,7 +13,7 @@ import javax.swing.*;
  * @Project StartScreen
  * @Description Load the game and refresh it constantly
  * @Author Ainsley Lee
- * @version 3
+ * @version 4
  */ 
 
 
