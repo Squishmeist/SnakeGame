@@ -6,4 +6,8 @@ public class Snake {
         UP, DOWN, RIGHT, LEFT
     }
 
+    public boolean outOfBounds(){
+        return true;
+    }
+
 }
