@@ -14,6 +14,5 @@
          </font>
       </Label>
       <Button fx:id="BackButton" layoutX="14.0" layoutY="521.0" mnemonicParsing="false" onAction="#switchToStartScene" text="Back" />
-      <Circle fx:id="snakeHead" fill="#95eea1" layoutX="435.0" layoutY="280.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
    </children>
 </AnchorPane>

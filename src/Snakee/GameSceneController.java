@@ -13,40 +13,72 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.shape.Circle;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class GameSceneController implements Initializable {
     private Stage stage;
     private Scene scene;
-    private Parent root;
-    @FXML
-    Label playernameLabel;
-    @FXML
-    private Circle snakeHead;
 
-    //x coordinates of snake
-    private double x;
-    //y coordinates of snake
-    private double y;
-    private Snake.Direction direction = Snake.Direction.RIGHT;
+    private final Double snakeSize = 25.;
+    private final Rectangle snakeHead = new Rectangle(250,250,snakeSize,snakeSize);
+    Rectangle snakeFirstTail = new Rectangle(snakeHead.getX() - snakeSize,snakeHead.getY(),snakeSize,snakeSize);
+
+    // snakeHead x coordinate
+    double x = snakeHead.getLayoutX();
+    // snakeHead y coordinate
+    double y = snakeHead.getLayoutY();
 
     //Direction snake is moving at start
-    //private SnakeDirection direction = SnakeDirection.RIGHT;
+    private Snake.Direction direction = Snake.Direction.RIGHT;
 
-    //Number of times the snakes moved
-    private int gameTicks;
+    //List of all position of the snake head
+    private final List<Position> positions = new ArrayList<>();
 
+    //List of all snake body parts
+    private final ArrayList<Rectangle> snakeBody = new ArrayList<>();
 
-    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), e -> {
+    //Number of times snakes moved
+    private int gameTicks = 0;
+
+    @FXML
+    private AnchorPane GameScene;
+    @FXML
+    Label playernameLabel;
+
+    //Runs game every 0.3 seconds
+    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.3),e ->{
+        positions.add(new Position(snakeHead.getX() + x, snakeHead.getY() + y));
         moveSnakeHead(snakeHead);
+        for (int i = 1; i < snakeBody.size(); i++) {
+            moveSnakeTail(snakeBody.get(i),i);
+        }
         gameTicks++;
     }));
+
+    //Called after stage loaded
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        snakeBody.add(snakeHead);
+        snakeHead.setFill(Color.GREEN);
+
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+
+        snakeBody.add(snakeFirstTail);
+        snakeFirstTail.setFill(Color.DARKGREEN);
+
+        GameScene.getChildren().addAll(snakeHead,snakeFirstTail);
+    }
 
     @FXML
     public void keyPressed(KeyEvent event){
@@ -71,21 +103,43 @@ public class GameSceneController implements Initializable {
         }
     }
 
-    //Snake head is moved in the direction specified
-    private void moveSnakeHead(Circle snakeHead) {
-        if (direction == direction.UP) {
-            y -= 2;
+    //Called to moveSnakeHead
+    private void moveSnakeHead(Rectangle snakeHead){
+        if(direction == direction.UP){
+            y = y - snakeSize;
             snakeHead.setTranslateY(y);
-        } else if (direction == direction.DOWN) {
-            y += 2;
+        }
+        if(direction == direction.DOWN){
+            y = y + snakeSize;
             snakeHead.setTranslateY(y);
-        } else if (direction == direction.LEFT) {
-            x -=  2;
-            snakeHead.setTranslateX(x);
-        } else if (direction == direction.RIGHT) {
-            x += 2;
+        }
+        if(direction == direction.LEFT){
+            x = x - snakeSize;
             snakeHead.setTranslateX(x);
         }
+        if(direction == direction.RIGHT){
+            x = x + snakeSize;
+            snakeHead.setTranslateX(x);
+        }
+    }
+
+    //New snake tail is created and added to the snake and the game scene
+    private void addSnakeTail(){
+        Rectangle rectangle = snakeBody.get(snakeBody.size() - 1);
+        Rectangle snakeTail = new Rectangle(
+                snakeBody.get(1).getX() + x + snakeSize,
+                snakeBody.get(1).getY() + y,
+                snakeSize,snakeSize);
+        snakeBody.add(snakeTail);
+        GameScene.getChildren().add(snakeTail);
+    }
+
+    //Moves tail to position of head x gameTicks after head was there
+    private void moveSnakeTail(Rectangle snakeTail, int tailNumber){
+        double y = positions.get(gameTicks - tailNumber + 1).getY() - snakeTail.getY();
+        double x = positions.get(gameTicks - tailNumber + 1).getX() - snakeTail.getX();
+        snakeTail.setTranslateX(x);
+        snakeTail.setTranslateY(y);
     }
 
     //Displays playerName in scene
@@ -102,10 +156,4 @@ public class GameSceneController implements Initializable {
         stage.show();
     }
 
-    //Method called after the stage is loaded
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
-    }
 }
