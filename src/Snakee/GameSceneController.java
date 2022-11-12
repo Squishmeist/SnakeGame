@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class GameSceneController implements Initializable {
+public class GameSceneController implements Initializable{
     private Stage stage;
     private Scene scene;
 
@@ -63,6 +63,10 @@ public class GameSceneController implements Initializable {
             moveSnakeTail(snakeBody.get(i),i);
         }
         gameTicks++;
+        if(outOfBounds(snakeHead)){
+            System.out.println("OUT OF BOUNDS");
+            System.out.println("X : " + x + "Y : " + y);
+        }
     }));
 
     //Called after stage loaded
@@ -140,6 +144,17 @@ public class GameSceneController implements Initializable {
         double x = positions.get(gameTicks - tailNumber + 1).getX() - snakeTail.getX();
         snakeTail.setTranslateX(x);
         snakeTail.setTranslateY(y);
+    }
+
+    //Check if snake is outOfBounds
+    public boolean outOfBounds(Rectangle snakeHead){
+        boolean xOut = (x < -250 || x > 600);
+        boolean yOut = (y < -250 || y > 290);
+        if (xOut || yOut)
+        {
+            return true;
+        }
+        return false;
     }
 
     //Displays playerName in scene
