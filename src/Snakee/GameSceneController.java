@@ -10,14 +10,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -72,12 +69,12 @@ public class GameSceneController implements Initializable{
         gameTicks++;
 
         //if food does not exist generate food
-        if (foodExists == false){
+        if (!foodExists){
             foodGenerate();
         }
 
         //if snake is out of bounds run switchToEndScene method
-        if(outOfBounds(snakeHead)){
+        if(outOfBounds()){
             System.out.println("OUT OF BOUNDS");
             try {
                 switchToEndScene();
@@ -106,45 +103,45 @@ public class GameSceneController implements Initializable{
 
     @FXML
     public void keyPressed(KeyEvent event){
-        if(event.getCode() == KeyCode.W && direction != direction.DOWN){
+        if(event.getCode() == KeyCode.W && direction != Snake.Direction.DOWN){
             System.out.println("Pressed W");
-            direction = direction.UP;
+            direction = Snake.Direction.UP;
         }
 
-        if(event.getCode() == KeyCode.S && direction != direction.UP){
+        if(event.getCode() == KeyCode.S && direction != Snake.Direction.UP){
             System.out.println("Pressed S");
-            direction = direction.DOWN;
+            direction = Snake.Direction.DOWN;
         }
 
-        if(event.getCode() == KeyCode.A && direction != direction.RIGHT){
+        if(event.getCode() == KeyCode.A && direction != Snake.Direction.RIGHT){
             System.out.println("Pressed A");
-            direction = direction.LEFT;
+            direction = Snake.Direction.LEFT;
         }
 
-        if(event.getCode() == KeyCode.D && direction != direction.LEFT){
+        if(event.getCode() == KeyCode.D && direction != Snake.Direction.LEFT){
             System.out.println("Pressed D");
-            direction = direction.RIGHT;
+            direction = Snake.Direction.RIGHT;
         }
     }
 
     //Called to moveSnakeHead
     private void moveSnakeHead(Rectangle snakeHead){
-        if(direction == direction.UP){
+        if(direction == Snake.Direction.UP){
             y = y - snakeSize;
             snakeHead.setRotate(-90);
             snakeHead.setTranslateY(y);
         }
-        if(direction == direction.DOWN){
+        if(direction == Snake.Direction.DOWN){
             y = y + snakeSize;
             snakeHead.setRotate(90);
             snakeHead.setTranslateY(y);
         }
-        if(direction == direction.LEFT){
+        if(direction == Snake.Direction.LEFT){
             x = x - snakeSize;
             snakeHead.setRotate(-180);
             snakeHead.setTranslateX(x);
         }
-        if(direction == direction.RIGHT){
+        if(direction == Snake.Direction.RIGHT){
             x = x + snakeSize;
             snakeHead.setRotate(0);
             snakeHead.setTranslateX(x);
@@ -169,8 +166,8 @@ public class GameSceneController implements Initializable{
 
     private void foodGenerate(){
         //Generates random x and y points for food to spawn
-        int xFood = (int)(Math.random() * (860 + 0) + 0 );
-        int yFood = (int)(Math.random() * (550 + 0) + 0 );
+        int xFood = (int)(Math.random() * (860) + 0 );
+        int yFood = (int)(Math.random() * (550) + 0 );
 
         //Creates food object
         Rectangle foodObject = new Rectangle();
@@ -192,7 +189,7 @@ public class GameSceneController implements Initializable{
     }
 
     //Check if snake is outOfBounds
-    public boolean outOfBounds(Rectangle snakeHead){
+    public boolean outOfBounds(){
         boolean xOut = (x < -250 || x > 600);
         boolean yOut = (y < -250 || y > 290);
         if (xOut || yOut)

@@ -7,12 +7,10 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
-import java.io.IOException;
-
 public class Main extends Application {
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("StartScene.fxml"));
             //Creates a scene object
