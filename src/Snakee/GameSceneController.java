@@ -10,7 +10,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -55,6 +58,8 @@ public class GameSceneController implements Initializable{
     @FXML
     Label playernameLabel;
 
+    Button EndButton = new Button();
+
     //Runs game every 0.3 seconds
     Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.3),e ->{
         positions.add(new Position(snakeHead.getX() + x, snakeHead.getY() + y));
@@ -65,13 +70,20 @@ public class GameSceneController implements Initializable{
         gameTicks++;
         if(outOfBounds(snakeHead)){
             System.out.println("OUT OF BOUNDS");
-            System.out.println("X : " + x + "Y : " + y);
+            try {
+                switchToEndScene();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }));
+
 
     //Called after stage loaded
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //GameSceneImage.setVisible(false);
+
         snakeBody.add(snakeHead);
         snakeHead.setFill(Color.GREEN);
 
@@ -160,6 +172,15 @@ public class GameSceneController implements Initializable{
     //Displays playerName in scene
     public void playerName(String playerName) {
         playernameLabel.setText("PLAYER : " + playerName);
+    }
+
+    //Switch to EndScene
+    public void switchToEndScene() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("EndScene.fxml"));
+        stage = (Stage) snakeHead.getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     //Switch to StartScene
