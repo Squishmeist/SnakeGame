@@ -9,5 +9,4 @@ public class Snake {
     public boolean outOfBounds(){
         return true;
     }
-
 }

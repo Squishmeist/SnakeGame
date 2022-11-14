@@ -18,6 +18,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -85,13 +86,17 @@ public class GameSceneController implements Initializable{
         //GameSceneImage.setVisible(false);
 
         snakeBody.add(snakeHead);
-        snakeHead.setFill(Color.GREEN);
+        //snakeHead.setFill(Color.GREEN);
+        Image snakeHeadImage = new Image("Snakee/images/snake-head-right.png");
+        snakeHead.setFill(new ImagePattern(snakeHeadImage));
 
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
 
         snakeBody.add(snakeFirstTail);
-        snakeFirstTail.setFill(Color.DARKGREEN);
+        //snakeFirstTail.setFill(Color.DARKGREEN);
+        Image snakeTailImage = new Image("Snakee/images/snake-body.png");
+        snakeFirstTail.setFill(new ImagePattern(snakeTailImage));
 
         GameScene.getChildren().addAll(snakeHead,snakeFirstTail);
     }
