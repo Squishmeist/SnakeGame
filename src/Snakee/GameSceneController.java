@@ -86,7 +86,6 @@ public class GameSceneController implements Initializable{
         //GameSceneImage.setVisible(false);
 
         snakeBody.add(snakeHead);
-        //snakeHead.setFill(Color.GREEN);
         Image snakeHeadImage = new Image("Snakee/images/snake-head-right.png");
         snakeHead.setFill(new ImagePattern(snakeHeadImage));
 
@@ -94,7 +93,6 @@ public class GameSceneController implements Initializable{
         timeline.play();
 
         snakeBody.add(snakeFirstTail);
-        //snakeFirstTail.setFill(Color.DARKGREEN);
         Image snakeTailImage = new Image("Snakee/images/snake-body.png");
         snakeFirstTail.setFill(new ImagePattern(snakeTailImage));
 
@@ -128,18 +126,22 @@ public class GameSceneController implements Initializable{
     private void moveSnakeHead(Rectangle snakeHead){
         if(direction == direction.UP){
             y = y - snakeSize;
+            snakeHead.setRotate(-90);
             snakeHead.setTranslateY(y);
         }
         if(direction == direction.DOWN){
             y = y + snakeSize;
+            snakeHead.setRotate(90);
             snakeHead.setTranslateY(y);
         }
         if(direction == direction.LEFT){
             x = x - snakeSize;
+            snakeHead.setRotate(-180);
             snakeHead.setTranslateX(x);
         }
         if(direction == direction.RIGHT){
             x = x + snakeSize;
+            snakeHead.setRotate(0);
             snakeHead.setTranslateX(x);
         }
     }
