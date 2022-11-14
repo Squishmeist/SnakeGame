@@ -54,12 +54,13 @@ public class GameSceneController implements Initializable{
     //Number of times snakes moved
     private int gameTicks = 0;
 
+    //food exists
+    private boolean foodExists = false;
+
     @FXML
     private AnchorPane GameScene;
     @FXML
     Label playernameLabel;
-
-    Button EndButton = new Button();
 
     //Runs game every 0.3 seconds
     Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.3),e ->{
@@ -69,6 +70,13 @@ public class GameSceneController implements Initializable{
             moveSnakeTail(snakeBody.get(i),i);
         }
         gameTicks++;
+
+        //if food does not exist generate food
+        if (foodExists == false){
+            foodGenerate();
+        }
+
+        //if snake is out of bounds run switchToEndScene method
         if(outOfBounds(snakeHead)){
             System.out.println("OUT OF BOUNDS");
             try {
@@ -83,8 +91,6 @@ public class GameSceneController implements Initializable{
     //Called after stage loaded
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //GameSceneImage.setVisible(false);
-
         snakeBody.add(snakeHead);
         Image snakeHeadImage = new Image("Snakee/images/snake-head-right.png");
         snakeHead.setFill(new ImagePattern(snakeHeadImage));
@@ -95,7 +101,6 @@ public class GameSceneController implements Initializable{
         snakeBody.add(snakeFirstTail);
         Image snakeTailImage = new Image("Snakee/images/snake-body.png");
         snakeFirstTail.setFill(new ImagePattern(snakeTailImage));
-
         GameScene.getChildren().addAll(snakeHead,snakeFirstTail);
     }
 
@@ -149,10 +154,7 @@ public class GameSceneController implements Initializable{
     //New snake tail is created and added to the snake and the game scene
     private void addSnakeTail(){
         Rectangle rectangle = snakeBody.get(snakeBody.size() - 1);
-        Rectangle snakeTail = new Rectangle(
-                snakeBody.get(1).getX() + x + snakeSize,
-                snakeBody.get(1).getY() + y,
-                snakeSize,snakeSize);
+        Rectangle snakeTail = new Rectangle(snakeBody.get(1).getX() + x + snakeSize, snakeBody.get(1).getY() + y, snakeSize,snakeSize);
         snakeBody.add(snakeTail);
         GameScene.getChildren().add(snakeTail);
     }
@@ -163,6 +165,30 @@ public class GameSceneController implements Initializable{
         double x = positions.get(gameTicks - tailNumber + 1).getX() - snakeTail.getX();
         snakeTail.setTranslateX(x);
         snakeTail.setTranslateY(y);
+    }
+
+    private void foodGenerate(){
+        //Generates random x and y points for food to spawn
+        int xFood = (int)(Math.random() * (860 + 0) + 0 );
+        int yFood = (int)(Math.random() * (550 + 0) + 0 );
+
+        //Creates food object
+        Rectangle foodObject = new Rectangle();
+        //Sets food objects x and y to randomly generated number
+        foodObject.setX(xFood);
+        foodObject.setY(yFood);
+        //Sets food objects size
+        foodObject.setWidth(30);
+        foodObject.setHeight(30);
+
+        //Loads image to fill rectangle object
+        Image foodImage = new Image("Snakee/images/food-apple.png");
+        foodObject.setFill(new ImagePattern(foodImage));
+
+        //Sets food exists to equal true
+        foodExists = true;
+        //Adds object to the scene
+        GameScene.getChildren().add(foodObject);
     }
 
     //Check if snake is outOfBounds
@@ -193,6 +219,7 @@ public class GameSceneController implements Initializable{
 
     //Switch to StartScene
     public void switchToStartScene(ActionEvent event) throws IOException {
+        timeline.stop();
         Parent root = FXMLLoader.load(getClass().getResource("StartScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
