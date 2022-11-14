@@ -2,8 +2,9 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="GameScene" onKeyPressed="#keyPressed" prefHeight="560.0" prefWidth="870.0" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snakee.GameSceneController">
@@ -14,5 +15,10 @@
          </font>
       </Label>
       <Button fx:id="BackButton" layoutX="14.0" layoutY="521.0" mnemonicParsing="false" onAction="#switchToStartScene" text="Back" />
+      <ImageView fx:id="EndSceneImage" fitHeight="150.0" fitWidth="200.0" layoutX="335.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@images/end-scene.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

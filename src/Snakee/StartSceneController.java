@@ -15,10 +15,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class StartSceneController {
-
     @FXML
     TextField nameTextField;
-
     private Stage stage;
     private Scene scene;
     private Parent root;
