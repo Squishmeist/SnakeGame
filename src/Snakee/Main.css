@@ -1,8 +1,14 @@
-#StartScene {
+#StartScene{
      -fx-background-image: url("images/start-scene.jpg");
      -fx-background-size: 110%;
 }
 
 #GameScene{
     -fx-background-image: url("images/UI-background.png");
+}
+
+#EndScene{
+    -fx-background-image: url("images/end-scene.png");
+    -fx-background-position: center center;
+    -fx-background-size: 110%;
 }
