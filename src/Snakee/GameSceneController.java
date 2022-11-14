@@ -183,6 +183,7 @@ public class GameSceneController implements Initializable{
 
     //Switch to EndScene
     public void switchToEndScene() throws IOException {
+        timeline.stop();
         Parent root = FXMLLoader.load(getClass().getResource("EndScene.fxml"));
         stage = (Stage) snakeHead.getScene().getWindow();
         scene = new Scene(root);
