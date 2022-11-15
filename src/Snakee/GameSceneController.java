@@ -35,9 +35,9 @@ public class GameSceneController implements Initializable{
     Rectangle snakeFirstTail = new Rectangle(snakeHead.getX() - snakeSize,snakeHead.getY(),snakeSize,snakeSize);
 
     // snakeHead x coordinate
-    double x = snakeHead.getLayoutX();
+    double snakeX = snakeHead.getLayoutX();
     // snakeHead y coordinate
-    double y = snakeHead.getLayoutY();
+    double snakeY = snakeHead.getLayoutY();
 
     //Direction snake is moving at start
     private Snake.Direction direction = Snake.Direction.RIGHT;
@@ -54,24 +54,22 @@ public class GameSceneController implements Initializable{
     //food exists
     private boolean foodExists = false;
 
+    //Creates food object
+    Rectangle foodObject = new Rectangle();
+
     @FXML
     private AnchorPane GameScene;
     @FXML
     Label playernameLabel;
 
     //Runs game every 0.3 seconds
-    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.3),e ->{
-        positions.add(new Position(snakeHead.getX() + x, snakeHead.getY() + y));
+    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.2),e ->{
+        positions.add(new Position(snakeHead.getX() + snakeX, snakeHead.getY() + snakeY));
         moveSnakeHead(snakeHead);
         for (int i = 1; i < snakeBody.size(); i++) {
             moveSnakeTail(snakeBody.get(i),i);
         }
         gameTicks++;
-
-        //if food does not exist generate food
-        if (!foodExists){
-            foodGenerate();
-        }
 
         //if snake is out of bounds run switchToEndScene method
         if(outOfBounds()){
@@ -82,6 +80,17 @@ public class GameSceneController implements Initializable{
                 throw new RuntimeException(ex);
             }
         }
+
+        //if food does not exist generate food
+        if (!foodExists){
+            foodGenerate();
+        }
+        //if food does exist check if its eaten
+        else if (foodExists){
+            foodEaten();
+        }
+
+
     }));
 
 
@@ -98,6 +107,7 @@ public class GameSceneController implements Initializable{
         snakeBody.add(snakeFirstTail);
         Image snakeTailImage = new Image("Snakee/images/snake-body.png");
         snakeFirstTail.setFill(new ImagePattern(snakeTailImage));
+
         GameScene.getChildren().addAll(snakeHead,snakeFirstTail);
     }
 
@@ -127,32 +137,37 @@ public class GameSceneController implements Initializable{
     //Called to moveSnakeHead
     private void moveSnakeHead(Rectangle snakeHead){
         if(direction == Snake.Direction.UP){
-            y = y - snakeSize;
+            snakeY = snakeY - snakeSize;
             snakeHead.setRotate(-90);
-            snakeHead.setTranslateY(y);
+            snakeHead.setTranslateY(snakeY);
         }
         if(direction == Snake.Direction.DOWN){
-            y = y + snakeSize;
+            snakeY = snakeY + snakeSize;
             snakeHead.setRotate(90);
-            snakeHead.setTranslateY(y);
+            snakeHead.setTranslateY(snakeY);
         }
         if(direction == Snake.Direction.LEFT){
-            x = x - snakeSize;
+            snakeX = snakeX - snakeSize;
             snakeHead.setRotate(-180);
-            snakeHead.setTranslateX(x);
+            snakeHead.setTranslateX(snakeX);
         }
         if(direction == Snake.Direction.RIGHT){
-            x = x + snakeSize;
+            snakeX = snakeX + snakeSize;
             snakeHead.setRotate(0);
-            snakeHead.setTranslateX(x);
+            snakeHead.setTranslateX(snakeX);
         }
     }
 
     //New snake tail is created and added to the snake and the game scene
     private void addSnakeTail(){
-        Rectangle rectangle = snakeBody.get(snakeBody.size() - 1);
-        Rectangle snakeTail = new Rectangle(snakeBody.get(1).getX() + x + snakeSize, snakeBody.get(1).getY() + y, snakeSize,snakeSize);
+        //Rectangle rectangle = snakeBody.get(snakeBody.size() - 1);
+
+        Rectangle snakeTail = new Rectangle(snakeBody.get(1).getX() + snakeX + snakeSize, snakeBody.get(1).getY() + snakeY, snakeSize,snakeSize);
         snakeBody.add(snakeTail);
+
+        Image snakeTailImage = new Image("Snakee/images/snake-body.png");
+        snakeTail.setFill(new ImagePattern(snakeTailImage));
+
         GameScene.getChildren().add(snakeTail);
     }
 
@@ -169,14 +184,12 @@ public class GameSceneController implements Initializable{
         int xFood = (int)(Math.random() * (860) + 0 );
         int yFood = (int)(Math.random() * (550) + 0 );
 
-        //Creates food object
-        Rectangle foodObject = new Rectangle();
         //Sets food objects x and y to randomly generated number
         foodObject.setX(xFood);
         foodObject.setY(yFood);
         //Sets food objects size
-        foodObject.setWidth(30);
-        foodObject.setHeight(30);
+        foodObject.setWidth(snakeSize);
+        foodObject.setHeight(snakeSize);
 
         //Loads image to fill rectangle object
         Image foodImage = new Image("Snakee/images/food-apple.png");
@@ -188,10 +201,18 @@ public class GameSceneController implements Initializable{
         GameScene.getChildren().add(foodObject);
     }
 
+    public void foodEaten(){
+        if(snakeHead.getBoundsInParent().intersects(foodObject.getBoundsInParent())){
+            System.out.println("FOOD EATEN");
+            foodExists = false;
+            addSnakeTail();
+        }
+    }
+
     //Check if snake is outOfBounds
     public boolean outOfBounds(){
-        boolean xOut = (x < -250 || x > 600);
-        boolean yOut = (y < -250 || y > 290);
+        boolean xOut = (snakeX < -250 || snakeX > 600);
+        boolean yOut = (snakeY < -250 || snakeY > 290);
         if (xOut || yOut)
         {
             return true;
