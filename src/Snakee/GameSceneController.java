@@ -1,5 +1,6 @@
 package Snakee;
 
+import Snakee.sourcecode.SnakeObject;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -30,6 +31,10 @@ public class GameSceneController implements Initializable{
     private Stage stage;
     private Scene scene;
 
+    private int speed_XY = 5;
+    private int num = 25/5;
+    private static int score = 0;
+
     private final Double snakeSize = 25.;
     private final Rectangle snakeHead = new Rectangle(250,250,snakeSize,snakeSize);
     Rectangle snakeFirstTail = new Rectangle(snakeHead.getX() - snakeSize,snakeHead.getY(),snakeSize,snakeSize);
@@ -40,13 +45,12 @@ public class GameSceneController implements Initializable{
     double snakeY = snakeHead.getLayoutY();
 
     //List of all position of the snake head
-    private final List<Position> positions = new ArrayList<>();
+    private final List<Position> bodyPoints = new ArrayList<>();
 
     //List of all snake body parts
     private final ArrayList<Rectangle> snakeBody = new ArrayList<>();
 
-    //Number of times snakes moved
-    private int gameTicks = 0;
+    boolean UP, DOWN, LEFT, RIGHT = true;
 
     //food exists
     private boolean foodExists = false;
@@ -54,7 +58,8 @@ public class GameSceneController implements Initializable{
     //Creates food object
     Rectangle foodObject = new Rectangle();
 
-    boolean UP, DOWN, LEFT, RIGHT = true;
+    //Number of times snakes moved
+    private int gameTicks = 0;
 
     @FXML
     private AnchorPane GameScene;
@@ -62,8 +67,8 @@ public class GameSceneController implements Initializable{
     Label playernameLabel;
 
     //Runs game every 0.3 seconds
-    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.2),e ->{
-        positions.add(new Position(snakeHead.getX() + snakeX, snakeHead.getY() + snakeY));
+    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20),e ->{
+        bodyPoints.add(new Position(snakeHead.getX() + snakeX, snakeHead.getY() + snakeY));
         moveSnakeHead(snakeHead);
         for (int i = 1; i < snakeBody.size(); i++) {
             moveSnakeTail(snakeBody.get(i),i);
@@ -89,7 +94,6 @@ public class GameSceneController implements Initializable{
             foodEaten();
         }
 
-
     }));
 
 
@@ -103,11 +107,7 @@ public class GameSceneController implements Initializable{
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
 
-        snakeBody.add(snakeFirstTail);
-        Image snakeTailImage = new Image("Snakee/images/snake-body.png");
-        snakeFirstTail.setFill(new ImagePattern(snakeTailImage));
-
-        GameScene.getChildren().addAll(snakeHead,snakeFirstTail);
+        GameScene.getChildren().addAll(snakeHead);
     }
 
     @FXML
@@ -118,6 +118,8 @@ public class GameSceneController implements Initializable{
             DOWN = false;
             LEFT = false;
             RIGHT = false;
+
+            snakeHead.setRotate(-90);
         }
 
         if(event.getCode() == KeyCode.S && !DOWN){
@@ -126,6 +128,8 @@ public class GameSceneController implements Initializable{
             DOWN = true;
             LEFT = false;
             RIGHT = false;
+
+            snakeHead.setRotate(90);
         }
 
         if(event.getCode() == KeyCode.A && !RIGHT){
@@ -134,6 +138,8 @@ public class GameSceneController implements Initializable{
             DOWN = false;
             LEFT = true;
             RIGHT = false;
+
+            snakeHead.setRotate(-180);
         }
 
         if(event.getCode() == KeyCode.D && !LEFT){
@@ -142,29 +148,27 @@ public class GameSceneController implements Initializable{
             DOWN = false;
             LEFT = false;
             RIGHT = true;
+
+            snakeHead.setRotate(0);
         }
     }
 
     //Called to moveSnakeHead
     private void moveSnakeHead(Rectangle snakeHead){
         if(UP == true){
-            snakeY = snakeY - snakeSize;
-            snakeHead.setRotate(-90);
+            snakeY -= speed_XY;
             snakeHead.setTranslateY(snakeY);
         }
         if(DOWN == true){
-            snakeY = snakeY + snakeSize;
-            snakeHead.setRotate(90);
+            snakeY += speed_XY;
             snakeHead.setTranslateY(snakeY);
         }
         if(LEFT == true){
-            snakeX = snakeX - snakeSize;
-            snakeHead.setRotate(-180);
+            snakeX -= speed_XY;
             snakeHead.setTranslateX(snakeX);
         }
         if(RIGHT == true){
-            snakeX = snakeX + snakeSize;
-            snakeHead.setRotate(0);
+            snakeX += speed_XY;
             snakeHead.setTranslateX(snakeX);
         }
     }
@@ -184,8 +188,8 @@ public class GameSceneController implements Initializable{
 
     //Moves tail to position of head x gameTicks after head was there
     private void moveSnakeTail(Rectangle snakeTail, int tailNumber){
-        double y = positions.get(gameTicks - tailNumber + 1).getY() - snakeTail.getY();
-        double x = positions.get(gameTicks - tailNumber + 1).getX() - snakeTail.getX();
+        double y = bodyPoints.get(gameTicks - tailNumber + 1).getY() - snakeTail.getY();
+        double x = bodyPoints.get(gameTicks - tailNumber + 1).getX() - snakeTail.getX();
         snakeTail.setTranslateX(x);
         snakeTail.setTranslateY(y);
     }
