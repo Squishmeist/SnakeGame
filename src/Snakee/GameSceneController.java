@@ -39,9 +39,6 @@ public class GameSceneController implements Initializable{
     // snakeHead y coordinate
     double snakeY = snakeHead.getLayoutY();
 
-    //Direction snake is moving at start
-    private Snake.Direction direction = Snake.Direction.RIGHT;
-
     //List of all position of the snake head
     private final List<Position> positions = new ArrayList<>();
 
@@ -56,6 +53,8 @@ public class GameSceneController implements Initializable{
 
     //Creates food object
     Rectangle foodObject = new Rectangle();
+
+    boolean UP, DOWN, LEFT, RIGHT = true;
 
     @FXML
     private AnchorPane GameScene;
@@ -113,45 +112,57 @@ public class GameSceneController implements Initializable{
 
     @FXML
     public void keyPressed(KeyEvent event){
-        if(event.getCode() == KeyCode.W && direction != Snake.Direction.DOWN){
+        if(event.getCode() == KeyCode.W && !DOWN){
             System.out.println("Pressed W");
-            direction = Snake.Direction.UP;
+            UP = true;
+            DOWN = false;
+            LEFT = false;
+            RIGHT = false;
         }
 
-        if(event.getCode() == KeyCode.S && direction != Snake.Direction.UP){
+        if(event.getCode() == KeyCode.S && !DOWN){
             System.out.println("Pressed S");
-            direction = Snake.Direction.DOWN;
+            UP = false;
+            DOWN = true;
+            LEFT = false;
+            RIGHT = false;
         }
 
-        if(event.getCode() == KeyCode.A && direction != Snake.Direction.RIGHT){
+        if(event.getCode() == KeyCode.A && !RIGHT){
             System.out.println("Pressed A");
-            direction = Snake.Direction.LEFT;
+            UP = false;
+            DOWN = false;
+            LEFT = true;
+            RIGHT = false;
         }
 
-        if(event.getCode() == KeyCode.D && direction != Snake.Direction.LEFT){
+        if(event.getCode() == KeyCode.D && !LEFT){
             System.out.println("Pressed D");
-            direction = Snake.Direction.RIGHT;
+            UP = false;
+            DOWN = false;
+            LEFT = false;
+            RIGHT = true;
         }
     }
 
     //Called to moveSnakeHead
     private void moveSnakeHead(Rectangle snakeHead){
-        if(direction == Snake.Direction.UP){
+        if(UP == true){
             snakeY = snakeY - snakeSize;
             snakeHead.setRotate(-90);
             snakeHead.setTranslateY(snakeY);
         }
-        if(direction == Snake.Direction.DOWN){
+        if(DOWN == true){
             snakeY = snakeY + snakeSize;
             snakeHead.setRotate(90);
             snakeHead.setTranslateY(snakeY);
         }
-        if(direction == Snake.Direction.LEFT){
+        if(LEFT == true){
             snakeX = snakeX - snakeSize;
             snakeHead.setRotate(-180);
             snakeHead.setTranslateX(snakeX);
         }
-        if(direction == Snake.Direction.RIGHT){
+        if(RIGHT == true){
             snakeX = snakeX + snakeSize;
             snakeHead.setRotate(0);
             snakeHead.setTranslateX(snakeX);
