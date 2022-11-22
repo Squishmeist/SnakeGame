@@ -31,21 +31,24 @@ public class GameSceneController implements Initializable{
     private Scene scene;
 
     private int speed_XY = 5;
+
     private static int playerScore;
 
     private final Double snakeSize = 25.;
     private final Rectangle snakeHead = new Rectangle(250,250,snakeSize,snakeSize);
 
     // snakeHead x coordinate
-    double snakeX = snakeHead.getLayoutX();
+    double snakeHeadX = snakeHead.getLayoutX();
     // snakeHead y coordinate
-    double snakeY = snakeHead.getLayoutY();
+    double snakeHeadY = snakeHead.getLayoutY();
 
     //List of all position of the snake head
     private final List<Position> headPoints = new ArrayList<>();
 
     //List of all snake body parts
     private final ArrayList<Rectangle> snakeBody = new ArrayList<>();
+
+    private int num = snakeBody.size() / speed_XY;
 
     boolean UP, DOWN, LEFT, RIGHT;
 
@@ -62,14 +65,16 @@ public class GameSceneController implements Initializable{
     private AnchorPane GameScene;
     @FXML
     Label playernameLabel;
-
     @FXML
     Label playerscoreLabel;
 
     //Runs game every 0.3 seconds
     Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20),e ->{
-        headPoints.add(new Position(snakeHead.getX() + snakeX, snakeHead.getY() + snakeY));
+        headPoints.add(new Position(snakeHead.getX() + snakeHeadX, snakeHead.getY() + snakeHeadY));
         MoveSnakeHead(snakeHead);
+        for (int i = 1; i < snakeBody.size(); i++) {
+            MoveSnakeTail(snakeBody.get(i),i);
+        }
         gameTicks++;
 
         //if snake is out of bounds run switchToEndScene method
@@ -93,7 +98,6 @@ public class GameSceneController implements Initializable{
         }
 
     }));
-
 
     //Called after stage loaded
     @Override
@@ -164,21 +168,54 @@ public class GameSceneController implements Initializable{
     //Called to moveSnakeHead
     private void MoveSnakeHead(Rectangle snakeHead){
         if(UP){
-            snakeY -= speed_XY;
-            snakeHead.setTranslateY(snakeY);
+            snakeHeadY -= speed_XY;
+            snakeHead.setTranslateY(snakeHeadY);
         }
         if(DOWN){
-            snakeY += speed_XY;
-            snakeHead.setTranslateY(snakeY);
+            snakeHeadY += speed_XY;
+            snakeHead.setTranslateY(snakeHeadY);
         }
         if(LEFT){
-            snakeX -= speed_XY;
-            snakeHead.setTranslateX(snakeX);
+            snakeHeadX -= speed_XY;
+            snakeHead.setTranslateX(snakeHeadX);
         }
         if(RIGHT){
-            snakeX += speed_XY;
-            snakeHead.setTranslateX(snakeX);
+            snakeHeadX += speed_XY;
+            snakeHead.setTranslateX(snakeHeadX);
         }
+    }
+
+    private void AddSnakeTail(){
+        System.out.println("SIZE : " + snakeBody.size());
+
+        if (snakeBody.size() == 1){
+            Rectangle snakeFirstTail = new Rectangle(snakeHead.getX() - snakeSize,snakeHead.getY(),snakeSize,snakeSize);
+            snakeBody.add(snakeFirstTail);
+
+            Image snakeTailImage = new Image("Snakee/images/snake-body.png");
+            snakeFirstTail.setFill(new ImagePattern(snakeTailImage));
+            GameScene.getChildren().add(snakeFirstTail);
+        }
+
+        else{
+            double snakeTailX = (snakeBody.get(1).getX() - (snakeSize * snakeBody.size()));
+            double snakeTailY = (snakeBody.get(1).getY());
+
+            Rectangle snakeTail = new Rectangle(snakeTailX, snakeTailY, snakeSize,snakeSize);
+            snakeBody.add(snakeTail);
+
+            Image snakeTailImage = new Image("Snakee/images/snake-body.png");
+            snakeTail.setFill(new ImagePattern(snakeTailImage));
+
+            GameScene.getChildren().add(snakeTail);
+        }
+    }
+
+    private void MoveSnakeTail(Rectangle snakeTail, int tailNumber){
+        double y = headPoints.get(gameTicks - tailNumber - 3).getY() - snakeTail.getY();
+        double x = headPoints.get(gameTicks - tailNumber - 3).getX() - snakeTail.getX();
+        snakeTail.setTranslateX(x);
+        snakeTail.setTranslateY(y);
     }
 
     private void FoodGenerate(){
@@ -211,13 +248,14 @@ public class GameSceneController implements Initializable{
             playerScore += 521;
 
             GameScene.getChildren().remove(foodObject);
+            AddSnakeTail();
         }
     }
 
     //Check if snake is outOfBounds
     public boolean OutOfBounds(){
-        boolean xOut = (snakeX < -250 || snakeX > 600);
-        boolean yOut = (snakeY < -250 || snakeY > 290);
+        boolean xOut = (snakeHeadX < -250 || snakeHeadX > 600);
+        boolean yOut = (snakeHeadY < -250 || snakeHeadY > 290);
         if (xOut || yOut)
         {
             return true;
