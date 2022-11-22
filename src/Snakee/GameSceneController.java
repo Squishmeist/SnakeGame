@@ -30,7 +30,7 @@ public class GameSceneController implements Initializable{
     private Stage stage;
     private Scene scene;
 
-    private int speed_XY = 5;
+    private int speed_XY = 20;
 
     private static int playerScore;
 
@@ -69,7 +69,7 @@ public class GameSceneController implements Initializable{
     Label playerscoreLabel;
 
     //Runs game every 0.3 seconds
-    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20),e ->{
+    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(80),e ->{
         headPoints.add(new Position(snakeHead.getX() + snakeHeadX, snakeHead.getY() + snakeHeadY));
         MoveSnakeHead(snakeHead);
         for (int i = 1; i < snakeBody.size(); i++) {
@@ -186,10 +186,8 @@ public class GameSceneController implements Initializable{
     }
 
     private void AddSnakeTail(){
-        System.out.println("SIZE : " + snakeBody.size());
-
-        if (snakeBody.size() == 1){
-            Rectangle snakeFirstTail = new Rectangle(snakeHead.getX() - snakeSize,snakeHead.getY(),snakeSize,snakeSize);
+        if (snakeBody.size() == 1) {
+            Rectangle snakeFirstTail = new Rectangle(snakeHead.getX() - snakeSize, snakeHead.getY(), snakeSize, snakeSize);
             snakeBody.add(snakeFirstTail);
 
             Image snakeTailImage = new Image("Snakee/images/snake-body.png");
@@ -198,22 +196,21 @@ public class GameSceneController implements Initializable{
         }
 
         else{
-            double snakeTailX = (snakeBody.get(1).getX() - (snakeSize * snakeBody.size()));
-            double snakeTailY = (snakeBody.get(1).getY());
+            double snakeTailX = snakeBody.get(1).getX() + snakeHeadX + snakeSize;
+            double snakeTailY = snakeBody.get(1).getY() + snakeHeadY;
 
-            Rectangle snakeTail = new Rectangle(snakeTailX, snakeTailY, snakeSize,snakeSize);
+            Rectangle snakeTail = new Rectangle(snakeTailX, snakeTailY, snakeSize, snakeSize);
             snakeBody.add(snakeTail);
 
             Image snakeTailImage = new Image("Snakee/images/snake-body.png");
             snakeTail.setFill(new ImagePattern(snakeTailImage));
-
             GameScene.getChildren().add(snakeTail);
         }
     }
 
     private void MoveSnakeTail(Rectangle snakeTail, int tailNumber){
-        double y = headPoints.get(gameTicks - tailNumber - 3).getY() - snakeTail.getY();
-        double x = headPoints.get(gameTicks - tailNumber - 3).getX() - snakeTail.getX();
+        double y = headPoints.get(gameTicks - tailNumber + 1).getY() - snakeTail.getY();
+        double x = headPoints.get(gameTicks - tailNumber + 1).getX() - snakeTail.getX();
         snakeTail.setTranslateX(x);
         snakeTail.setTranslateY(y);
     }
@@ -309,6 +306,7 @@ public class GameSceneController implements Initializable{
         GameScene.getChildren().add(foodObject);
     }
 
+    //Checks if food is eaten
     private void FoodEaten(){
         if(snakeHead.getBoundsInParent().intersects(foodObject.getBoundsInParent())){
             System.out.println("FOOD EATEN");
