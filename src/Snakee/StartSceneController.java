@@ -22,7 +22,7 @@ public class StartSceneController {
         Parent root = loader.load();
 
         GameSceneController gameSceneController = loader.getController();
-        gameSceneController.playerName(playername);
+        gameSceneController.PlayerName(playername);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);

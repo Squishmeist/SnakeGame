@@ -31,12 +31,10 @@ public class GameSceneController implements Initializable{
     private Scene scene;
 
     private int speed_XY = 5;
-    private int num = 25/5;
-    private static int score = 0;
+    private static int playerScore;
 
     private final Double snakeSize = 25.;
     private final Rectangle snakeHead = new Rectangle(250,250,snakeSize,snakeSize);
-
 
     // snakeHead x coordinate
     double snakeX = snakeHead.getLayoutX();
@@ -49,33 +47,36 @@ public class GameSceneController implements Initializable{
     //List of all snake body parts
     private final ArrayList<Rectangle> snakeBody = new ArrayList<>();
 
-    boolean UP, DOWN, LEFT, RIGHT = true;
+    boolean UP, DOWN, LEFT, RIGHT;
 
     //food exists
-    private boolean foodExists = false;
+    private boolean foodExists;
 
     //Creates food object
     Rectangle foodObject = new Rectangle();
 
     //Number of times snakes moved
-    private int gameTicks = 0;
+    private int gameTicks;
 
     @FXML
     private AnchorPane GameScene;
     @FXML
     Label playernameLabel;
 
+    @FXML
+    Label playerscoreLabel;
+
     //Runs game every 0.3 seconds
     Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20),e ->{
         headPoints.add(new Position(snakeHead.getX() + snakeX, snakeHead.getY() + snakeY));
-        moveSnakeHead(snakeHead);
+        MoveSnakeHead(snakeHead);
         gameTicks++;
 
         //if snake is out of bounds run switchToEndScene method
-        if(outOfBounds()){
+        if(OutOfBounds()){
             System.out.println("OUT OF BOUNDS");
             try {
-                switchToEndScene();
+                SwitchToEndScene();
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
@@ -83,11 +84,12 @@ public class GameSceneController implements Initializable{
 
         //if food does not exist generate food
         if (!foodExists){
-            foodGenerate();
+            FoodGenerate();
         }
         //if food does exist check if its eaten
         else if (foodExists){
-            foodEaten();
+            FoodEaten();
+            PlayerScore(playerScore);
         }
 
     }));
@@ -98,6 +100,13 @@ public class GameSceneController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         headPoints.clear();
         snakeBody.clear();
+
+        RIGHT = true;
+        playerScore = 0;
+        foodExists = false;
+        gameTicks = 0;
+
+        PlayerScore(playerScore);
 
         snakeBody.add(snakeHead);
         Image snakeHeadImage = new Image("Snakee/images/snake-head-right.png");
@@ -110,7 +119,7 @@ public class GameSceneController implements Initializable{
     }
 
     @FXML
-    public void keyPressed(KeyEvent event){
+    public void KeyPressed(KeyEvent event){
         if(event.getCode() == KeyCode.W && !DOWN){
             System.out.println("Pressed W");
             UP = true;
@@ -153,26 +162,26 @@ public class GameSceneController implements Initializable{
     }
 
     //Called to moveSnakeHead
-    private void moveSnakeHead(Rectangle snakeHead){
-        if(UP == true){
+    private void MoveSnakeHead(Rectangle snakeHead){
+        if(UP){
             snakeY -= speed_XY;
             snakeHead.setTranslateY(snakeY);
         }
-        if(DOWN == true){
+        if(DOWN){
             snakeY += speed_XY;
             snakeHead.setTranslateY(snakeY);
         }
-        if(LEFT == true){
+        if(LEFT){
             snakeX -= speed_XY;
             snakeHead.setTranslateX(snakeX);
         }
-        if(RIGHT == true){
+        if(RIGHT){
             snakeX += speed_XY;
             snakeHead.setTranslateX(snakeX);
         }
     }
 
-    private void foodGenerate(){
+    private void FoodGenerate(){
         //Generates random x and y points for food to spawn
         int xFood = (int)(Math.random() * (860) + 0 );
         int yFood = (int)(Math.random() * (550) + 0 );
@@ -194,16 +203,19 @@ public class GameSceneController implements Initializable{
         GameScene.getChildren().add(foodObject);
     }
 
-    public void foodEaten(){
+    public void FoodEaten(){
         if(snakeHead.getBoundsInParent().intersects(foodObject.getBoundsInParent())){
             System.out.println("FOOD EATEN");
-            GameScene.getChildren().remove(foodObject);
+
             foodExists = false;
+            playerScore += 521;
+
+            GameScene.getChildren().remove(foodObject);
         }
     }
 
     //Check if snake is outOfBounds
-    public boolean outOfBounds(){
+    public boolean OutOfBounds(){
         boolean xOut = (snakeX < -250 || snakeX > 600);
         boolean yOut = (snakeY < -250 || snakeY > 290);
         if (xOut || yOut)
@@ -213,13 +225,17 @@ public class GameSceneController implements Initializable{
         return false;
     }
 
+    public void PlayerScore(int playerScore) {
+        playerscoreLabel.setText("SCORE : " + playerScore);
+    }
+
     //Displays playerName in scene
-    public void playerName(String playerName) {
+    public void PlayerName(String playerName) {
         playernameLabel.setText("PLAYER : " + playerName);
     }
 
     //Switch to EndScene
-    public void switchToEndScene() throws IOException {
+    public void SwitchToEndScene() throws IOException {
         timeline.stop();
         Parent root = FXMLLoader.load(getClass().getResource("EndScene.fxml"));
         stage = (Stage) snakeHead.getScene().getWindow();
@@ -229,7 +245,7 @@ public class GameSceneController implements Initializable{
     }
 
     //Switch to StartScene
-    public void switchToStartScene(ActionEvent event) throws IOException {
+    public void SwitchToStartScene(ActionEvent event) throws IOException {
         timeline.stop();
         Parent root = FXMLLoader.load(getClass().getResource("StartScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
