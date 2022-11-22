@@ -1,6 +1,5 @@
 package Snakee;
 
-import Snakee.sourcecode.SnakeObject;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -37,7 +36,7 @@ public class GameSceneController implements Initializable{
 
     private final Double snakeSize = 25.;
     private final Rectangle snakeHead = new Rectangle(250,250,snakeSize,snakeSize);
-    Rectangle snakeFirstTail = new Rectangle(snakeHead.getX() - snakeSize,snakeHead.getY(),snakeSize,snakeSize);
+
 
     // snakeHead x coordinate
     double snakeX = snakeHead.getLayoutX();
@@ -45,7 +44,7 @@ public class GameSceneController implements Initializable{
     double snakeY = snakeHead.getLayoutY();
 
     //List of all position of the snake head
-    private final List<Position> bodyPoints = new ArrayList<>();
+    private final List<Position> headPoints = new ArrayList<>();
 
     //List of all snake body parts
     private final ArrayList<Rectangle> snakeBody = new ArrayList<>();
@@ -68,11 +67,8 @@ public class GameSceneController implements Initializable{
 
     //Runs game every 0.3 seconds
     Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20),e ->{
-        bodyPoints.add(new Position(snakeHead.getX() + snakeX, snakeHead.getY() + snakeY));
+        headPoints.add(new Position(snakeHead.getX() + snakeX, snakeHead.getY() + snakeY));
         moveSnakeHead(snakeHead);
-        for (int i = 1; i < snakeBody.size(); i++) {
-            moveSnakeTail(snakeBody.get(i),i);
-        }
         gameTicks++;
 
         //if snake is out of bounds run switchToEndScene method
@@ -100,6 +96,9 @@ public class GameSceneController implements Initializable{
     //Called after stage loaded
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        headPoints.clear();
+        snakeBody.clear();
+
         snakeBody.add(snakeHead);
         Image snakeHeadImage = new Image("Snakee/images/snake-head-right.png");
         snakeHead.setFill(new ImagePattern(snakeHeadImage));
@@ -107,7 +106,7 @@ public class GameSceneController implements Initializable{
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
 
-        GameScene.getChildren().addAll(snakeHead);
+        GameScene.getChildren().add(snakeHead);
     }
 
     @FXML
@@ -173,27 +172,6 @@ public class GameSceneController implements Initializable{
         }
     }
 
-    //New snake tail is created and added to the snake and the game scene
-    private void addSnakeTail(){
-        //Rectangle rectangle = snakeBody.get(snakeBody.size() - 1);
-
-        Rectangle snakeTail = new Rectangle(snakeBody.get(1).getX() + snakeX + snakeSize, snakeBody.get(1).getY() + snakeY, snakeSize,snakeSize);
-        snakeBody.add(snakeTail);
-
-        Image snakeTailImage = new Image("Snakee/images/snake-body.png");
-        snakeTail.setFill(new ImagePattern(snakeTailImage));
-
-        GameScene.getChildren().add(snakeTail);
-    }
-
-    //Moves tail to position of head x gameTicks after head was there
-    private void moveSnakeTail(Rectangle snakeTail, int tailNumber){
-        double y = bodyPoints.get(gameTicks - tailNumber + 1).getY() - snakeTail.getY();
-        double x = bodyPoints.get(gameTicks - tailNumber + 1).getX() - snakeTail.getX();
-        snakeTail.setTranslateX(x);
-        snakeTail.setTranslateY(y);
-    }
-
     private void foodGenerate(){
         //Generates random x and y points for food to spawn
         int xFood = (int)(Math.random() * (860) + 0 );
@@ -219,8 +197,8 @@ public class GameSceneController implements Initializable{
     public void foodEaten(){
         if(snakeHead.getBoundsInParent().intersects(foodObject.getBoundsInParent())){
             System.out.println("FOOD EATEN");
+            GameScene.getChildren().remove(foodObject);
             foodExists = false;
-            addSnakeTail();
         }
     }
 
