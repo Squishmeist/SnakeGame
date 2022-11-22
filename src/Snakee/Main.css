@@ -1,14 +1,47 @@
 #StartScene{
-     -fx-background-image: url("images/start-scene.jpg");
-     -fx-background-size: 110%;
+    -fx-background-color: #3E363F;
+}
+
+#leftsidePane{
+    -fx-background-color: #73A580;
+}
+
+#nameTextField{
+    -fx-background-radius: 0 30 30 0;
+}
+
+#startButton{
+    -fx-background-radius: 30 0 0 30;
+    -fx-background-color: white;
+}
+
+#themeButton{
+    -fx-background-radius: 30 0 0 30;
+    -fx-background-color: white;
+}
+
+#leaderboardButton {
+    -fx-background-radius: 30 0 0 30;
+    -fx-background-color: white;
 }
 
 #GameScene{
     -fx-background-image: url("images/UI-background.png");
 }
 
+#backButton{
+    -fx-background-radius: 0 30 30 0;
+    -fx-background-color: white;
+}
+
+
 #EndScene{
     -fx-background-image: url("images/end-scene.png");
     -fx-background-position: center center;
     -fx-background-size: 110%;
+}
+
+#mainmenuButton{
+    -fx-background-radius: 30 30 30 30;
+    -fx-background-color: white;
 }
