@@ -30,7 +30,7 @@ public class GameSceneController implements Initializable{
     private Stage stage;
     private Scene scene;
 
-    private int speed_XY = 20;
+    private int speed_XY = 25;
 
     private static int playerScore;
 
@@ -125,7 +125,6 @@ public class GameSceneController implements Initializable{
     @FXML
     public void KeyPressed(KeyEvent event){
         if(event.getCode() == KeyCode.W && !DOWN){
-            System.out.println("Pressed W");
             UP = true;
             DOWN = false;
             LEFT = false;
@@ -135,7 +134,6 @@ public class GameSceneController implements Initializable{
         }
 
         if(event.getCode() == KeyCode.S && !DOWN){
-            System.out.println("Pressed S");
             UP = false;
             DOWN = true;
             LEFT = false;
@@ -145,7 +143,6 @@ public class GameSceneController implements Initializable{
         }
 
         if(event.getCode() == KeyCode.A && !RIGHT){
-            System.out.println("Pressed A");
             UP = false;
             DOWN = false;
             LEFT = true;
@@ -155,7 +152,6 @@ public class GameSceneController implements Initializable{
         }
 
         if(event.getCode() == KeyCode.D && !LEFT){
-            System.out.println("Pressed D");
             UP = false;
             DOWN = false;
             LEFT = false;
@@ -215,7 +211,9 @@ public class GameSceneController implements Initializable{
         snakeTail.setTranslateY(y);
     }
 
-    private Image GenerateFoodImage(int foodImageNumber, Image foodImage){
+    private Image GenerateFoodImage(Image foodImage){
+        int foodImageNumber = (int) (Math.random() * (17) + 1);
+
         switch (foodImageNumber) {
             case 0:
                 foodImage = new Image("Snakee/images/food-apple.png");
@@ -280,8 +278,19 @@ public class GameSceneController implements Initializable{
     private void FoodGenerate() {
         //Generates random x and y points for food to spawn
         int foodX = (int) (Math.random() * (860) + 0);
-        int foodY = (int) (Math.random() * (550) + 0);
-        int foodImageNumber = (int) (Math.random() * (17) + 1);
+        int foodY = (int) (Math.random() * (540) + 0);
+
+        int size = headPoints.size() - 1;
+
+        if (size > 2){
+            for (int i = size - snakeBody.size(); i < size; i++) {
+                if (foodX == (headPoints.get(i).getX())
+                        && foodY == (headPoints.get(i).getY())) {
+                    System.out.println("FOOD SPAWNS IN BODY");
+                    FoodGenerate();
+                }
+            }
+        }
 
         Image foodImage = null;
 
@@ -293,7 +302,7 @@ public class GameSceneController implements Initializable{
         foodObject.setHeight(snakeSize);
 
         //Sets to random image based on random number generated
-        foodImage = GenerateFoodImage(foodImageNumber, foodImage);
+        foodImage = GenerateFoodImage(foodImage);
         //Loads image to fill rectangle object
         foodObject.setFill(new ImagePattern(foodImage));
 
