@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
@@ -15,11 +16,6 @@
    <children>
       <Pane fx:id="leftsidePane" layoutX="584.0" prefHeight="560.0" prefWidth="320.0">
          <children>
-            <Button fx:id="themeButton" layoutX="45.0" layoutY="314.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="275.0" text="Theme">
-               <font>
-                  <Font name="Monospaced Regular" size="32.0" />
-               </font>
-            </Button>
             <TextField fx:id="nameTextField" alignment="CENTER" layoutY="112.0" prefHeight="66.0" prefWidth="275.0" promptText="Player Name">
                <font>
                   <Font name="Monospaced Regular" size="32.0" />
@@ -35,6 +31,7 @@
                   <Font name="Monospaced Regular" size="32.0" />
                </font>
             </Button>
+            <ComboBox fx:id="themeComboBox" layoutX="45.0" layoutY="317.0" prefHeight="66.0" prefWidth="275.0" promptText="Theme" />
          </children>
       </Pane>
       <Label fx:id="gametitleLabel" layoutX="74.0" layoutY="175.0" prefHeight="96.0" prefWidth="302.0" text="Snakee" textAlignment="CENTER" textFill="WHITE">

@@ -29,34 +29,23 @@ import java.util.ResourceBundle;
 public class GameSceneController implements Initializable{
     private Stage stage;
     private Scene scene;
-
     private static int playerScore;
 
     private final Double snakeSize = 25.;
     private final Rectangle snakeHead = new Rectangle(250,250,snakeSize,snakeSize);
 
-    // snakeHead x coordinate
     double snakeHeadX = snakeHead.getLayoutX();
-    // snakeHead y coordinate
     double snakeHeadY = snakeHead.getLayoutY();
 
     //List of all position of the snake head
     private final List<Position> headPoints = new ArrayList<>();
-
     //List of all snake body parts
     private final ArrayList<Rectangle> snakeBody = new ArrayList<>();
 
     boolean UP, DOWN, LEFT, RIGHT;
-
-    //food exists
     private boolean foodExists;
-
-    //Creates food object
     Rectangle foodObject = new Rectangle();
-
     private boolean obstacleExists;
-
-    //Creates obstacle object
     Rectangle obstacleObject = new Rectangle();
 
     //Number of times snakes moved
@@ -69,7 +58,7 @@ public class GameSceneController implements Initializable{
     @FXML
     Label playerscoreLabel;
 
-    //Runs game every 0.3 seconds
+    //Runs game every 80 milliseconds
     Timeline timeline = new Timeline(new KeyFrame(Duration.millis(80),e ->{
         headPoints.add(new Position(snakeHead.getX() + snakeHeadX, snakeHead.getY() + snakeHeadY));
         MoveSnakeHead(snakeHead);
@@ -260,6 +249,7 @@ public class GameSceneController implements Initializable{
         return false;
     }
 
+    //Displays playerScore in scene
     public void PlayerScore(int playerScore) {
         playerscoreLabel.setText("SCORE : " + playerScore);
     }
