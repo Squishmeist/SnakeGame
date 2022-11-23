@@ -57,6 +57,11 @@ public class GameSceneController implements Initializable{
     //Creates food object
     Rectangle foodObject = new Rectangle();
 
+    private boolean obstacleExists;
+
+    //Creates obstacle object
+    Rectangle obstacleObject = new Rectangle();
+
     //Number of times snakes moved
     private int gameTicks;
 
@@ -93,6 +98,14 @@ public class GameSceneController implements Initializable{
         //if food does exist check if its eaten
         else if (foodExists){
             FoodEaten();
+            PlayerScore(playerScore);
+        }
+
+        if(!obstacleExists){
+            ObstacleGenerate();
+        }
+        else if(obstacleExists){
+            ObstacleHit();
             PlayerScore(playerScore);
         }
 
@@ -276,7 +289,7 @@ public class GameSceneController implements Initializable{
 
     private void FoodGenerate() {
         //Generates random x and y points for food to spawn
-        int foodX = (int) (Math.random() * (860) + 0);
+        int foodX = (int) (Math.random() * (850) + 0);
         int foodY = (int) (Math.random() * (540) + 0);
 
         int size = headPoints.size() - 1;
@@ -321,6 +334,50 @@ public class GameSceneController implements Initializable{
 
             GameScene.getChildren().remove(foodObject);
             AddSnakeTail();
+        }
+    }
+
+    //Creates obstacle
+    private void ObstacleGenerate(){
+        int obstacleX = (int) (Math.random() * (860) + 0);
+        int obstacleY = (int) (Math.random() * (540) + 0);
+
+        int size = headPoints.size() - 1;
+        if (size > 2){
+            for (int i = size - snakeBody.size(); i < size; i++) {
+                if (obstacleX == (headPoints.get(i).getX())
+                        && obstacleY == (headPoints.get(i).getY())) {
+                    System.out.println("FOOD SPAWNS IN BODY");
+                    FoodGenerate();
+                }
+            }
+        }
+
+        obstacleObject.setX(obstacleX);
+        obstacleObject.setY(obstacleY);
+        obstacleObject.setWidth(50);
+        obstacleObject.setHeight(50);
+
+        //Sets to random image based on random number generated
+        Image obstacleImage = new Image("Snakee/images/obstacle-beartrap.png");
+        //Loads image to fill rectangle object
+        obstacleObject.setFill(new ImagePattern(obstacleImage));
+
+        obstacleExists = true;
+
+        //Adds object to the scene
+        GameScene.getChildren().add(obstacleObject);
+    }
+
+    //Checks if snake hits obstacle
+    private void ObstacleHit(){
+        if(snakeHead.getBoundsInParent().intersects(obstacleObject.getBoundsInParent())){
+            System.out.println("OBSTACLE HIT");
+
+            playerScore -= 521;
+
+            obstacleExists = false;
+            GameScene.getChildren().remove(obstacleObject);
         }
     }
 

@@ -15,7 +15,7 @@ public class StartSceneController {
     @FXML
     TextField nameTextField;
 
-    public void switchToGameScene(ActionEvent event) throws IOException {
+    public void SwitchToGameScene(ActionEvent event) throws IOException {
         String playername = nameTextField.getText();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GameScene.fxml"));
