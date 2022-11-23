@@ -49,7 +49,6 @@ public class GameSceneController implements Initializable{
     private final ArrayList<Rectangle> snakeBody = new ArrayList<>();
 
     private int num = snakeBody.size() / speed_XY;
-
     boolean UP, DOWN, LEFT, RIGHT;
 
     //food exists
