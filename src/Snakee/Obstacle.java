@@ -30,7 +30,7 @@ public class Obstacle {
         obstacleObject.setWidth(50);
         obstacleObject.setHeight(50);
 
-        Image obstacleImage = new Image("Snakee/images/obstacle-beartrap.png");
+        Image obstacleImage = new Image("Snakee/images/obstacle-one.png");
         obstacleObject.setFill(new ImagePattern(obstacleImage));
 
         return obstacleObject;

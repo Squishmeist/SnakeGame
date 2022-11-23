@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 public class StartSceneController {
 
-    private final String[] themeList = {"One", "Two", "Three"};
+    private final String[] themeList = {"Green", "Brown", "Red"};
 
     @FXML
     TextField nameTextField;
@@ -29,12 +29,12 @@ public class StartSceneController {
         String themeChoice = (String) themeComboBox.getValue();
         int themeNumber = 0;
 
-        if(themeChoice == "One"){
+        if(themeChoice == "Green"){
             themeNumber = 1;
-        } else if (themeChoice == "Two") {
+        } else if (themeChoice == "Brown") {
             themeNumber = 2;
         }
-        else if (themeChoice == "Three"){
+        else if (themeChoice == "Red"){
             themeNumber = 3;
         }
         else{
@@ -46,11 +46,10 @@ public class StartSceneController {
 
     public void SwitchToGameScene(ActionEvent event) throws IOException {
         String playerName = nameTextField.getText();
+        GameSceneController.themeNumber = PlayerThemeChoice();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GameScene.fxml"));
         Parent root = loader.load();
-
-        GameSceneController.themeNumber = PlayerThemeChoice();
 
         GameSceneController gameSceneController = loader.getController();
         gameSceneController.PlayerName(playerName);

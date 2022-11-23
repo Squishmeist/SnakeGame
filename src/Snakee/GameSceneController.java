@@ -124,8 +124,10 @@ public class GameSceneController implements Initializable{
 
         PlayerScore(playerScore);
 
+        System.out.println("THEME : " + themeNumber);
+
         snakeBody.add(snakeHead);
-        Image snakeHeadImage = new Image("Snakee/images/snake-head-right.png");
+        Image snakeHeadImage = Theme.GenerateSnakeHeadImage(themeNumber);
         snakeHead.setFill(new ImagePattern(snakeHeadImage));
 
         timeline.setCycleCount(Animation.INDEFINITE);
@@ -199,7 +201,7 @@ public class GameSceneController implements Initializable{
             Rectangle snakeFirstTail = new Rectangle(snakeHead.getX() - snakeSize, snakeHead.getY(), snakeSize, snakeSize);
             snakeBody.add(snakeFirstTail);
 
-            Image snakeTailImage = new Image("Snakee/images/snake-body.png");
+            Image snakeTailImage = Theme.GenerateSnakeTailImage(themeNumber);
             snakeFirstTail.setFill(new ImagePattern(snakeTailImage));
             GameScene.getChildren().add(snakeFirstTail);
         }
@@ -211,7 +213,8 @@ public class GameSceneController implements Initializable{
             Rectangle snakeTail = new Rectangle(snakeTailX, snakeTailY, snakeSize, snakeSize);
             snakeBody.add(snakeTail);
 
-            Image snakeTailImage = new Image("Snakee/images/snake-body.png");
+            Image snakeTailImage = Theme.GenerateSnakeTailImage(themeNumber);
+
             snakeTail.setFill(new ImagePattern(snakeTailImage));
             GameScene.getChildren().add(snakeTail);
         }
@@ -259,7 +262,6 @@ public class GameSceneController implements Initializable{
     //Displays playerName in scene
     public void PlayerName(String playerName) {
         playernameLabel.setText("PLAYER : " + playerName);
-        System.out.println("THEME : " + themeNumber);
     }
 
     //Switch to EndScene
