@@ -224,35 +224,7 @@ public class GameSceneController implements Initializable{
     }
 
     private void FoodGenerate() {
-        //Generates random x and y points for food to spawn
-        int foodX = (int) (Math.random() * (850) + 0);
-        int foodY = (int) (Math.random() * (540) + 0);
-
-        int size = headPoints.size() - 1;
-
-        if (size > 2){
-            for (int i = size - snakeBody.size(); i < size; i++) {
-                if (foodX == (headPoints.get(i).getX())
-                        && foodY == (headPoints.get(i).getY())) {
-                    System.out.println("FOOD SPAWNS IN BODY");
-                    FoodGenerate();
-                }
-            }
-        }
-
-        Image foodImage = null;
-
-        //Sets food objects x and y to randomly generated number
-        foodObject.setX(foodX);
-        foodObject.setY(foodY);
-        //Sets food objects size
-        foodObject.setWidth(snakeSize);
-        foodObject.setHeight(snakeSize);
-
-        //Sets to random image based on random number generated
-        foodImage = Food.GenerateFoodImage(foodImage);
-        //Loads image to fill rectangle object
-        foodObject.setFill(new ImagePattern(foodImage));
+        foodObject = Food.GenerateFood(foodObject, snakeBody, headPoints);
 
         //Sets food exists to equal true
         foodExists = true;
