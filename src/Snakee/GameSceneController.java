@@ -93,12 +93,18 @@ public class GameSceneController implements Initializable{
 
         //if food does not exist generate food
         if (!foodExists){
-            FoodGenerate();
+            foodObject = Food.GenerateFood(foodObject, snakeBody, headPoints);
+            foodExists = true;
+            GameScene.getChildren().add(foodObject);
         }
         //if food does exist check if its eaten
         else if (foodExists){
-            FoodEaten();
-            PlayerScore(playerScore);
+            if(Food.FoodEaten(snakeHead, foodObject)) {
+                foodExists = false;
+                playerScore += 521;
+                GameScene.getChildren().remove(foodObject);
+                AddSnakeTail();
+            }
         }
 
         if(!obstacleExists){
@@ -106,8 +112,9 @@ public class GameSceneController implements Initializable{
         }
         else if(obstacleExists){
             ObstacleHit();
-            PlayerScore(playerScore);
         }
+
+        PlayerScore(playerScore);
 
     }));
 
@@ -223,28 +230,6 @@ public class GameSceneController implements Initializable{
         snakeTail.setTranslateY(y);
     }
 
-    private void FoodGenerate() {
-        foodObject = Food.GenerateFood(foodObject, snakeBody, headPoints);
-
-        //Sets food exists to equal true
-        foodExists = true;
-        //Adds object to the scene
-        GameScene.getChildren().add(foodObject);
-    }
-
-    //Checks if food is eaten
-    private void FoodEaten(){
-        if(snakeHead.getBoundsInParent().intersects(foodObject.getBoundsInParent())){
-            System.out.println("FOOD EATEN");
-
-            foodExists = false;
-            playerScore += 521;
-
-            GameScene.getChildren().remove(foodObject);
-            AddSnakeTail();
-        }
-    }
-
     //Creates obstacle
     private void ObstacleGenerate(){
         int obstacleX = (int) (Math.random() * (860) + 0);
@@ -255,8 +240,8 @@ public class GameSceneController implements Initializable{
             for (int i = size - snakeBody.size(); i < size; i++) {
                 if (obstacleX == (headPoints.get(i).getX())
                         && obstacleY == (headPoints.get(i).getY())) {
-                    System.out.println("FOOD SPAWNS IN BODY");
-                    FoodGenerate();
+                    System.out.println("OBSTACLE SPAWNS IN BODY");
+                    ObstacleGenerate();
                 }
             }
         }

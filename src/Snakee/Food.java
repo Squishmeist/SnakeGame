@@ -73,7 +73,6 @@ public class Food {
         return foodImage;
     }
 
-
     public static Rectangle GenerateFood(Rectangle foodObject, ArrayList<Rectangle> snakeBody, List<Position> headPoints) {
         //Generates random x and y points for food to spawn
         int foodX = (int) (Math.random() * (850) + 0);
@@ -106,5 +105,14 @@ public class Food {
         foodObject.setFill(new ImagePattern(foodImage));
 
         return foodObject;
+    }
+
+    static boolean FoodEaten(Rectangle snakeHead, Rectangle foodObject){
+        if(snakeHead.getBoundsInParent().intersects(foodObject.getBoundsInParent())){
+            System.out.println("FOOD EATEN");
+            return true;
+
+        }
+        return false;
     }
 }
