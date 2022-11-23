@@ -31,6 +31,8 @@ public class GameSceneController implements Initializable{
     private Scene scene;
     private static int playerScore;
 
+    static int themeNumber = 0;
+
     private final Double snakeSize = 25.;
     private final Rectangle snakeHead = new Rectangle(250,250,snakeSize,snakeSize);
 
@@ -257,6 +259,7 @@ public class GameSceneController implements Initializable{
     //Displays playerName in scene
     public void PlayerName(String playerName) {
         playernameLabel.setText("PLAYER : " + playerName);
+        System.out.println("THEME : " + themeNumber);
     }
 
     //Switch to EndScene
