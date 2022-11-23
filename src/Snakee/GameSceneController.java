@@ -30,8 +30,6 @@ public class GameSceneController implements Initializable{
     private Stage stage;
     private Scene scene;
 
-    private int speed_XY = 25;
-
     private static int playerScore;
 
     private final Double snakeSize = 25.;
@@ -48,7 +46,6 @@ public class GameSceneController implements Initializable{
     //List of all snake body parts
     private final ArrayList<Rectangle> snakeBody = new ArrayList<>();
 
-    private int num = snakeBody.size() / speed_XY;
     boolean UP, DOWN, LEFT, RIGHT;
 
     //food exists
@@ -98,8 +95,8 @@ public class GameSceneController implements Initializable{
             GameScene.getChildren().add(foodObject);
         }
         //if food does exist check if its eaten
-        else if (foodExists){
-            if(Food.FoodEaten(snakeHead, foodObject)) {
+        else {
+            if(Food.EatenFood(snakeHead, foodObject)) {
                 foodExists = false;
                 playerScore += 521;
                 GameScene.getChildren().remove(foodObject);
@@ -108,12 +105,17 @@ public class GameSceneController implements Initializable{
         }
 
         if(!obstacleExists){
-            ObstacleGenerate();
+            obstacleObject = Obstacle.GenerateObstacle(obstacleObject, snakeBody, headPoints);
+            obstacleExists = true;
+            GameScene.getChildren().add(obstacleObject);
         }
-        else if(obstacleExists){
-            ObstacleHit();
+        else {
+            if(Obstacle.HitObstacle(snakeHead, obstacleObject)){
+                playerScore -= 521;
+                obstacleExists = false;
+                GameScene.getChildren().remove(obstacleObject);
+            }
         }
-
         PlayerScore(playerScore);
 
     }));
@@ -182,6 +184,7 @@ public class GameSceneController implements Initializable{
 
     //Called to moveSnakeHead
     private void MoveSnakeHead(Rectangle snakeHead){
+        int speed_XY = 25;
         if(UP){
             snakeHeadY -= speed_XY;
             snakeHead.setTranslateY(snakeHeadY);
@@ -228,50 +231,6 @@ public class GameSceneController implements Initializable{
         double x = headPoints.get(gameTicks - tailNumber + 1).getX() - snakeTail.getX();
         snakeTail.setTranslateX(x);
         snakeTail.setTranslateY(y);
-    }
-
-    //Creates obstacle
-    private void ObstacleGenerate(){
-        int obstacleX = (int) (Math.random() * (860) + 0);
-        int obstacleY = (int) (Math.random() * (540) + 0);
-
-        int size = headPoints.size() - 1;
-        if (size > 2){
-            for (int i = size - snakeBody.size(); i < size; i++) {
-                if (obstacleX == (headPoints.get(i).getX())
-                        && obstacleY == (headPoints.get(i).getY())) {
-                    System.out.println("OBSTACLE SPAWNS IN BODY");
-                    ObstacleGenerate();
-                }
-            }
-        }
-
-        obstacleObject.setX(obstacleX);
-        obstacleObject.setY(obstacleY);
-        obstacleObject.setWidth(50);
-        obstacleObject.setHeight(50);
-
-        //Sets to random image based on random number generated
-        Image obstacleImage = new Image("Snakee/images/obstacle-beartrap.png");
-        //Loads image to fill rectangle object
-        obstacleObject.setFill(new ImagePattern(obstacleImage));
-
-        obstacleExists = true;
-
-        //Adds object to the scene
-        GameScene.getChildren().add(obstacleObject);
-    }
-
-    //Checks if snake hits obstacle
-    private void ObstacleHit(){
-        if(snakeHead.getBoundsInParent().intersects(obstacleObject.getBoundsInParent())){
-            System.out.println("OBSTACLE HIT");
-
-            playerScore -= 521;
-
-            obstacleExists = false;
-            GameScene.getChildren().remove(obstacleObject);
-        }
     }
 
     //Check if snake hits itself

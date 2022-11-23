@@ -107,11 +107,10 @@ public class Food {
         return foodObject;
     }
 
-    static boolean FoodEaten(Rectangle snakeHead, Rectangle foodObject){
+    static boolean EatenFood(Rectangle snakeHead, Rectangle foodObject){
         if(snakeHead.getBoundsInParent().intersects(foodObject.getBoundsInParent())){
             System.out.println("FOOD EATEN");
             return true;
-
         }
         return false;
     }
