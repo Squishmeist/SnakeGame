@@ -71,7 +71,7 @@ public class GameSceneController implements Initializable{
         gameTicks++;
 
         //if snake is out of bounds run switchToEndScene method
-        if(OutOfBounds() || BodyHit()){
+        if(Snake.OutOfBounds(snakeHeadX, snakeHeadY) || Snake.BodyHit(headPoints, snakeBody)){
             System.out.println("OUT OF BOUNDS or BODY HIT");
             try {
                 SwitchToEndScene();
@@ -92,7 +92,9 @@ public class GameSceneController implements Initializable{
                 foodExists = false;
                 playerScore += 521;
                 gameAnchorPane.getChildren().remove(foodObject);
-                AddSnakeTail();
+
+                Rectangle snakeTail = Snake.AddSnakeTail(snakeBody, snakeHead, snakeSize, snakeHeadX, snakeHeadY);
+                gameAnchorPane.getChildren().add(snakeTail);
             }
         }
 
@@ -199,58 +201,11 @@ public class GameSceneController implements Initializable{
         }
     }
 
-    private void AddSnakeTail(){
-        if (snakeBody.size() == 1) {
-            Rectangle snakeFirstTail = new Rectangle(snakeHead.getX() - snakeSize, snakeHead.getY(), snakeSize, snakeSize);
-            snakeBody.add(snakeFirstTail);
-
-            Image snakeTailImage = Theme.GenerateSnakeTailImage(themeNumber);
-            snakeFirstTail.setFill(new ImagePattern(snakeTailImage));
-            gameAnchorPane.getChildren().add(snakeFirstTail);
-        }
-
-        else{
-            double snakeTailX = snakeBody.get(1).getX() + snakeHeadX + snakeSize;
-            double snakeTailY = snakeBody.get(1).getY() + snakeHeadY;
-
-            Rectangle snakeTail = new Rectangle(snakeTailX, snakeTailY, snakeSize, snakeSize);
-            snakeBody.add(snakeTail);
-
-            Image snakeTailImage = Theme.GenerateSnakeTailImage(themeNumber);
-
-            snakeTail.setFill(new ImagePattern(snakeTailImage));
-            gameAnchorPane.getChildren().add(snakeTail);
-        }
-    }
-
     private void MoveSnakeTail(Rectangle snakeTail, int tailNumber){
         double y = headPoints.get(gameTicks - tailNumber + 1).getY() - snakeTail.getY();
         double x = headPoints.get(gameTicks - tailNumber + 1).getX() - snakeTail.getX();
         snakeTail.setTranslateX(x);
         snakeTail.setTranslateY(y);
-    }
-
-    //Check if snake hits itself
-    private boolean BodyHit(){
-        int size = headPoints.size() - 1;
-
-        if (size > 2){
-            for (int i = size - snakeBody.size(); i < size; i++){
-                if(headPoints.get(size).getX() == (headPoints.get(i).getX())
-                && headPoints.get(size).getY() == (headPoints.get(i).getY())){
-                    System.out.println("BODY HIT");
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    //Check if snake is outOfBounds
-    private boolean OutOfBounds(){
-        boolean xOut = (snakeHeadX < -250 || snakeHeadX > 600);
-        boolean yOut = (snakeHeadY < -250 || snakeHeadY > 290);
-        return xOut || yOut;
     }
 
     //Displays playerScore in scene
