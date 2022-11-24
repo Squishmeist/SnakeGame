@@ -1,26 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="StartScene" prefHeight="560.0" prefWidth="870.0" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snakee.StartSceneController">
+<AnchorPane fx:id="startAnchorPane" prefHeight="560.0" prefWidth="870.0" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snakee.StartSceneController">
    <children>
-      <Label layoutX="286.0" layoutY="73.0" prefHeight="151.0" prefWidth="300.0" text="Snakee Yipee" textAlignment="CENTER">
+      <Pane fx:id="leftsidePane" layoutX="584.0" prefHeight="560.0" prefWidth="320.0">
+         <children>
+            <TextField fx:id="nameTextField" alignment="CENTER" layoutY="112.0" prefHeight="66.0" prefWidth="275.0" promptText="Player Name">
+               <font>
+                  <Font name="Monospaced Regular" size="32.0" />
+               </font>
+            </TextField>
+            <Button fx:id="startButton" layoutX="45.0" layoutY="214.0" mnemonicParsing="false" onAction="#SwitchToGameScene" prefHeight="66.0" prefWidth="275.0" styleClass="button6" stylesheets="@Main.css" text="Start">
+               <font>
+                  <Font name="Monospaced Regular" size="32.0" />
+               </font>
+            </Button>
+            <Button fx:id="leaderboardButton" layoutX="45.0" layoutY="410.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="275.0" text="Leaderboard">
+               <font>
+                  <Font name="Monospaced Regular" size="32.0" />
+               </font>
+            </Button>
+            <ComboBox fx:id="themeComboBox" layoutX="45.0" layoutY="317.0" prefHeight="66.0" prefWidth="275.0" promptText="Theme" />
+         </children>
+      </Pane>
+      <Label fx:id="gametitleLabel" layoutX="74.0" layoutY="175.0" prefHeight="96.0" prefWidth="302.0" text="Snakee" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font size="50.0" />
+            <Font name="Monospaced Bold" size="80.0" />
          </font>
       </Label>
-      <Button layoutX="382.0" layoutY="351.0" mnemonicParsing="false" onAction="#switchToGameScene" prefHeight="38.0" prefWidth="106.0" text="Start">
+      <Separator layoutX="175.0" layoutY="351.0" orientation="VERTICAL" prefHeight="209.0" prefWidth="13.0" />
+      <Separator layoutX="180.0" layoutY="351.0" prefWidth="200.0" />
+      <Separator layoutX="376.0" layoutY="223.0" orientation="VERTICAL" prefHeight="130.0" prefWidth="13.0" />
+      <Label fx:id="gametitleLabel1" layoutX="153.0" layoutY="271.0" prefHeight="66.0" prefWidth="218.0" text="a casual game where a sole player attempts to eat food by running into them with the head of the snake." textFill="WHITE" wrapText="true">
          <font>
-            <Font size="16.0" />
-         </font></Button>
-      <TextField fx:id="nameTextField" alignment="CENTER" layoutX="314.0" layoutY="262.0" prefHeight="52.0" prefWidth="245.0" promptText="Player Name">
-         <font>
-            <Font size="22.0" />
+            <Font name="Monospaced Regular" size="13.0" />
          </font>
-      </TextField>
+      </Label>
+      <ImageView fitHeight="60.0" fitWidth="29.0" layoutX="366.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+         <image>
+            <Image url="@images/snake-head-right.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </ImageView>
    </children>
 </AnchorPane>
