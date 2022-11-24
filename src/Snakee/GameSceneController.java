@@ -31,7 +31,6 @@ public class GameSceneController implements Initializable{
     private Stage stage;
     private Scene scene;
     private static int playerScore;
-
     static int themeNumber = 0;
 
     private final Double snakeSize = 25.;
@@ -111,7 +110,6 @@ public class GameSceneController implements Initializable{
             }
         }
         PlayerScore(playerScore);
-
     }));
 
     //Called after stage loaded
@@ -127,8 +125,6 @@ public class GameSceneController implements Initializable{
 
         PlayerScore(playerScore);
 
-        System.out.println("THEME : " + themeNumber);
-
         //ameAnchorPane.setStyle("-fx-background-image: url(images/start-scene.jpg)");
 
         snakeBody.add(snakeHead);
@@ -137,7 +133,6 @@ public class GameSceneController implements Initializable{
 
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
-
         gameAnchorPane.getChildren().add(snakeHead);
     }
 
