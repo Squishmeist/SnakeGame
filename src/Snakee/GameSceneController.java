@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class GameSceneController implements Initializable{
@@ -54,7 +55,7 @@ public class GameSceneController implements Initializable{
     private int gameTicks;
 
     @FXML
-    private AnchorPane GameScene;
+    private AnchorPane gameAnchorPane;
     @FXML
     Label playernameLabel;
     @FXML
@@ -83,14 +84,14 @@ public class GameSceneController implements Initializable{
         if (!foodExists){
             foodObject = Food.GenerateFood(foodObject, snakeBody, headPoints);
             foodExists = true;
-            GameScene.getChildren().add(foodObject);
+            gameAnchorPane.getChildren().add(foodObject);
         }
         //if food does exist check if its eaten
         else {
             if(Food.EatenFood(snakeHead, foodObject)) {
                 foodExists = false;
                 playerScore += 521;
-                GameScene.getChildren().remove(foodObject);
+                gameAnchorPane.getChildren().remove(foodObject);
                 AddSnakeTail();
             }
         }
@@ -98,13 +99,13 @@ public class GameSceneController implements Initializable{
         if(!obstacleExists){
             obstacleObject = Obstacle.GenerateObstacle(obstacleObject, snakeBody, headPoints);
             obstacleExists = true;
-            GameScene.getChildren().add(obstacleObject);
+            gameAnchorPane.getChildren().add(obstacleObject);
         }
         else {
             if(Obstacle.HitObstacle(snakeHead, obstacleObject)){
                 playerScore -= 521;
                 obstacleExists = false;
-                GameScene.getChildren().remove(obstacleObject);
+                gameAnchorPane.getChildren().remove(obstacleObject);
             }
         }
         PlayerScore(playerScore);
@@ -126,6 +127,8 @@ public class GameSceneController implements Initializable{
 
         System.out.println("THEME : " + themeNumber);
 
+        //ameAnchorPane.setStyle("-fx-background-image: url(images/start-scene.jpg)");
+
         snakeBody.add(snakeHead);
         Image snakeHeadImage = Theme.GenerateSnakeHeadImage(themeNumber);
         snakeHead.setFill(new ImagePattern(snakeHeadImage));
@@ -133,7 +136,7 @@ public class GameSceneController implements Initializable{
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
 
-        GameScene.getChildren().add(snakeHead);
+        gameAnchorPane.getChildren().add(snakeHead);
     }
 
     @FXML
@@ -147,7 +150,7 @@ public class GameSceneController implements Initializable{
             snakeHead.setRotate(-90);
         }
 
-        if(event.getCode() == KeyCode.S && !DOWN){
+        if(event.getCode() == KeyCode.S && !UP){
             UP = false;
             DOWN = true;
             LEFT = false;
@@ -203,7 +206,7 @@ public class GameSceneController implements Initializable{
 
             Image snakeTailImage = Theme.GenerateSnakeTailImage(themeNumber);
             snakeFirstTail.setFill(new ImagePattern(snakeTailImage));
-            GameScene.getChildren().add(snakeFirstTail);
+            gameAnchorPane.getChildren().add(snakeFirstTail);
         }
 
         else{
@@ -216,7 +219,7 @@ public class GameSceneController implements Initializable{
             Image snakeTailImage = Theme.GenerateSnakeTailImage(themeNumber);
 
             snakeTail.setFill(new ImagePattern(snakeTailImage));
-            GameScene.getChildren().add(snakeTail);
+            gameAnchorPane.getChildren().add(snakeTail);
         }
     }
 
@@ -247,11 +250,7 @@ public class GameSceneController implements Initializable{
     private boolean OutOfBounds(){
         boolean xOut = (snakeHeadX < -250 || snakeHeadX > 600);
         boolean yOut = (snakeHeadY < -250 || snakeHeadY > 290);
-        if (xOut || yOut)
-        {
-            return true;
-        }
-        return false;
+        return xOut || yOut;
     }
 
     //Displays playerScore in scene
@@ -267,7 +266,7 @@ public class GameSceneController implements Initializable{
     //Switch to EndScene
     public void SwitchToEndScene() throws IOException {
         timeline.stop();
-        Parent root = FXMLLoader.load(getClass().getResource("EndScene.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("EndScene.fxml")));
         stage = (Stage) snakeHead.getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -277,7 +276,7 @@ public class GameSceneController implements Initializable{
     //Switch to StartScene
     public void SwitchToStartScene(ActionEvent event) throws IOException {
         timeline.stop();
-        Parent root = FXMLLoader.load(getClass().getResource("StartScene.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("StartScene.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

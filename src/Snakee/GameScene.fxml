@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="GameScene" onKeyPressed="#KeyPressed" prefHeight="560.0" prefWidth="870.0" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snakee.GameSceneController">
+<AnchorPane fx:id="gameAnchorPane" onKeyPressed="#KeyPressed" prefHeight="560.0" prefWidth="870.0" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snakee.GameSceneController">
    <children>
       <Label fx:id="playernameLabel" layoutX="14.0" prefHeight="58.0" prefWidth="311.0" text="PLAYER :">
          <font>

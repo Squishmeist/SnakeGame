@@ -9,66 +9,32 @@ import java.util.List;
 
 public class Food {
 
-    static Image GenerateFoodImage(Image foodImage){
+    static Image GenerateFoodImage(){
         int foodImageNumber = (int) (Math.random() * (17) + 1);
+        Image foodImage = null;
 
         switch (foodImageNumber) {
-            case 0:
-                foodImage = new Image("Snakee/images/food-apple.png");
-                break;
-            case 1:
-                foodImage = new Image("Snakee/images/food-banana.png");
-                break;
-            case 2:
-                foodImage = new Image("Snakee/images/food-blueberry.png");
-                break;
-            case 3:
-                foodImage = new Image("Snakee/images/food-cherry.png");
-                break;
-            case 4:
-                foodImage = new Image("Snakee/images/food-durian.png");
-                break;
-            case 5:
-                foodImage = new Image("Snakee/images/food-grape.png");
-                break;
-            case 6:
-                foodImage = new Image("Snakee/images/food-grapefruit.png");
-                break;
-            case 7:
-                foodImage = new Image("Snakee/images/food-kiwi.png");
-                break;
-            case 8:
-                foodImage = new Image("Snakee/images/food-lemon.png");
-                break;
-            case 9:
-                foodImage = new Image("Snakee/images/food-litchi.png");
-                break;
-            case 10:
-                foodImage = new Image("Snakee/images/food-mango.png");
-                break;
-            case 11:
-                foodImage = new Image("Snakee/images/food-orange.png");
-                break;
-            case 12:
-                foodImage = new Image("Snakee/images/food-peach.png");
-                break;
-            case 13:
-                foodImage = new Image("Snakee/images/food-pear.png");
-                break;
-            case 14:
-                foodImage = new Image("Snakee/images/food-pineapple.png");
-                break;
-            case 15:
-                foodImage = new Image("Snakee/images/food-pitaya.png");
-                break;
-            case 16:
-                foodImage = new Image("Snakee/images/food-strawberry.png");
-                break;
-            case 17:
-                foodImage = new Image("Snakee/images/food-watermelon.png");
-                break;
-            default:
-                // code block
+            case 0 -> foodImage = new Image("Snakee/images/food-apple.png");
+            case 1 -> foodImage = new Image("Snakee/images/food-banana.png");
+            case 2 -> foodImage = new Image("Snakee/images/food-blueberry.png");
+            case 3 -> foodImage = new Image("Snakee/images/food-cherry.png");
+            case 4 -> foodImage = new Image("Snakee/images/food-durian.png");
+            case 5 -> foodImage = new Image("Snakee/images/food-grape.png");
+            case 6 -> foodImage = new Image("Snakee/images/food-grapefruit.png");
+            case 7 -> foodImage = new Image("Snakee/images/food-kiwi.png");
+            case 8 -> foodImage = new Image("Snakee/images/food-lemon.png");
+            case 9 -> foodImage = new Image("Snakee/images/food-litchi.png");
+            case 10 -> foodImage = new Image("Snakee/images/food-mango.png");
+            case 11 -> foodImage = new Image("Snakee/images/food-orange.png");
+            case 12 -> foodImage = new Image("Snakee/images/food-peach.png");
+            case 13 -> foodImage = new Image("Snakee/images/food-pear.png");
+            case 14 -> foodImage = new Image("Snakee/images/food-pineapple.png");
+            case 15 -> foodImage = new Image("Snakee/images/food-pitaya.png");
+            case 16 -> foodImage = new Image("Snakee/images/food-strawberry.png");
+            case 17 -> foodImage = new Image("Snakee/images/food-watermelon.png");
+            default -> {
+            }
+            // code block
         }
         return foodImage;
     }
@@ -90,8 +56,6 @@ public class Food {
             }
         }
 
-        Image foodImage = null;
-
         //Sets food objects x and y to randomly generated number
         foodObject.setX(foodX);
         foodObject.setY(foodY);
@@ -99,10 +63,8 @@ public class Food {
         foodObject.setWidth(25);
         foodObject.setHeight(25);
 
-        //Sets to random image based on random number generated
-        foodImage = Food.GenerateFoodImage(foodImage);
         //Loads image to fill rectangle object
-        foodObject.setFill(new ImagePattern(foodImage));
+        foodObject.setFill(new ImagePattern(Food.GenerateFoodImage()));
 
         return foodObject;
     }

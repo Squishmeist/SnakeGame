@@ -1,4 +1,4 @@
-#StartScene{
+#startAnchorPane{
     -fx-background-color: #3E363F;
 }
 
@@ -27,7 +27,7 @@
     -fx-background-color: white;
 }
 
-#GameScene{
+#gameAnchorPane{
     -fx-background-image: url("images/UI-background.png");
 }
 
@@ -37,7 +37,7 @@
 }
 
 
-#EndScene{
+#endAnchorPane{
     -fx-background-image: url("images/end-scene.png");
     -fx-background-position: center center;
     -fx-background-size: 110%;
