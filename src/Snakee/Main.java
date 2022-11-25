@@ -7,18 +7,20 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+import java.util.Objects;
+
 public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("StartScene.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("StartScene.fxml")));
             //Creates a scene object
             Scene scene = new Scene(root, 870, 560);
             //Sets stage title
             stage.setTitle("Snake Yipee");
             //Sets stage icon
-            stage.getIcons().add(new Image(getClass().getResourceAsStream("images/snake-logo.png")));
+            stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/snake-logo.png"))));
 
 
             //Adds scene to the stage

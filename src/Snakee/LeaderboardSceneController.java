@@ -37,34 +37,76 @@ public class LeaderboardSceneController {
 
     public void initialize() {
         Leaderboard.ReadLeaderboardFile();
-        Leaderboard();
-    }
 
-    public void Leaderboard(){
         ArrayList<String> playernameList = Leaderboard.playernameList;
         ArrayList<Integer> playerscoreList = Leaderboard.playerscoreList;
 
-        System.out.println("PlayerNameList : " + playernameList);
-        System.out.println("PlayerScoreList : " + playerscoreList);
-
-        firstnameLabel.setText(playernameList.get(0));
-        firstscoreLabel.setText(String.valueOf(playerscoreList.get(0)));
-
-        secondnameLabel.setText(playernameList.get(1));
-        secondscoreLabel.setText(String.valueOf(playerscoreList.get(1)));
-
-        thirdnameLabel.setText(playernameList.get(2));
-        thirdscoreLabel.setText(String.valueOf(playerscoreList.get(2)));
-
-        fourthnameLabel.setText(playernameList.get(3));
-        fourthscoreLabel.setText(String.valueOf(playerscoreList.get(3)));
-
-        fifthnameLabel.setText(playernameList.get(4));
-        fifthscoreLabel.setText(String.valueOf(playerscoreList.get(4)));
+        ScoreArraySort(playerscoreList, playernameList);
     }
 
+    public void ScoreArraySort(ArrayList<Integer> playerscoreList, ArrayList<String> playernameList){
 
+        int score = 0, firstScore = 0, secondScore = 0, thirdScore = 0, fourthScore = 0, fifthScore = 0;
+        String name = "", firstName = "", secondName = "", thirdName = "", fourthName = "", fifthName = "";
 
+        for(int i = 0; i < playerscoreList.size(); i++){
+            name = playernameList.get(i);
+            score = playerscoreList.get(i);
+
+            if(score > firstScore){
+                fifthScore = fourthScore;
+                fifthName = fourthName;
+                fourthScore = thirdScore;
+                fourthName = thirdName;
+                thirdScore = secondScore;
+                thirdName = secondName;
+                secondScore = firstScore;
+                secondName = firstName;
+                firstScore = score;
+                firstName = name;
+            }if (score > secondScore && name != firstName){
+                fifthScore = fourthScore;
+                fifthName = fourthName;
+                fourthScore = thirdScore;
+                fourthName = thirdName;
+                thirdScore = secondScore;
+                thirdName = secondName;
+                secondScore = score;
+                secondName = name;
+            }if (score > thirdScore && name != secondName && name != firstName){
+                fifthScore = fourthScore;
+                fifthName = fourthName;
+                fourthScore = thirdScore;
+                fourthName = thirdName;
+                thirdScore = score;
+                thirdName = name;
+            }if (score > fourthScore && name != thirdName && name != secondName && name != firstName){
+                fifthScore = fourthScore;
+                fifthName = fourthName;
+                fourthScore = score;
+                fourthName = name;
+            }if (score > fifthScore && name != fourthName && name != thirdName && name != secondName && name != firstName){
+                fifthScore = score;
+                fifthName = name;
+            }
+        }
+
+        firstnameLabel.setText(firstName);
+        firstscoreLabel.setText(String.valueOf(firstScore));
+
+        secondnameLabel.setText(secondName);
+        secondscoreLabel.setText(String.valueOf(secondScore));
+
+        thirdnameLabel.setText(thirdName);
+        thirdscoreLabel.setText(String.valueOf(thirdScore));
+
+        fourthnameLabel.setText(fourthName);
+        fourthscoreLabel.setText(String.valueOf(fourthScore));
+
+        fifthnameLabel.setText(fifthName);
+        fifthscoreLabel.setText(String.valueOf(fifthScore));
+
+    }
 
     public void SwitchToStartScene(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("StartScene.fxml"));

@@ -4,12 +4,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="endAnchorPane" prefHeight="560.0" prefWidth="870.0" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snakee.EndSceneController">
-   <children>
-      <Button fx:id="mainmenuButton" layoutX="365.0" layoutY="433.0" mnemonicParsing="false" onAction="#switchToStartScene" prefHeight="40.0" prefWidth="140.0" text="Main Menu">
-         <font>
-            <Font name="Monospaced Regular" size="18.0" />
-         </font>
-      </Button>
-   </children>
+<AnchorPane fx:id="endAnchorPane" prefHeight="560.0" prefWidth="870.0" stylesheets="@Main.css"
+            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Snakee.EndSceneController">
+   <Button fx:id="mainmenuButton" layoutX="365.0" layoutY="433.0" mnemonicParsing="false" onAction="#switchToStartScene"
+           prefHeight="40.0" prefWidth="140.0" text="Main Menu">
+      <font>
+         <Font name="Monospaced Regular" size="18.0"/>
+      </font>
+   </Button>
 </AnchorPane>

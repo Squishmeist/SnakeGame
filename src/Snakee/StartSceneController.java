@@ -1,6 +1,8 @@
 package Snakee;
 
 import java.io.IOException;
+import java.util.Objects;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,14 +26,14 @@ public class StartSceneController {
     }
     public int PlayerThemeChoice(){
         String themeChoice = (String) themeComboBox.getValue();
-        int themeNumber = 0;
+        int themeNumber;
 
-        if(themeChoice == "Green"){
+        if(Objects.equals(themeChoice, "Green")){
             themeNumber = 1;
-        } else if (themeChoice == "Brown") {
+        } else if (Objects.equals(themeChoice, "Brown")) {
             themeNumber = 2;
         }
-        else if (themeChoice == "Red"){
+        else if (Objects.equals(themeChoice, "Red")){
             themeNumber = 3;
         }
         else{

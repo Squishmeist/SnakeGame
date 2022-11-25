@@ -4,15 +4,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Leaderboard {
 
-    static ArrayList<String> playernameList = new ArrayList<String>();
-    static ArrayList<Integer> playerscoreList = new ArrayList<Integer>();
+    static ArrayList<String> playernameList = new ArrayList<>();
+    static ArrayList<Integer> playerscoreList = new ArrayList<>();
 
     public static void WriteLeaderboardFile(String playerName, int playerScore){
         try {
@@ -49,13 +47,4 @@ public class Leaderboard {
             e.printStackTrace();
         }
     }
-
-    public static ArrayList<String> ReturnPlayernameList(){
-        return playernameList;
-    }
-
-    public static ArrayList<Integer> ReturnPlayerscoreList(){
-        return playerscoreList;
-    }
-
 }
