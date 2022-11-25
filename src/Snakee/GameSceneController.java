@@ -76,6 +76,7 @@ public class GameSceneController implements Initializable{
             System.out.println("OUT OF BOUNDS or BODY HIT");
             try {
                 Leaderboard.WriteLeaderboardFile(playerName, playerScore);
+                Leaderboard.ReadLeaderboardFile();
                 SwitchToEndScene();
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
