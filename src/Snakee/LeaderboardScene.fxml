@@ -20,27 +20,27 @@
       </Label>
       <Pane layoutX="227.0" layoutY="153.0" prefHeight="346.0" prefWidth="417.0">
          <children>
-            <Label fx:id="firstplayerLabel" layoutY="24.0" prefHeight="52.0" prefWidth="286.0" text="FIRST PLAYER">
+            <Label fx:id="firstnameLabel" layoutY="24.0" prefHeight="52.0" prefWidth="286.0" text="FIRST PLAYER">
                <font>
                   <Font name="Monospaced Regular" size="32.0" />
                </font>
             </Label>
-            <Label fx:id="secondplayerLabel" layoutY="84.0" prefHeight="52.0" prefWidth="286.0" text="SECOND PLAYER">
+            <Label fx:id="secondnameLabel" layoutY="84.0" prefHeight="52.0" prefWidth="286.0" text="SECOND PLAYER">
                <font>
                   <Font name="Monospaced Regular" size="32.0" />
                </font>
             </Label>
-            <Label fx:id="thirdplayerLabel" layoutY="147.0" prefHeight="52.0" prefWidth="286.0" text="THIRD PLAYER">
+            <Label fx:id="thirdnameLabel" layoutY="147.0" prefHeight="52.0" prefWidth="286.0" text="THIRD PLAYER">
                <font>
                   <Font name="Monospaced Regular" size="32.0" />
                </font>
             </Label>
-            <Label fx:id="fourthplayerLabel" layoutY="211.0" prefHeight="52.0" prefWidth="286.0" text="FOURH PLAYER">
+            <Label fx:id="fourthnameLabel" layoutY="211.0" prefHeight="52.0" prefWidth="286.0" text="FOURH PLAYER">
                <font>
                   <Font name="Monospaced Regular" size="32.0" />
                </font>
             </Label>
-            <Label fx:id="fifthplayerLabel" layoutY="280.0" prefHeight="52.0" prefWidth="286.0" text="FIFTH PLAYER">
+            <Label fx:id="fifthnameLabel" layoutY="280.0" prefHeight="52.0" prefWidth="286.0" text="FIFTH PLAYER">
                <font>
                   <Font name="Monospaced Regular" size="32.0" />
                </font>

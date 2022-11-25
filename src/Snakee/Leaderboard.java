@@ -4,23 +4,24 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Leaderboard {
 
+    static ArrayList<String> playernameList = new ArrayList<String>();
+    static ArrayList<Integer> playerscoreList = new ArrayList<Integer>();
+
     public static void WriteLeaderboardFile(String playerName, int playerScore){
         try {
             FileWriter fw = new FileWriter("leaderboard.txt", true);
-
             fw.write(playerName);
             fw.write("\n");
             fw.write(playerScore + "");
             fw.write("\n");
             fw.close();
-
             System.out.println("WRITTEN TO FILE");
         } catch (IOException e) {
             e.printStackTrace();
@@ -29,9 +30,6 @@ public class Leaderboard {
 
     public static void ReadLeaderboardFile() {
         int i = 0;
-        LinkedList<String> playernameList = new LinkedList<String>();
-        LinkedList<Integer> playerscoreList = new LinkedList<Integer>();
-
         try {
             File fn = new File("leaderboard.txt");
             Scanner fs = new Scanner(fn);
@@ -46,12 +44,18 @@ public class Leaderboard {
                 }
                 i++;
             }
-            System.out.println("LinkedList Name : " + playernameList);
-            System.out.println("LinkedList Score : " + playerscoreList);
             fs.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public static ArrayList<String> ReturnPlayernameList(){
+        return playernameList;
+    }
+
+    public static ArrayList<Integer> ReturnPlayerscoreList(){
+        return playerscoreList;
     }
 
 }
