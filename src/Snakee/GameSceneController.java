@@ -20,6 +20,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -69,10 +71,11 @@ public class GameSceneController implements Initializable{
         }
         gameTicks++;
 
-        //if snake is out of bounds run switchToEndScene method
+        //if snake is out of bounds or hits itself run switchToEndScene method
         if(Snake.OutOfBounds(snakeHeadX, snakeHeadY) || Snake.BodyHit(headPoints, snakeBody)){
             System.out.println("OUT OF BOUNDS or BODY HIT");
             try {
+                Leaderboard.WriteLeaderboardFile();
                 SwitchToEndScene();
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
@@ -174,6 +177,8 @@ public class GameSceneController implements Initializable{
             snakeHead.setRotate(0);
         }
     }
+
+
 
     //Called to moveSnakeHead
     private void MoveSnakeHead(Rectangle snakeHead){
