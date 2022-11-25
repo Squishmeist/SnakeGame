@@ -45,14 +45,11 @@ public class StartSceneController {
     }
 
     public void SwitchToGameScene(ActionEvent event) throws IOException {
-        String playerName = nameTextField.getText();
+        GameSceneController.playerName = nameTextField.getText();
         GameSceneController.themeNumber = PlayerThemeChoice();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GameScene.fxml"));
         Parent root = loader.load();
-
-        GameSceneController gameSceneController = loader.getController();
-        gameSceneController.PlayerName(playerName);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);

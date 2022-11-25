@@ -33,8 +33,8 @@ public class GameSceneController implements Initializable{
     private Stage stage;
     private Scene scene;
     private static int playerScore;
+    static String playerName;
     static int themeNumber = 0;
-
     private final Double snakeSize = 25.;
     private final Rectangle snakeHead = new Rectangle(250,250,snakeSize,snakeSize);
 
@@ -75,7 +75,7 @@ public class GameSceneController implements Initializable{
         if(Snake.OutOfBounds(snakeHeadX, snakeHeadY) || Snake.BodyHit(headPoints, snakeBody)){
             System.out.println("OUT OF BOUNDS or BODY HIT");
             try {
-                Leaderboard.WriteLeaderboardFile();
+                Leaderboard.WriteLeaderboardFile(playerName, playerScore);
                 SwitchToEndScene();
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
@@ -126,6 +126,7 @@ public class GameSceneController implements Initializable{
         foodExists = false;
         gameTicks = 0;
 
+        PlayerName(playerName);
         PlayerScore(playerScore);
 
         //ameAnchorPane.setStyle("-fx-background-image: url(images/start-scene.jpg)");
@@ -177,8 +178,6 @@ public class GameSceneController implements Initializable{
             snakeHead.setRotate(0);
         }
     }
-
-
 
     //Called to moveSnakeHead
     private void MoveSnakeHead(Rectangle snakeHead){
