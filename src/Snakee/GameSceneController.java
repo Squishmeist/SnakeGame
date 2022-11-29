@@ -61,7 +61,7 @@ public class GameSceneController implements Initializable{
     Label playerscoreLabel;
 
     //Runs game every 80 milliseconds
-    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(80),e ->{
+    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(60),e ->{
         headPoints.add(new Position(snakeHead.getX() + snakeHeadX, snakeHead.getY() + snakeHeadY));
         MoveSnakeHead(snakeHead);
         for (int i = 1; i < snakeBody.size(); i++) {
