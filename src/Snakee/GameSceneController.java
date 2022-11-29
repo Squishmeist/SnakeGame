@@ -101,7 +101,7 @@ public class GameSceneController implements Initializable{
         }
 
         if(!obstacleExists){
-            obstacleObject = Obstacle.GenerateObstacle(obstacleObject, snakeBody, headPoints);
+            obstacleObject = Obstacle.GenerateObstacle(obstacleObject, snakeBody, headPoints, themeNumber);
             obstacleExists = true;
             gameAnchorPane.getChildren().add(obstacleObject);
         }

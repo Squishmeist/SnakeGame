@@ -10,9 +10,10 @@ import java.util.List;
 public class Obstacle {
 
     //Creates obstacle
-    public static Rectangle GenerateObstacle(Rectangle obstacleObject, ArrayList<Rectangle> snakeBody, List<Position> headPoints){
+    public static Rectangle GenerateObstacle(Rectangle obstacleObject, ArrayList<Rectangle> snakeBody, List<Position> headPoints, int themeNumber){
         int obstacleX = (int) (Math.random() * (860) + 0);
         int obstacleY = (int) (Math.random() * (540) + 0);
+        Image obstacleImage;
 
         int size = headPoints.size() - 1;
         if (size > 2){
@@ -20,7 +21,7 @@ public class Obstacle {
                 if (obstacleX == (headPoints.get(i).getX())
                         && obstacleY == (headPoints.get(i).getY())) {
                     System.out.println("OBSTACLE SPAWNS IN BODY");
-                    GenerateObstacle(obstacleObject, snakeBody, headPoints);
+                    GenerateObstacle(obstacleObject, snakeBody, headPoints, themeNumber);
                 }
             }
         }
@@ -30,8 +31,21 @@ public class Obstacle {
         obstacleObject.setWidth(50);
         obstacleObject.setHeight(50);
 
-        Image obstacleImage = new Image("Snakee/images/obstacle-one.png");
-        obstacleObject.setFill(new ImagePattern(obstacleImage));
+        switch (themeNumber) {
+            case 1 -> {
+                obstacleImage = new Image("Snakee/images/obstacle-one.png");
+                obstacleObject.setFill(new ImagePattern(obstacleImage));
+            }
+            case 2 -> obstacleObject.setFill(new ImagePattern(Theme.GeneratePacmanObstacle()));
+            case 3 -> {
+                obstacleImage = new Image("Snakee/images/obstacle-one.png");
+                obstacleObject.setFill(new ImagePattern(obstacleImage));
+            }
+            default -> {
+                obstacleImage = new Image("Snakee/images/obstacle-one.png");
+                obstacleObject.setFill(new ImagePattern(obstacleImage));
+            }
+        }
 
         return obstacleObject;
     }

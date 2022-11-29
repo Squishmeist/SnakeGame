@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class StartSceneController {
-    private final String[] themeList = {"Green", "Brown", "Red"};
+    private final String[] themeList = {"Snake", "Pacman", "Red"};
     @FXML
     TextField nameTextField;
     @FXML
@@ -28,9 +28,9 @@ public class StartSceneController {
         String themeChoice = (String) themeComboBox.getValue();
         int themeNumber;
 
-        if(Objects.equals(themeChoice, "Green")){
+        if(Objects.equals(themeChoice, "Snake")){
             themeNumber = 1;
-        } else if (Objects.equals(themeChoice, "Brown")) {
+        } else if (Objects.equals(themeChoice, "Pacman")) {
             themeNumber = 2;
         }
         else if (Objects.equals(themeChoice, "Red")){
