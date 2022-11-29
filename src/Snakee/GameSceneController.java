@@ -210,7 +210,7 @@ public class GameSceneController implements Initializable{
 
     //Displays playerScore in scene
     public void PlayerScore(int playerScore) {
-        if(themeNumber == 2){
+        if(themeNumber == 2 || themeNumber == 3){
             playerscoreLabel.setTextFill(Color.WHITE);
         }
         playerscoreLabel.setText("SCORE : " + playerScore);
@@ -218,7 +218,7 @@ public class GameSceneController implements Initializable{
 
     //Displays playerName in scene
     public void PlayerName(String playerName) {
-        if(themeNumber == 2){
+        if(themeNumber == 2 || themeNumber == 3){
             playernameLabel.setTextFill(Color.WHITE);
         }
         playernameLabel.setText("PLAYER : " + playerName);

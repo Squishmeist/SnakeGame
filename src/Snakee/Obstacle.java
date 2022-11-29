@@ -28,25 +28,17 @@ public class Obstacle {
 
         obstacleObject.setX(obstacleX);
         obstacleObject.setY(obstacleY);
-        obstacleObject.setWidth(50);
-        obstacleObject.setHeight(50);
+        obstacleObject.setWidth(25);
+        obstacleObject.setHeight(25);
 
         switch (themeNumber) {
-            case 1 -> {
-                obstacleImage = new Image("Snakee/images/obstacle-one.png");
-                obstacleObject.setFill(new ImagePattern(obstacleImage));
-            }
             case 2 -> obstacleObject.setFill(new ImagePattern(Theme.GeneratePacmanObstacle()));
-            case 3 -> {
-                obstacleImage = new Image("Snakee/images/obstacle-one.png");
-                obstacleObject.setFill(new ImagePattern(obstacleImage));
-            }
+            case 3 -> obstacleObject.setFill(new ImagePattern(Theme.GenerateInvaderObstacle()));
             default -> {
                 obstacleImage = new Image("Snakee/images/obstacle-one.png");
                 obstacleObject.setFill(new ImagePattern(obstacleImage));
             }
         }
-
         return obstacleObject;
     }
 

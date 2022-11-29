@@ -34,7 +34,6 @@ public class Food {
             case 17 -> foodImage = new Image("Snakee/images/food-watermelon.png");
             default -> {
             }
-            // code block
         }
         return foodImage;
     }
@@ -65,7 +64,6 @@ public class Food {
 
         //Loads image to fill rectangle object
         foodObject.setFill(new ImagePattern(Food.GenerateFoodImage()));
-
         return foodObject;
     }
 

@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class StartSceneController {
-    private final String[] themeList = {"Snake", "Pacman", "Red"};
+    private final String[] themeList = {"Snake", "Pacman", "SpaceInvader"};
     @FXML
     TextField nameTextField;
     @FXML
@@ -33,7 +33,7 @@ public class StartSceneController {
         } else if (Objects.equals(themeChoice, "Pacman")) {
             themeNumber = 2;
         }
-        else if (Objects.equals(themeChoice, "Red")){
+        else if (Objects.equals(themeChoice, "SpaceInvader")){
             themeNumber = 3;
         }
         else{
