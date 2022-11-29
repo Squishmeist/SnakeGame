@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -52,7 +53,8 @@ public class GameSceneController implements Initializable{
 
     //Number of times snakes moved
     private int gameTicks;
-
+    @FXML
+    private Pane gamePane1;
     @FXML
     private AnchorPane gameAnchorPane;
     @FXML
@@ -61,7 +63,7 @@ public class GameSceneController implements Initializable{
     Label playerscoreLabel;
 
     //Runs game every 80 milliseconds
-    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(60),e ->{
+    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100),e ->{
         headPoints.add(new Position(snakeHead.getX() + snakeHeadX, snakeHead.getY() + snakeHeadY));
         MoveSnakeHead(snakeHead);
         for (int i = 1; i < snakeBody.size(); i++) {
@@ -127,7 +129,7 @@ public class GameSceneController implements Initializable{
         PlayerName(playerName);
         PlayerScore(playerScore);
 
-        //ameAnchorPane.setStyle("-fx-background-image: url(images/start-scene.jpg)");
+        gamePane1.setId(Theme.GenerateGameBackground(themeNumber));
 
         snakeBody.add(snakeHead);
         Image snakeHeadImage = Theme.GenerateSnakeHeadImage(themeNumber);

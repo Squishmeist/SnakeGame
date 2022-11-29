@@ -59,9 +59,6 @@ public class LeaderboardSceneController {
                 }
         }
 
-        System.out.println(playerscoreList);
-        System.out.println(playernameList);
-
         firstnameLabel.setText(playernameList.get(0));
         firstscoreLabel.setText(String.valueOf(playerscoreList.get(0)));
 

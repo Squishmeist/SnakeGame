@@ -4,6 +4,25 @@ import javafx.scene.image.Image;
 
 public class Theme {
 
+    public static String GenerateGameBackground(int themeNumber){
+        String paneId;
+
+        switch(themeNumber){
+            case 1:
+                paneId = "gamePane1";
+                break;
+            case 2:
+                paneId = "gamePane2";
+                break;
+            case 3:
+                paneId = "gamePane3";
+                break;
+            default:
+                paneId = "gamePane1";
+        }
+        return paneId;
+    }
+
     public static Image GenerateSnakeTailImage(int themeNumber) {
         return switch (themeNumber) {
             case 1 -> new Image("Snakee/images/snake-body.png");

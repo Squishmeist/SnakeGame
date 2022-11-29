@@ -27,9 +27,19 @@
     -fx-background-color: white;
 }
 
-#gameAnchorPane{
+#gamePane1{
     -fx-background-image: url("images/UI-background.png");
 }
+
+#gamePane2{
+    -fx-background-image: url("images/UI-background2.png");
+}
+
+#gamePane3{
+    -fx-background-image: url("images/UI-background3.jpg");
+}
+
+
 
 #backButton{
     -fx-background-radius: 0 30 30 0;
