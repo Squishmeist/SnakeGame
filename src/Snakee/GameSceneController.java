@@ -16,6 +16,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -209,11 +210,17 @@ public class GameSceneController implements Initializable{
 
     //Displays playerScore in scene
     public void PlayerScore(int playerScore) {
+        if(themeNumber == 2){
+            playerscoreLabel.setTextFill(Color.WHITE);
+        }
         playerscoreLabel.setText("SCORE : " + playerScore);
     }
 
     //Displays playerName in scene
     public void PlayerName(String playerName) {
+        if(themeNumber == 2){
+            playernameLabel.setTextFill(Color.WHITE);
+        }
         playernameLabel.setText("PLAYER : " + playerName);
     }
 
