@@ -35,7 +35,8 @@ public class GameSceneController implements Initializable{
     private Scene scene;
     static int playerScore;
     static String playerName;
-    static int themeNumber = 0;
+    static int themeNumber;
+    static int levelNumber;
     private final Double snakeSize = 25.;
     private final Rectangle snakeHead = new Rectangle(250,250,snakeSize,snakeSize);
 
@@ -67,9 +68,8 @@ public class GameSceneController implements Initializable{
     @FXML
     Button backButton;
 
-
-    //Runs game every 80 milliseconds
-    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100),e ->{
+    //Depending on users level choice runs game every 120, 80 or 40 milliseconds
+    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(levelNumber),e ->{
         headPoints.add(new Position(snakeHead.getX() + snakeHeadX, snakeHead.getY() + snakeHeadY));
         MoveSnakeHead(snakeHead);
         for (int i = 1; i < snakeBody.size(); i++) {
@@ -145,11 +145,12 @@ public class GameSceneController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         headPoints.clear();
         snakeBody.clear();
-
         RIGHT = true;
         playerScore = 0;
         foodExists = false;
+        obstacleExists = false;
         gameTicks = 0;
+        obstacleTicks = 0;
 
         PlayerName(playerName);
         PlayerScore(playerScore);

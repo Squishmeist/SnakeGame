@@ -15,14 +15,18 @@ import javafx.stage.Stage;
 
 public class StartSceneController {
     private final String[] themeList = {"Snake", "Pacman", "SpaceInvader"};
+    private final String[] levelList = {"Easy", "Medium", "Hard"};
     @FXML
     TextField nameTextField;
     @FXML
     ComboBox themeComboBox;
+    @FXML
+    ComboBox levelComboBox;
 
     @FXML
     private void initialize(){
         themeComboBox.getItems().addAll(themeList);
+        levelComboBox.getItems().addAll(levelList);
     }
     public int PlayerThemeChoice(){
         String themeChoice = (String) themeComboBox.getValue();
@@ -40,9 +44,24 @@ public class StartSceneController {
         }
         return themeNumber;
     }
+    public int PlayerLevelChoice(){
+        String levelChoice = (String) levelComboBox.getValue();
+        int levelNumber = 0;
+
+        if(Objects.equals(levelChoice, "Easy")){
+            levelNumber = 120;
+        } else if (Objects.equals(levelChoice, "Medium")) {
+            levelNumber = 80;
+        }
+        else if (Objects.equals(levelChoice, "Hard")){
+            levelNumber = 40;
+        }
+        return levelNumber;
+    }
     public void SwitchToGameScene(ActionEvent event) throws IOException {
         GameSceneController.playerName = nameTextField.getText();
         GameSceneController.themeNumber = PlayerThemeChoice();
+        GameSceneController.levelNumber = PlayerLevelChoice();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GameScene.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
