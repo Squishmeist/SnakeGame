@@ -22,13 +22,34 @@
     -fx-font-size: 32px;
 }
 
-#leaderboardButton {
+#rightButton {
     -fx-background-radius: 30 0 0 30;
     -fx-background-color: white;
 }
 
-#gameAnchorPane{
-    -fx-background-image: url("images/UI-background.png");
+#leaderboardAnchorPane{
+    -fx-background-color: #1e1d1f;
+}
+
+#leaderboardPane{
+    -fx-background-color: #5c5b7f;
+}
+
+#leaderboardbackButton{
+    -fx-background-radius: 0 30 30 0;
+    -fx-background-color: #5c5b7f;
+}
+
+#gamePane1{
+    -fx-background-image: url("images/snake-background.png");
+}
+
+#gamePane2{
+    -fx-background-image: url("images/pacman-background.png");
+}
+
+#gamePane3{
+    -fx-background-image: url("images/invader-background.png");
 }
 
 #backButton{
@@ -36,14 +57,8 @@
     -fx-background-color: white;
 }
 
-
-#endAnchorPane{
-    -fx-background-image: url("images/end-scene.png");
-    -fx-background-position: center center;
-    -fx-background-size: 110%;
-}
-
-#mainmenuButton{
-    -fx-background-radius: 30 30 30 30;
-    -fx-background-color: white;
+#darkbackButton{
+    -fx-background-radius: 0 30 30 0;
+    -fx-background-color: black;
+    -fx-text-fill: white;
 }

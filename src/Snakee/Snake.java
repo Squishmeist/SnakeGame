@@ -46,15 +46,16 @@ public class Snake {
         else{
             double snakeTailX = snakeBody.get(1).getX() + snakeHeadX + snakeSize;
             double snakeTailY = snakeBody.get(1).getY() + snakeHeadY;
-
             Rectangle snakeTail = new Rectangle(snakeTailX, snakeTailY, snakeSize, snakeSize);
             snakeBody.add(snakeTail);
 
             Image snakeTailImage = Theme.GenerateSnakeTailImage(themeNumber);
-
             snakeTail.setFill(new ImagePattern(snakeTailImage));
             return snakeTail;
         }
     }
 
+    static Rectangle RemoveSnakeTail(ArrayList<Rectangle> snakeBody, int snakebodySize){
+        return snakeBody.get(snakebodySize-1);
+    }
 }

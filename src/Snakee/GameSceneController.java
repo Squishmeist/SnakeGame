@@ -10,11 +10,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -30,7 +33,7 @@ import java.util.ResourceBundle;
 public class GameSceneController implements Initializable{
     private Stage stage;
     private Scene scene;
-    private static int playerScore;
+    static int playerScore;
     static String playerName;
     static int themeNumber = 0;
     private final Double snakeSize = 25.;
@@ -52,22 +55,28 @@ public class GameSceneController implements Initializable{
 
     //Number of times snakes moved
     private int gameTicks;
-
+    private int obstacleTicks;
     @FXML
     private AnchorPane gameAnchorPane;
+    @FXML
+    private Pane gamePane1;
     @FXML
     Label playernameLabel;
     @FXML
     Label playerscoreLabel;
+    @FXML
+    Button backButton;
+
 
     //Runs game every 80 milliseconds
-    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(80),e ->{
+    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100),e ->{
         headPoints.add(new Position(snakeHead.getX() + snakeHeadX, snakeHead.getY() + snakeHeadY));
         MoveSnakeHead(snakeHead);
         for (int i = 1; i < snakeBody.size(); i++) {
             MoveSnakeTail(snakeBody.get(i),i);
         }
         gameTicks++;
+        obstacleTicks++;
 
         //if snake is out of bounds or hits itself run switchToEndScene method
         if(Snake.OutOfBounds(snakeHeadX, snakeHeadY) || Snake.BodyHit(headPoints, snakeBody) || playerScore < 0){
@@ -82,7 +91,7 @@ public class GameSceneController implements Initializable{
 
         //if food does not exist generate food
         if (!foodExists){
-            foodObject = Food.GenerateFood(foodObject, snakeBody, headPoints);
+            foodObject = Food.GenerateFood(foodObject, snakeBody, headPoints, themeNumber);
             foodExists = true;
             gameAnchorPane.getChildren().add(foodObject);
         }
@@ -98,16 +107,34 @@ public class GameSceneController implements Initializable{
             }
         }
 
+        //removes obstacle and generates a new one
+        if (obstacleTicks == 40){
+            obstacleTicks = 0;
+            obstacleExists = false;
+            gameAnchorPane.getChildren().remove(obstacleObject);
+        }
+
+
         if(!obstacleExists){
-            obstacleObject = Obstacle.GenerateObstacle(obstacleObject, snakeBody, headPoints);
+            obstacleObject = Obstacle.GenerateObstacle(obstacleObject, snakeBody, headPoints, themeNumber);
             obstacleExists = true;
             gameAnchorPane.getChildren().add(obstacleObject);
         }
         else {
             if(Obstacle.HitObstacle(snakeHead, obstacleObject)){
+                int snakebodySize = snakeBody.size();
                 playerScore -= 521;
+                if(playerScore < 0){
+                    try {
+                        SwitchToEndScene();
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
                 obstacleExists = false;
+                gameAnchorPane.getChildren().remove(Snake.RemoveSnakeTail(snakeBody, snakebodySize));
                 gameAnchorPane.getChildren().remove(obstacleObject);
+                snakeBody.remove(snakebodySize-1);
             }
         }
         PlayerScore(playerScore);
@@ -127,7 +154,8 @@ public class GameSceneController implements Initializable{
         PlayerName(playerName);
         PlayerScore(playerScore);
 
-        //ameAnchorPane.setStyle("-fx-background-image: url(images/start-scene.jpg)");
+        gamePane1.setId(Theme.GenerateGameBackground(themeNumber));
+        backButton.setId(Theme.GenerateBackButton(themeNumber));
 
         snakeBody.add(snakeHead);
         Image snakeHeadImage = Theme.GenerateSnakeHeadImage(themeNumber);
@@ -207,11 +235,17 @@ public class GameSceneController implements Initializable{
 
     //Displays playerScore in scene
     public void PlayerScore(int playerScore) {
+        if(themeNumber == 2 || themeNumber == 3){
+            playerscoreLabel.setTextFill(Color.WHITE);
+        }
         playerscoreLabel.setText("SCORE : " + playerScore);
     }
 
     //Displays playerName in scene
     public void PlayerName(String playerName) {
+        if(themeNumber == 2 || themeNumber == 3){
+            playernameLabel.setTextFill(Color.WHITE);
+        }
         playernameLabel.setText("PLAYER : " + playerName);
     }
 

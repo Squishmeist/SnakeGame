@@ -22,7 +22,6 @@ public class Main extends Application {
             //Sets stage icon
             stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/snake-logo.png"))));
 
-
             //Adds scene to the stage
             stage.setScene(scene);
             //Displays the contents of the stage
