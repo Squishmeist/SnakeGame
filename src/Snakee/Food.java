@@ -14,7 +14,7 @@ public class Food {
 
         switch(themeNumber){
             case 1 -> foodImage = Theme.GenerateSnakeFood();
-            case 2 -> foodImage = Theme.GenerateSnakeFood();
+            case 2 -> foodImage = Theme.GeneratePacmanFood();
             case 3 -> foodImage = Theme.GenerateInvaderFood();
             default -> {
             }
