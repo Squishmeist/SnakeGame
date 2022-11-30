@@ -28,8 +28,8 @@ public class Obstacle {
 
         obstacleObject.setX(obstacleX);
         obstacleObject.setY(obstacleY);
-        obstacleObject.setWidth(25);
-        obstacleObject.setHeight(25);
+        obstacleObject.setWidth(40);
+        obstacleObject.setHeight(40);
 
         switch (themeNumber) {
             case 2 -> obstacleObject.setFill(new ImagePattern(Theme.GeneratePacmanObstacle()));

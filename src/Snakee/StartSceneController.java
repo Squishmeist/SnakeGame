@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class StartSceneController {
@@ -27,7 +28,6 @@ public class StartSceneController {
     public int PlayerThemeChoice(){
         String themeChoice = (String) themeComboBox.getValue();
         int themeNumber;
-
         if(Objects.equals(themeChoice, "Snake")){
             themeNumber = 1;
         } else if (Objects.equals(themeChoice, "Pacman")) {
@@ -39,7 +39,6 @@ public class StartSceneController {
         else{
             themeNumber = 0;
         }
-
         return themeNumber;
     }
     public void SwitchToGameScene(ActionEvent event) throws IOException {

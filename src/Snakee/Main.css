@@ -27,6 +27,19 @@
     -fx-background-color: white;
 }
 
+#leaderboardAnchorPane{
+    -fx-background-color: #1e1d1f;
+}
+
+#leaderboardPane{
+    -fx-background-color: #5c5b7f;
+}
+
+#leaderboardbackButton{
+    -fx-background-radius: 0 30 30 0;
+    -fx-background-color: #5c5b7f;
+}
+
 #gamePane1{
     -fx-background-image: url("images/snake-background.png");
 }
@@ -44,6 +57,11 @@
     -fx-background-color: white;
 }
 
+#darkbackButton{
+    -fx-background-radius: 0 30 30 0;
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}
 
 #endAnchorPane{
     -fx-background-image: url("images/end-scene.png");

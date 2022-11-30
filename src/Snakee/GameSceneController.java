@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -55,13 +56,16 @@ public class GameSceneController implements Initializable{
     //Number of times snakes moved
     private int gameTicks;
     @FXML
-    private Pane gamePane1;
-    @FXML
     private AnchorPane gameAnchorPane;
+    @FXML
+    private Pane gamePane1;
     @FXML
     Label playernameLabel;
     @FXML
     Label playerscoreLabel;
+    @FXML
+    Button backButton;
+
 
     //Runs game every 80 milliseconds
     Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100),e ->{
@@ -85,7 +89,7 @@ public class GameSceneController implements Initializable{
 
         //if food does not exist generate food
         if (!foodExists){
-            foodObject = Food.GenerateFood(foodObject, snakeBody, headPoints);
+            foodObject = Food.GenerateFood(foodObject, snakeBody, headPoints, themeNumber);
             foodExists = true;
             gameAnchorPane.getChildren().add(foodObject);
         }
@@ -131,6 +135,7 @@ public class GameSceneController implements Initializable{
         PlayerScore(playerScore);
 
         gamePane1.setId(Theme.GenerateGameBackground(themeNumber));
+        backButton.setId(Theme.GenerateBackButton(themeNumber));
 
         snakeBody.add(snakeHead);
         Image snakeHeadImage = Theme.GenerateSnakeHeadImage(themeNumber);
