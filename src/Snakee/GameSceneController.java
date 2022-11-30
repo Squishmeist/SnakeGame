@@ -55,6 +55,7 @@ public class GameSceneController implements Initializable{
 
     //Number of times snakes moved
     private int gameTicks;
+    private int obstacleTicks;
     @FXML
     private AnchorPane gameAnchorPane;
     @FXML
@@ -75,6 +76,7 @@ public class GameSceneController implements Initializable{
             MoveSnakeTail(snakeBody.get(i),i);
         }
         gameTicks++;
+        obstacleTicks++;
 
         //if snake is out of bounds or hits itself run switchToEndScene method
         if(Snake.OutOfBounds(snakeHeadX, snakeHeadY) || Snake.BodyHit(headPoints, snakeBody) || playerScore < 0){
@@ -104,6 +106,14 @@ public class GameSceneController implements Initializable{
                 gameAnchorPane.getChildren().add(snakeTail);
             }
         }
+
+        //removes obstacle and generates a new one
+        if (obstacleTicks == 40){
+            obstacleTicks = 0;
+            obstacleExists = false;
+            gameAnchorPane.getChildren().remove(obstacleObject);
+        }
+
 
         if(!obstacleExists){
             obstacleObject = Obstacle.GenerateObstacle(obstacleObject, snakeBody, headPoints, themeNumber);
