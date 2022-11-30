@@ -22,7 +22,7 @@
     -fx-font-size: 32px;
 }
 
-#leaderboardButton {
+#rightButton {
     -fx-background-radius: 30 0 0 30;
     -fx-background-color: white;
 }
@@ -61,15 +61,4 @@
     -fx-background-radius: 0 30 30 0;
     -fx-background-color: black;
     -fx-text-fill: white;
-}
-
-#endAnchorPane{
-    -fx-background-image: url("images/end-scene.png");
-    -fx-background-position: center center;
-    -fx-background-size: 110%;
-}
-
-#mainmenuButton{
-    -fx-background-radius: 30 30 30 30;
-    -fx-background-color: white;
 }

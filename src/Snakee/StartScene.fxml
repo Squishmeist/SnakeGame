@@ -14,7 +14,7 @@
 
 <AnchorPane fx:id="startAnchorPane" maxHeight="560.0" maxWidth="870.0" minHeight="560.0" minWidth="870.0" prefHeight="560.0" prefWidth="870.0" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snakee.StartSceneController">
    <Pane fx:id="leftsidePane" layoutX="550.0" prefHeight="560.0" prefWidth="320.0">
-      <TextField fx:id="nameTextField" alignment="CENTER" layoutY="112.0" prefHeight="66.0" prefWidth="275.0" promptText="Player Name">
+      <TextField fx:id="nameTextField" alignment="CENTER" layoutY="114.0" prefHeight="66.0" prefWidth="275.0" promptText="Player Name">
          <font>
             <Font name="Monospaced Regular" size="32.0" />
          </font>
@@ -24,12 +24,12 @@
             <Font name="Monospaced Regular" size="32.0" />
          </font>
       </Button>
-      <Button fx:id="leaderboardButton" layoutX="45.0" layoutY="410.0" mnemonicParsing="false" onAction="#SwitchToLeaderboardScene" prefHeight="66.0" prefWidth="275.0" text="Leaderboard">
+      <Button fx:id="rightButton" layoutX="45.0" layoutY="414.0" mnemonicParsing="false" onAction="#SwitchToLeaderboardScene" prefHeight="66.0" prefWidth="275.0" text="Leaderboard">
          <font>
             <Font name="Monospaced Regular" size="32.0" />
          </font>
       </Button>
-      <ComboBox fx:id="themeComboBox" layoutX="45.0" layoutY="317.0" prefHeight="66.0" prefWidth="275.0" promptText="Theme" />
+      <ComboBox fx:id="themeComboBox" layoutX="45.0" layoutY="314.0" prefHeight="66.0" prefWidth="275.0" promptText="Theme" />
    </Pane>
    <Label fx:id="gametitleLabel" layoutX="74.0" layoutY="175.0" prefHeight="96.0" prefWidth="302.0" text="Snakee" textAlignment="CENTER" textFill="WHITE">
       <font>

@@ -33,7 +33,7 @@ import java.util.ResourceBundle;
 public class GameSceneController implements Initializable{
     private Stage stage;
     private Scene scene;
-    private static int playerScore;
+    static int playerScore;
     static String playerName;
     static int themeNumber = 0;
     private final Double snakeSize = 25.;
