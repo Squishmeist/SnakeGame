@@ -112,9 +112,19 @@ public class GameSceneController implements Initializable{
         }
         else {
             if(Obstacle.HitObstacle(snakeHead, obstacleObject)){
+                int snakebodySize = snakeBody.size();
                 playerScore -= 521;
+                if(playerScore < 0){
+                    try {
+                        SwitchToEndScene();
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
                 obstacleExists = false;
+                gameAnchorPane.getChildren().remove(Snake.RemoveSnakeTail(snakeBody, snakebodySize));
                 gameAnchorPane.getChildren().remove(obstacleObject);
+                snakeBody.remove(snakebodySize-1);
             }
         }
         PlayerScore(playerScore);

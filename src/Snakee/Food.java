@@ -10,16 +10,13 @@ import java.util.List;
 public class Food {
 
     static Image GenerateFoodImage(int themeNumber){
-        Image foodImage = null;
+        Image foodImage;
 
         switch(themeNumber){
-            case 1 -> foodImage = Theme.GenerateSnakeFood();
             case 2 -> foodImage = Theme.GeneratePacmanFood();
             case 3 -> foodImage = Theme.GenerateInvaderFood();
-            default -> {
-            }
+            default -> foodImage = Theme.GenerateSnakeFood();
         }
-
         return foodImage;
     }
 
