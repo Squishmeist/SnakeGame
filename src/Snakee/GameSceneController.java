@@ -54,6 +54,8 @@ public class GameSceneController implements Initializable{
     private boolean obstacleExists;
     Rectangle obstacleObject = new Rectangle();
 
+    String filename;
+
     //Number of times snakes moved
     private int gameTicks;
     private int obstacleTicks;
@@ -82,6 +84,7 @@ public class GameSceneController implements Initializable{
         if(Snake.OutOfBounds(snakeHeadX, snakeHeadY) || Snake.BodyHit(headPoints, snakeBody) || playerScore < 0){
             System.out.println("OUT OF BOUNDS or BODY HIT or SCORE BELOW 0");
             try {
+                gameTicks = -1;
                 Leaderboard.WriteLeaderboardFile(playerName, playerScore);
                 SwitchToEndScene();
             } catch (IOException ex) {
@@ -100,8 +103,9 @@ public class GameSceneController implements Initializable{
             if(Food.EatenFood(snakeHead, foodObject)) {
                 foodExists = false;
                 playerScore += 521;
+                filename = "src/Snakee/sounds/foodeaten-bleep.mp3";
+                Music.MusicPlayer(filename);
                 gameAnchorPane.getChildren().remove(foodObject);
-
                 Rectangle snakeTail = Snake.AddSnakeTail(snakeBody, snakeHead, snakeSize, snakeHeadX, snakeHeadY);
                 gameAnchorPane.getChildren().add(snakeTail);
             }
@@ -131,6 +135,8 @@ public class GameSceneController implements Initializable{
                         throw new RuntimeException(ex);
                     }
                 }
+                filename = "src/Snakee/sounds/obstaclehit-bleep.mp3";
+                Music.MusicPlayer(filename);
                 obstacleExists = false;
                 gameAnchorPane.getChildren().remove(Snake.RemoveSnakeTail(snakeBody, snakebodySize));
                 gameAnchorPane.getChildren().remove(obstacleObject);
@@ -151,8 +157,6 @@ public class GameSceneController implements Initializable{
         obstacleExists = false;
         gameTicks = 0;
         obstacleTicks = 0;
-
-        Music.Music();
 
         PlayerName(playerName);
         PlayerScore(playerScore);

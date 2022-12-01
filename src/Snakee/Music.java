@@ -9,15 +9,9 @@ public class Music {
     Media media;
     public static MediaPlayer player;
 
-
-    /**
-     * creates new player object to access BufferedInputStream and play music
-     */
-    public static void Music() {
-        String s = "src/Snakee/sounds/frogger.mp3";
-
-        Media h = new Media(Paths.get(s).toUri().toString());
-        player = new MediaPlayer(h);
+    public static void MusicPlayer(String filename) {
+        Media media = new Media(Paths.get(filename).toUri().toString());
+        player = new MediaPlayer(media);
         player.play();
     }
 
