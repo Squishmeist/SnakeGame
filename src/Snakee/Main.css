@@ -22,6 +22,13 @@
     -fx-font-size: 32px;
 }
 
+#levelComboBox{
+    -fx-background-radius: 30 0 0 30;
+    -fx-background-color: white;
+    -fx-font-family: Monospaced;
+    -fx-font-size: 32px;
+}
+
 #rightButton {
     -fx-background-radius: 30 0 0 30;
     -fx-background-color: white;

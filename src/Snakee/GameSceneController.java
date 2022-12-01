@@ -35,7 +35,8 @@ public class GameSceneController implements Initializable{
     private Scene scene;
     static int playerScore;
     static String playerName;
-    static int themeNumber = 0;
+    static int themeNumber;
+    static int levelNumber;
     private final Double snakeSize = 25.;
     private final Rectangle snakeHead = new Rectangle(250,250,snakeSize,snakeSize);
 
@@ -53,6 +54,8 @@ public class GameSceneController implements Initializable{
     private boolean obstacleExists;
     Rectangle obstacleObject = new Rectangle();
 
+    String filename;
+
     //Number of times snakes moved
     private int gameTicks;
     private int obstacleTicks;
@@ -67,9 +70,8 @@ public class GameSceneController implements Initializable{
     @FXML
     Button backButton;
 
-
-    //Runs game every 80 milliseconds
-    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100),e ->{
+    //Depending on users level choice runs game every 120, 80 or 40 milliseconds
+    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(levelNumber),e ->{
         headPoints.add(new Position(snakeHead.getX() + snakeHeadX, snakeHead.getY() + snakeHeadY));
         MoveSnakeHead(snakeHead);
         for (int i = 1; i < snakeBody.size(); i++) {
@@ -82,6 +84,7 @@ public class GameSceneController implements Initializable{
         if(Snake.OutOfBounds(snakeHeadX, snakeHeadY) || Snake.BodyHit(headPoints, snakeBody) || playerScore < 0){
             System.out.println("OUT OF BOUNDS or BODY HIT or SCORE BELOW 0");
             try {
+                gameTicks = -1;
                 Leaderboard.WriteLeaderboardFile(playerName, playerScore);
                 SwitchToEndScene();
             } catch (IOException ex) {
@@ -100,8 +103,9 @@ public class GameSceneController implements Initializable{
             if(Food.EatenFood(snakeHead, foodObject)) {
                 foodExists = false;
                 playerScore += 521;
+                filename = "src/Snakee/sounds/foodeaten-bleep.mp3";
+                Music.MusicPlayer(filename);
                 gameAnchorPane.getChildren().remove(foodObject);
-
                 Rectangle snakeTail = Snake.AddSnakeTail(snakeBody, snakeHead, snakeSize, snakeHeadX, snakeHeadY);
                 gameAnchorPane.getChildren().add(snakeTail);
             }
@@ -113,7 +117,6 @@ public class GameSceneController implements Initializable{
             obstacleExists = false;
             gameAnchorPane.getChildren().remove(obstacleObject);
         }
-
 
         if(!obstacleExists){
             obstacleObject = Obstacle.GenerateObstacle(obstacleObject, snakeBody, headPoints, themeNumber);
@@ -131,6 +134,8 @@ public class GameSceneController implements Initializable{
                         throw new RuntimeException(ex);
                     }
                 }
+                filename = "src/Snakee/sounds/obstaclehit-bleep.mp3";
+                Music.MusicPlayer(filename);
                 obstacleExists = false;
                 gameAnchorPane.getChildren().remove(Snake.RemoveSnakeTail(snakeBody, snakebodySize));
                 gameAnchorPane.getChildren().remove(obstacleObject);
@@ -145,11 +150,12 @@ public class GameSceneController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         headPoints.clear();
         snakeBody.clear();
-
         RIGHT = true;
         playerScore = 0;
         foodExists = false;
+        obstacleExists = false;
         gameTicks = 0;
+        obstacleTicks = 0;
 
         PlayerName(playerName);
         PlayerScore(playerScore);
