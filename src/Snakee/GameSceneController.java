@@ -118,7 +118,6 @@ public class GameSceneController implements Initializable{
             gameAnchorPane.getChildren().remove(obstacleObject);
         }
 
-
         if(!obstacleExists){
             obstacleObject = Obstacle.GenerateObstacle(obstacleObject, snakeBody, headPoints, themeNumber);
             obstacleExists = true;

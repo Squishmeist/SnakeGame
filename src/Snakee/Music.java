@@ -6,7 +6,6 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.Media;
 
 public class Music {
-    Media media;
     public static MediaPlayer player;
 
     public static void MusicPlayer(String filename) {
@@ -14,5 +13,4 @@ public class Music {
         player = new MediaPlayer(media);
         player.play();
     }
-
 }
