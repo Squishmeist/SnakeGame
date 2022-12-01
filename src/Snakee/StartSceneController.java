@@ -56,6 +56,9 @@ public class StartSceneController {
         else if (Objects.equals(levelChoice, "Hard")){
             levelNumber = 40;
         }
+        else{
+            levelNumber = 120;
+        }
         return levelNumber;
     }
     public void SwitchToGameScene(ActionEvent event) throws IOException {

@@ -152,6 +152,8 @@ public class GameSceneController implements Initializable{
         gameTicks = 0;
         obstacleTicks = 0;
 
+        Music.Music();
+
         PlayerName(playerName);
         PlayerScore(playerScore);
 

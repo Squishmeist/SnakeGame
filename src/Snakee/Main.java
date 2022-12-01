@@ -1,5 +1,7 @@
 package Snakee;
 
+import Snakee.sourcecode.MusicPlayer;
+import Snakee.sourcecode.Play;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
