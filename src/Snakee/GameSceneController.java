@@ -12,14 +12,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -53,8 +56,8 @@ public class GameSceneController implements Initializable{
     Rectangle foodObject = new Rectangle();
     private boolean obstacleExists;
     Rectangle obstacleObject = new Rectangle();
-
     String filename;
+
 
     //Number of times snakes moved
     private int gameTicks;
@@ -104,7 +107,7 @@ public class GameSceneController implements Initializable{
                 foodExists = false;
                 playerScore += 521;
                 filename = "src/Snakee/resources/sounds/foodeaten-bleep.mp3";
-                Music.MusicPlayer(filename);
+                //Music.MusicPlayer(filename);
                 gameAnchorPane.getChildren().remove(foodObject);
                 Rectangle snakeTail = Snake.AddSnakeTail(snakeBody, snakeHead, snakeSize, snakeHeadX, snakeHeadY);
                 gameAnchorPane.getChildren().add(snakeTail);
@@ -135,13 +138,22 @@ public class GameSceneController implements Initializable{
                     }
                 }
                 filename = "src/Snakee/resources/sounds/obstaclehit-bleep.mp3";
-                Music.MusicPlayer(filename);
+                //Music.MusicPlayer(filename);
                 obstacleExists = false;
                 gameAnchorPane.getChildren().remove(Snake.RemoveSnakeTail(snakeBody, snakebodySize));
                 gameAnchorPane.getChildren().remove(obstacleObject);
                 snakeBody.remove(snakebodySize-1);
             }
         }
+
+        if(playerScore ==  1042 && levelNumber == 120 || playerScore == 2084 && levelNumber == 80 || playerScore == 3117 && levelNumber == 40){
+            try {
+                levelPopup();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+
         PlayerScore(playerScore);
     }));
 
@@ -253,6 +265,14 @@ public class GameSceneController implements Initializable{
             playernameLabel.setTextFill(Color.WHITE);
         }
         playernameLabel.setText("PLAYER : " + playerName);
+    }
+    private void levelPopup() throws IOException{
+        timeline.stop();
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/LevelScene.fxml")));
+        stage = (Stage) snakeHead.getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     //Switch to EndScene

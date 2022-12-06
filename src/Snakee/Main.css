@@ -47,6 +47,10 @@
     -fx-background-color: #5c5b7f;
 }
 
+#levelPane{
+    -fx-background-color: blue;
+}
+
 #gamePane1{
     -fx-background-image: url("resources/images/snake/snake-background.png");
 }
