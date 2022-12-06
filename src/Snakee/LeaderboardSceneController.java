@@ -77,7 +77,7 @@ public class LeaderboardSceneController {
     }
 
     public void SwitchToStartScene(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("StartScene.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxmls/StartScene.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);

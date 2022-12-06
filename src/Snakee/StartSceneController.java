@@ -65,7 +65,7 @@ public class StartSceneController {
         GameSceneController.playerName = nameTextField.getText();
         GameSceneController.themeNumber = PlayerThemeChoice();
         GameSceneController.levelNumber = PlayerLevelChoice();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameScene.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxmls/GameScene.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
@@ -73,7 +73,7 @@ public class StartSceneController {
         stage.show();
     }
     public void SwitchToLeaderboardScene(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("LeaderboardScene.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxmls/LeaderboardScene.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);

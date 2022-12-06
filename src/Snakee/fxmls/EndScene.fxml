@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="startAnchorPane" maxHeight="560.0" maxWidth="870.0" minHeight="560.0" minWidth="870.0" prefHeight="560.0" prefWidth="870.0" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snakee.EndSceneController">
+<AnchorPane fx:id="startAnchorPane" maxHeight="560.0" maxWidth="870.0" minHeight="560.0" minWidth="870.0" prefHeight="560.0" prefWidth="870.0" stylesheets="@../Main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snakee.EndSceneController">
    <Pane fx:id="leftsidePane" prefHeight="560.0" prefWidth="552.0">
       <children>
          <Label fx:id="playernameLabel" layoutX="35.0" layoutY="211.0" prefHeight="58.0" prefWidth="482.0" text="PLAYER :" textFill="WHITE">

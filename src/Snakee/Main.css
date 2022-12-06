@@ -48,15 +48,15 @@
 }
 
 #gamePane1{
-    -fx-background-image: url("images/snake-background.png");
+    -fx-background-image: url("resources/images/snake/snake-background.png");
 }
 
 #gamePane2{
-    -fx-background-image: url("images/pacman-background.png");
+    -fx-background-image: url("resources/images/pacman/pacman-background.png");
 }
 
 #gamePane3{
-    -fx-background-image: url("images/invader-background.png");
+    -fx-background-image: url("resources/images/spaceinvaders/invader-background.png");
 }
 
 #backButton{

@@ -103,7 +103,7 @@ public class GameSceneController implements Initializable{
             if(Food.EatenFood(snakeHead, foodObject)) {
                 foodExists = false;
                 playerScore += 521;
-                filename = "src/Snakee/sounds/foodeaten-bleep.mp3";
+                filename = "src/Snakee/resources/sounds/foodeaten-bleep.mp3";
                 Music.MusicPlayer(filename);
                 gameAnchorPane.getChildren().remove(foodObject);
                 Rectangle snakeTail = Snake.AddSnakeTail(snakeBody, snakeHead, snakeSize, snakeHeadX, snakeHeadY);
@@ -134,7 +134,7 @@ public class GameSceneController implements Initializable{
                         throw new RuntimeException(ex);
                     }
                 }
-                filename = "src/Snakee/sounds/obstaclehit-bleep.mp3";
+                filename = "src/Snakee/resources/sounds/obstaclehit-bleep.mp3";
                 Music.MusicPlayer(filename);
                 obstacleExists = false;
                 gameAnchorPane.getChildren().remove(Snake.RemoveSnakeTail(snakeBody, snakebodySize));
@@ -258,7 +258,7 @@ public class GameSceneController implements Initializable{
     //Switch to EndScene
     public void SwitchToEndScene() throws IOException {
         timeline.stop();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("EndScene.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/EndScene.fxml")));
         stage = (Stage) snakeHead.getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -268,7 +268,7 @@ public class GameSceneController implements Initializable{
     //Switch to StartScene
     public void SwitchToStartScene(ActionEvent event) throws IOException {
         timeline.stop();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("StartScene.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/StartScene.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

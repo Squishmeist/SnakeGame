@@ -35,7 +35,7 @@ public class Obstacle {
             case 2 -> obstacleObject.setFill(new ImagePattern(Theme.GeneratePacmanObstacle()));
             case 3 -> obstacleObject.setFill(new ImagePattern(Theme.GenerateInvaderObstacle()));
             default -> {
-                obstacleImage = new Image("Snakee/images/obstacle-one.png");
+                obstacleImage = new Image("Snakee/resources/images/snake/obstacle-one.png");
                 obstacleObject.setFill(new ImagePattern(obstacleImage));
             }
         }

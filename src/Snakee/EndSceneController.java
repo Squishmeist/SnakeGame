@@ -28,7 +28,7 @@ public class EndSceneController {
     }
     //Switch to StartScene
     public void SwitchToStartScene(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("StartScene.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/StartScene.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -36,7 +36,7 @@ public class EndSceneController {
     }
     //Switch to LeaderboardScene
     public void SwitchToLeaderboardScene(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("LeaderboardScene.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxmls/LeaderboardScene.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);

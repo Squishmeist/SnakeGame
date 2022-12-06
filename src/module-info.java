@@ -1,10 +1,11 @@
 module COMP2013.Coursework {
     requires java.desktop;
-    requires jlayer;
     opens Snakee;
-    opens Snakee.images;
-    opens Snakee.sounds;
-    opens Snakee.sourcecode;
+    opens Snakee.resources.images;
+    opens Snakee.resources.images.snake;
+    opens Snakee.resources.images.pacman;
+    opens Snakee.resources.images.spaceinvaders;
+    opens Snakee.resources.sounds;
 
     requires javafx.fxml;
     requires javafx.controls;

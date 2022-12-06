@@ -8,10 +8,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="leaderboardAnchorPane" maxHeight="560.0" maxWidth="870.0" minHeight="560.0" minWidth="870.0" prefHeight="560.0" prefWidth="870.0" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snakee.LeaderboardSceneController">
+<AnchorPane fx:id="leaderboardAnchorPane" maxHeight="560.0" maxWidth="870.0" minHeight="560.0" minWidth="870.0" prefHeight="560.0" prefWidth="870.0" stylesheets="@../Main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snakee.LeaderboardSceneController">
    <ImageView fitHeight="577.0" fitWidth="567.0" layoutX="139.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="@images/arcade-background.png" />
+         <Image url="@../resources/images/arcade-background.png" />
       </image>
    </ImageView>
    <Button fx:id="leaderboardbackButton" layoutY="522.0" mnemonicParsing="false" onAction="#SwitchToStartScene" prefHeight="38.0" prefWidth="69.0" text="Back" textFill="WHITE">
