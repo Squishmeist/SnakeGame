@@ -22,8 +22,8 @@ public class Food {
 
     public static Rectangle GenerateFood(Rectangle foodObject, ArrayList<Rectangle> snakeBody, List<Position> headPoints, int themeNumber) {
         //Generates random x and y points for food to spawn
-        int foodX = (int) (Math.random() * (850) + 0);
-        int foodY = (int) (Math.random() * (540) + 0);
+        int foodX = (int) (Math.random() * (870) - 25);
+        int foodY = (int) (Math.random() * (560) - 25);
 
         int size = headPoints.size() - 1;
 

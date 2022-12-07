@@ -12,17 +12,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -107,7 +104,7 @@ public class GameSceneController implements Initializable{
                 foodExists = false;
                 playerScore += 521;
                 filename = "src/Snakee/resources/sounds/foodeaten-bleep.mp3";
-                //Music.MusicPlayer(filename);
+                Music.MusicPlayer(filename);
                 gameAnchorPane.getChildren().remove(foodObject);
                 Rectangle snakeTail = Snake.AddSnakeTail(snakeBody, snakeHead, snakeSize, snakeHeadX, snakeHeadY);
                 gameAnchorPane.getChildren().add(snakeTail);
@@ -138,7 +135,7 @@ public class GameSceneController implements Initializable{
                     }
                 }
                 filename = "src/Snakee/resources/sounds/obstaclehit-bleep.mp3";
-                //Music.MusicPlayer(filename);
+                Music.MusicPlayer(filename);
                 obstacleExists = false;
                 gameAnchorPane.getChildren().remove(Snake.RemoveSnakeTail(snakeBody, snakebodySize));
                 gameAnchorPane.getChildren().remove(obstacleObject);
