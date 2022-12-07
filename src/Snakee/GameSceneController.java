@@ -39,22 +39,18 @@ public class GameSceneController implements Initializable{
     static int levelNumber;
     private final Double snakeSize = 25.;
     private final Rectangle snakeHead = new Rectangle(250,250,snakeSize,snakeSize);
-
     double snakeHeadX = snakeHead.getLayoutX();
     double snakeHeadY = snakeHead.getLayoutY();
-
     //List of all position of the snake head
     private final List<Position> headPoints = new ArrayList<>();
     //List of all snake body parts
     private final ArrayList<Rectangle> snakeBody = new ArrayList<>();
-
     boolean UP, DOWN, LEFT, RIGHT;
     private boolean foodExists;
     Rectangle foodObject = new Rectangle();
     private boolean obstacleExists;
     Rectangle obstacleObject = new Rectangle();
     String filename;
-
 
     //Number of times snakes moved
     private int gameTicks;

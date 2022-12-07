@@ -11,8 +11,8 @@ public class Obstacle {
 
     //Creates obstacle
     public static Rectangle GenerateObstacle(Rectangle obstacleObject, ArrayList<Rectangle> snakeBody, List<Position> headPoints, int themeNumber){
-        int obstacleX = (int) (Math.random() * (860) + 0);
-        int obstacleY = (int) (Math.random() * (540) + 0);
+        int obstacleX = (int) (Math.random() * (870) - 40);
+        int obstacleY = (int) (Math.random() * (560) - 40);
         Image obstacleImage;
 
         int size = headPoints.size() - 1;

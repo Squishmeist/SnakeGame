@@ -21,12 +21,23 @@ public class EndSceneController {
     Label playerscoreLabel;
     @FXML
     Label playernameLabel;
-    //Displays playername and playerscore
+
+    /**
+     * Method ran when EndScene.fxml is loaded.
+     * <p>
+     * This method sets the playerscoreLabel to display the text "SCORE : " and the playerScore variable which stores the score achieved.
+     * It also sets the playernameLabel to display the text "PLAYER : " and the playerName variable which stores the name entered from the player.
+     */
     public void initialize(){
         playerscoreLabel.setText("SCORE : " + playerScore);
         playernameLabel.setText("PLAYER : " + playerName);
     }
-    //Switch to StartScene
+
+    /**
+     * Method loads the StartScene.fxml when an event occurs.
+     * @param event
+     * @throws IOException
+     */
     public void SwitchToStartScene(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/StartScene.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -34,7 +45,12 @@ public class EndSceneController {
         stage.setScene(scene);
         stage.show();
     }
-    //Switch to LeaderboardScene
+
+    /**
+     * Method loads the LeaderboardScene.fxml when an event occurs.
+     * @param event
+     * @throws IOException
+     */
     public void SwitchToLeaderboardScene(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("fxmls/LeaderboardScene.fxml"));
         Parent root = loader.load();
@@ -43,6 +59,13 @@ public class EndSceneController {
         stage.setScene(scene);
         stage.show();
     }
+
+    /**
+     * Method exits the game.
+     *
+     * @param event
+     * @throws IOException
+     */
     public void ExitGame(ActionEvent event) throws IOException{
         System.exit(0);
     }
