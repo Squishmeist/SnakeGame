@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -34,11 +33,8 @@ public class GameSceneController implements Initializable{
     private Stage stage;
     private Scene scene;
 
-    static int playerScore;
     static String playerName;
-    static int themeNumber;
-    static int levelNumber;
-
+    static int playerScore, themeNumber, levelNumber;
     private final Double snakeSize = 25.;
     private final Rectangle snakeHead = new Rectangle(250,250,snakeSize,snakeSize);
     //List of all position of the snake head
@@ -50,15 +46,15 @@ public class GameSceneController implements Initializable{
     private double m_snakeHeadX = snakeHead.getLayoutX();
     private double m_snakeHeadY = snakeHead.getLayoutY();
     boolean m_UP, m_DOWN, m_LEFT, m_RIGHT;
-    private boolean m_foodExists;
-    private boolean m_obstacleExists;
+    private boolean m_foodExists, m_obstacleExists;
     Snake m_snake;
     Food m_food;
     Obstacle m_obstacle;
-    Leaderboard m_leaderboard;
+    Leaderboard m_leaderboard = new Leaderboard();
+    Music m_music = new Music();
+    SceneSwitch m_sceneSwitch = new SceneSwitch();
     //Number of times snakes moved
-    private int m_gameTicks;
-    private int m_obstacleTicks;
+    private int m_gameTicks, m_obstacleTicks;
 
     @FXML
     private AnchorPane gameAnchorPane;
@@ -103,7 +99,7 @@ public class GameSceneController implements Initializable{
             if(m_food.EatenFood()) {
                 m_foodExists = false;
                 playerScore += 521;
-                Music.MusicPlayer("src/Snakee/resources/sounds/foodeaten-bleep.mp3");
+                m_music.MusicPlayer("src/Snakee/resources/sounds/foodeaten-bleep.mp3");
                 m_food.RemoveFood();
                 m_snake.AddSnakeTail();
             }
@@ -131,7 +127,7 @@ public class GameSceneController implements Initializable{
                         throw new RuntimeException(ex);
                     }
                 }
-                Music.MusicPlayer("src/Snakee/resources/sounds/obstaclehit-bleep.mp3");
+                m_music.MusicPlayer("src/Snakee/resources/sounds/obstaclehit-bleep.mp3");
                 m_obstacleExists = false;
                 m_snake.RemoveSnakeTail();
                 m_obstacle.RemoveObstacle();
@@ -165,7 +161,6 @@ public class GameSceneController implements Initializable{
         m_snake = new Snake(gameAnchorPane, snakeBody, snakeHead, snakeSize);
         m_food = new Food(gameAnchorPane, snakeHead, snakeBody, headPoints, themeNumber);
         m_obstacle = new Obstacle(gameAnchorPane, snakeHead, snakeBody, headPoints, themeNumber);
-        m_leaderboard = new Leaderboard();
 
         PlayerName(playerName);
         PlayerScore(playerScore);
@@ -181,7 +176,6 @@ public class GameSceneController implements Initializable{
         timeline.play();
         gameAnchorPane.getChildren().add(snakeHead);
     }
-
     @FXML
     public void KeyPressed(KeyEvent event){
         if(event.getCode() == KeyCode.W && !m_DOWN){
@@ -220,7 +214,6 @@ public class GameSceneController implements Initializable{
             snakeHead.setRotate(0);
         }
     }
-
     //Called to moveSnakeHead
     private void MoveSnakeHead(Rectangle snakeHead){
         int speed_XY = 25;
@@ -241,24 +234,21 @@ public class GameSceneController implements Initializable{
             snakeHead.setTranslateX(m_snakeHeadX);
         }
     }
-
     private void MoveSnakeTail(Rectangle snakeTail, int tailNumber){
         double y = headPoints.get(m_gameTicks - tailNumber + 1).getY() - snakeTail.getY();
         double x = headPoints.get(m_gameTicks - tailNumber + 1).getX() - snakeTail.getX();
         snakeTail.setTranslateX(x);
         snakeTail.setTranslateY(y);
     }
-
     //Displays playerScore in scene
-    public void PlayerScore(int playerScore) {
+    private void PlayerScore(int playerScore) {
         if(themeNumber == 2 || themeNumber == 3){
             playerscoreLabel.setTextFill(Color.WHITE);
         }
         playerscoreLabel.setText("SCORE : " + playerScore);
     }
-
     //Displays playerName in scene
-    public void PlayerName(String playerName) {
+    private void PlayerName(String playerName) {
         if(themeNumber == 2 || themeNumber == 3){
             playernameLabel.setTextFill(Color.WHITE);
         }
@@ -272,7 +262,6 @@ public class GameSceneController implements Initializable{
         stage.setScene(scene);
         stage.show();
     }
-
     //Switch to EndScene
     public void SwitchToEndScene() throws IOException {
         timeline.stop();
@@ -282,15 +271,11 @@ public class GameSceneController implements Initializable{
         stage.setScene(scene);
         stage.show();
     }
-
     //Switch to StartScene
     public void SwitchToStartScene(ActionEvent event) throws IOException {
         timeline.stop();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/StartScene.fxml")));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        String m_filename = "fxmls/StartScene.fxml";
+        m_sceneSwitch.SwitchScene(event, m_filename);
     }
 
 }

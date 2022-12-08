@@ -35,8 +35,8 @@ public class Obstacle {
     private Image GenerateObstacleImage(){
         Image obstacleImage;
         switch (m_themeNumber) {
-            case 2 -> obstacleImage = Theme.GeneratePacmanFood();
-            case 3 -> obstacleImage = Theme.GeneratePacmanFood();
+            case 2 -> obstacleImage = Theme.GeneratePacmanObstacle();
+            case 3 -> obstacleImage = Theme.GeneratePacmanObstacle();
             default -> {
                 obstacleImage = new Image("Snakee/resources/images/snake/obstacle-one.png");
             }
@@ -66,12 +66,10 @@ public class Obstacle {
                 }
             }
         }
-
         m_obstacleObject.setX(obstacleX);
         m_obstacleObject.setY(obstacleY);
         m_obstacleObject.setWidth(40);
         m_obstacleObject.setHeight(40);
-
         m_obstacleObject.setFill(new ImagePattern(GenerateObstacleImage()));
         m_gameAnchorPane.getChildren().add(m_obstacleObject);
     }

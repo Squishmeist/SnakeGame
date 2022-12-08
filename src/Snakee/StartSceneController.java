@@ -5,17 +5,14 @@ import java.util.Objects;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 public class StartSceneController {
-    private final String[] themeList = {"Snake", "Pacman", "SpaceInvader"};
-    private final String[] levelList = {"Easy", "Medium", "Hard"};
+    private final String[] m_themeList = {"Snake", "Pacman", "SpaceInvader"};
+    private final String[] m_levelList = {"Easy", "Medium", "Hard"};
+    private String m_filename;
+    SceneSwitch m_sceneSwitch = new SceneSwitch();
     @FXML
     TextField nameTextField;
     @FXML
@@ -25,10 +22,10 @@ public class StartSceneController {
 
     @FXML
     private void initialize(){
-        themeComboBox.getItems().addAll(themeList);
-        levelComboBox.getItems().addAll(levelList);
+        themeComboBox.getItems().addAll(m_themeList);
+        levelComboBox.getItems().addAll(m_levelList);
     }
-    public int PlayerThemeChoice(){
+    public int ThemeChoice(){
         String themeChoice = (String) themeComboBox.getValue();
         int themeNumber;
         if(Objects.equals(themeChoice, "Snake")){
@@ -44,9 +41,9 @@ public class StartSceneController {
         }
         return themeNumber;
     }
-    public int PlayerLevelChoice(){
+    public int LevelChoice(){
         String levelChoice = (String) levelComboBox.getValue();
-        int levelNumber = 0;
+        int levelNumber;
 
         if(Objects.equals(levelChoice, "Easy")){
             levelNumber = 120;
@@ -63,21 +60,13 @@ public class StartSceneController {
     }
     public void SwitchToGameScene(ActionEvent event) throws IOException {
         GameSceneController.playerName = nameTextField.getText();
-        GameSceneController.themeNumber = PlayerThemeChoice();
-        GameSceneController.levelNumber = PlayerLevelChoice();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxmls/GameScene.fxml"));
-        Parent root = loader.load();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        GameSceneController.themeNumber = ThemeChoice();
+        GameSceneController.levelNumber = LevelChoice();
+        m_filename = "fxmls/GameScene.fxml";
+        m_sceneSwitch.SwitchScene(event, m_filename);
     }
     public void SwitchToLeaderboardScene(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxmls/LeaderboardScene.fxml"));
-        Parent root = loader.load();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        m_filename = "fxmls/LeaderboardScene.fxml";
+        m_sceneSwitch.SwitchScene(event, m_filename);
     }
 }

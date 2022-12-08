@@ -2,22 +2,16 @@ package Snakee;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class LeaderboardSceneController {
-
-    Leaderboard m_leaderboard = new Leaderboard();
     private ArrayList<String> m_playernameList;
     private ArrayList<Integer> m_playerscoreList;
-
+    Leaderboard m_leaderboard = new Leaderboard();
+    SceneSwitch m_sceneSwitch = new SceneSwitch();
     @FXML
     Label firstnameLabel;
     @FXML
@@ -47,7 +41,6 @@ public class LeaderboardSceneController {
     }
 
     public void ScoreArraySort() {
-
         for (int i = 0; i < m_playerscoreList.size() - 1; i++) {
             for (int j = 0; j < m_playerscoreList.size() - i - 1; j++)
                 if (m_playerscoreList.get(j) < m_playerscoreList.get(j + 1)) {
@@ -75,11 +68,7 @@ public class LeaderboardSceneController {
     }
 
     public void SwitchToStartScene(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxmls/StartScene.fxml"));
-        Parent root = loader.load();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        String m_filename = "fxmls/StartScene.fxml";
+        m_sceneSwitch.SwitchScene(event, m_filename);
     }
 }

@@ -21,18 +21,16 @@ public class LevelSceneController {
     Label levelLabel;
 
     public void initialize(){
-        switch (levelNumber){
-            case 120:
+        switch (levelNumber) {
+            case 120 -> {
                 levelLabel.setText("LEVEL : 1");
                 levelNumber = 80;
-                break;
-            case 80:
+            }
+            case 80 -> {
                 levelLabel.setText("LEVEL : 2");
                 levelNumber = 40;
-                break;
-            case 40:
-                levelLabel.setText("LEVEL : 3");
-                break;
+            }
+            case 40 -> levelLabel.setText("LEVEL : 3");
         }
         scoreLabel.setText("SCORE : " + playerScore);
     }
