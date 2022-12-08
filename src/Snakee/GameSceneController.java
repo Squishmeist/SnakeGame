@@ -33,28 +33,32 @@ import java.util.ResourceBundle;
 public class GameSceneController implements Initializable{
     private Stage stage;
     private Scene scene;
+
     static int playerScore;
     static String playerName;
     static int themeNumber;
     static int levelNumber;
+
     private final Double snakeSize = 25.;
     private final Rectangle snakeHead = new Rectangle(250,250,snakeSize,snakeSize);
-    double snakeHeadX = snakeHead.getLayoutX();
-    double snakeHeadY = snakeHead.getLayoutY();
     //List of all position of the snake head
     private final List<Position> headPoints = new ArrayList<>();
     //List of all snake body parts
     private final ArrayList<Rectangle> snakeBody = new ArrayList<>();
-    boolean UP, DOWN, LEFT, RIGHT;
-    private boolean foodExists;
-    Rectangle foodObject = new Rectangle();
-    private boolean obstacleExists;
-    Rectangle obstacleObject = new Rectangle();
-    String filename;
 
+    //Class specific variables
+    private double m_snakeHeadX = snakeHead.getLayoutX();
+    private double m_snakeHeadY = snakeHead.getLayoutY();
+    boolean m_UP, m_DOWN, m_LEFT, m_RIGHT;
+    private boolean m_foodExists;
+    private boolean m_obstacleExists;
+    Snake m_snake;
+    Food m_food;
+    Obstacle m_obstacle;
     //Number of times snakes moved
-    private int gameTicks;
-    private int obstacleTicks;
+    private int m_gameTicks;
+    private int m_obstacleTicks;
+
     @FXML
     private AnchorPane gameAnchorPane;
     @FXML
@@ -68,19 +72,19 @@ public class GameSceneController implements Initializable{
 
     //Depending on users level choice runs game every 120, 80 or 40 milliseconds
     Timeline timeline = new Timeline(new KeyFrame(Duration.millis(levelNumber),e ->{
-        headPoints.add(new Position(snakeHead.getX() + snakeHeadX, snakeHead.getY() + snakeHeadY));
+        headPoints.add(new Position(snakeHead.getX() + m_snakeHeadX, snakeHead.getY() + m_snakeHeadY));
         MoveSnakeHead(snakeHead);
         for (int i = 1; i < snakeBody.size(); i++) {
             MoveSnakeTail(snakeBody.get(i),i);
         }
-        gameTicks++;
-        obstacleTicks++;
+        m_gameTicks++;
+        m_obstacleTicks++;
 
         //if snake is out of bounds or hits itself run switchToEndScene method
-        if(Snake.OutOfBounds(snakeHeadX, snakeHeadY) || Snake.BodyHit(headPoints, snakeBody) || playerScore < 0){
+        if(m_snake.OutOfBounds(m_snakeHeadX, m_snakeHeadY) || m_snake.BodyHit(headPoints, snakeBody) || playerScore < 0){
             System.out.println("OUT OF BOUNDS or BODY HIT or SCORE BELOW 0");
             try {
-                gameTicks = -1;
+                m_gameTicks = -1;
                 Leaderboard.WriteLeaderboardFile(playerName, playerScore);
                 SwitchToEndScene();
             } catch (IOException ex) {
@@ -89,38 +93,34 @@ public class GameSceneController implements Initializable{
         }
 
         //if food does not exist generate food
-        if (!foodExists){
-            foodObject = Food.GenerateFood(foodObject, snakeBody, headPoints, themeNumber);
-            foodExists = true;
-            gameAnchorPane.getChildren().add(foodObject);
+        if (!m_foodExists){
+            m_foodExists = true;
+            m_food.GenerateFood();
         }
         //if food does exist check if its eaten
         else {
-            if(Food.EatenFood(snakeHead, foodObject)) {
-                foodExists = false;
+            if(m_food.EatenFood()) {
+                m_foodExists = false;
                 playerScore += 521;
-                filename = "src/Snakee/resources/sounds/foodeaten-bleep.mp3";
-                Music.MusicPlayer(filename);
-                gameAnchorPane.getChildren().remove(foodObject);
-                Rectangle snakeTail = Snake.AddSnakeTail(snakeBody, snakeHead, snakeSize, snakeHeadX, snakeHeadY);
-                gameAnchorPane.getChildren().add(snakeTail);
+                Music.MusicPlayer("src/Snakee/resources/sounds/foodeaten-bleep.mp3");
+                m_food.RemoveFood();
+                m_snake.AddSnakeTail();
             }
         }
 
         //removes obstacle and generates a new one
-        if (obstacleTicks == 40){
-            obstacleTicks = 0;
-            obstacleExists = false;
-            gameAnchorPane.getChildren().remove(obstacleObject);
+        if (m_obstacleTicks == 40){
+            m_obstacleTicks = 0;
+            m_obstacleExists = false;
+            m_obstacle.RemoveObstacle();
         }
 
-        if(!obstacleExists){
-            obstacleObject = Obstacle.GenerateObstacle(obstacleObject, snakeBody, headPoints, themeNumber);
-            obstacleExists = true;
-            gameAnchorPane.getChildren().add(obstacleObject);
+        if(!m_obstacleExists){
+            m_obstacleExists = true;
+            m_obstacle.GenerateObstacle();
         }
         else {
-            if(Obstacle.HitObstacle(snakeHead, obstacleObject)){
+            if(m_obstacle.HitObstacle()){
                 int snakebodySize = snakeBody.size();
                 playerScore -= 521;
                 if(playerScore < 0){
@@ -130,11 +130,10 @@ public class GameSceneController implements Initializable{
                         throw new RuntimeException(ex);
                     }
                 }
-                filename = "src/Snakee/resources/sounds/obstaclehit-bleep.mp3";
-                Music.MusicPlayer(filename);
-                obstacleExists = false;
-                gameAnchorPane.getChildren().remove(Snake.RemoveSnakeTail(snakeBody, snakebodySize));
-                gameAnchorPane.getChildren().remove(obstacleObject);
+                Music.MusicPlayer("src/Snakee/resources/sounds/obstaclehit-bleep.mp3");
+                m_obstacleExists = false;
+                m_snake.RemoveSnakeTail();
+                m_obstacle.RemoveObstacle();
                 snakeBody.remove(snakebodySize-1);
             }
         }
@@ -155,12 +154,16 @@ public class GameSceneController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         headPoints.clear();
         snakeBody.clear();
-        RIGHT = true;
+        m_RIGHT = true;
         playerScore = 0;
-        foodExists = false;
-        obstacleExists = false;
-        gameTicks = 0;
-        obstacleTicks = 0;
+        m_foodExists = false;
+        m_obstacleExists = false;
+        m_gameTicks = 0;
+        m_obstacleTicks = 0;
+
+        m_snake = new Snake(gameAnchorPane, snakeBody, snakeHead, snakeSize);
+        m_food = new Food(gameAnchorPane, snakeHead, snakeBody, headPoints, themeNumber);
+        m_obstacle = new Obstacle(gameAnchorPane, snakeHead, snakeBody, headPoints, themeNumber);
 
         PlayerName(playerName);
         PlayerScore(playerScore);
@@ -179,38 +182,38 @@ public class GameSceneController implements Initializable{
 
     @FXML
     public void KeyPressed(KeyEvent event){
-        if(event.getCode() == KeyCode.W && !DOWN){
-            UP = true;
-            DOWN = false;
-            LEFT = false;
-            RIGHT = false;
+        if(event.getCode() == KeyCode.W && !m_DOWN){
+            m_UP = true;
+            m_DOWN = false;
+            m_LEFT = false;
+            m_RIGHT = false;
 
             snakeHead.setRotate(-90);
         }
 
-        if(event.getCode() == KeyCode.S && !UP){
-            UP = false;
-            DOWN = true;
-            LEFT = false;
-            RIGHT = false;
+        if(event.getCode() == KeyCode.S && !m_UP){
+            m_UP = false;
+            m_DOWN = true;
+            m_LEFT = false;
+            m_RIGHT = false;
 
             snakeHead.setRotate(90);
         }
 
-        if(event.getCode() == KeyCode.A && !RIGHT){
-            UP = false;
-            DOWN = false;
-            LEFT = true;
-            RIGHT = false;
+        if(event.getCode() == KeyCode.A && !m_RIGHT){
+            m_UP = false;
+            m_DOWN = false;
+            m_LEFT = true;
+            m_RIGHT = false;
 
             snakeHead.setRotate(-180);
         }
 
-        if(event.getCode() == KeyCode.D && !LEFT){
-            UP = false;
-            DOWN = false;
-            LEFT = false;
-            RIGHT = true;
+        if(event.getCode() == KeyCode.D && !m_LEFT){
+            m_UP = false;
+            m_DOWN = false;
+            m_LEFT = false;
+            m_RIGHT = true;
 
             snakeHead.setRotate(0);
         }
@@ -219,27 +222,27 @@ public class GameSceneController implements Initializable{
     //Called to moveSnakeHead
     private void MoveSnakeHead(Rectangle snakeHead){
         int speed_XY = 25;
-        if(UP){
-            snakeHeadY -= speed_XY;
-            snakeHead.setTranslateY(snakeHeadY);
+        if(m_UP){
+            m_snakeHeadY -= speed_XY;
+            snakeHead.setTranslateY(m_snakeHeadY);
         }
-        if(DOWN){
-            snakeHeadY += speed_XY;
-            snakeHead.setTranslateY(snakeHeadY);
+        if(m_DOWN){
+            m_snakeHeadY += speed_XY;
+            snakeHead.setTranslateY(m_snakeHeadY);
         }
-        if(LEFT){
-            snakeHeadX -= speed_XY;
-            snakeHead.setTranslateX(snakeHeadX);
+        if(m_LEFT){
+            m_snakeHeadX -= speed_XY;
+            snakeHead.setTranslateX(m_snakeHeadX);
         }
-        if(RIGHT){
-            snakeHeadX += speed_XY;
-            snakeHead.setTranslateX(snakeHeadX);
+        if(m_RIGHT){
+            m_snakeHeadX += speed_XY;
+            snakeHead.setTranslateX(m_snakeHeadX);
         }
     }
 
     private void MoveSnakeTail(Rectangle snakeTail, int tailNumber){
-        double y = headPoints.get(gameTicks - tailNumber + 1).getY() - snakeTail.getY();
-        double x = headPoints.get(gameTicks - tailNumber + 1).getX() - snakeTail.getX();
+        double y = headPoints.get(m_gameTicks - tailNumber + 1).getY() - snakeTail.getY();
+        double x = headPoints.get(m_gameTicks - tailNumber + 1).getX() - snakeTail.getX();
         snakeTail.setTranslateX(x);
         snakeTail.setTranslateY(y);
     }
