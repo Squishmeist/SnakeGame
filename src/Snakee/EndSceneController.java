@@ -32,8 +32,6 @@ public class EndSceneController {
 
     /**
      * Method loads the StartScene.fxml when an event occurs.
-     * @param event
-     * @throws IOException
      */
     public void SwitchToStartScene(ActionEvent event) throws IOException {
         m_filename = "fxmls/StartScene.fxml";
@@ -42,8 +40,6 @@ public class EndSceneController {
 
     /**
      * Method loads the LeaderboardScene.fxml when an event occurs.
-     * @param event
-     * @throws IOException
      */
     public void SwitchToLeaderboardScene(ActionEvent event) throws IOException {
         m_filename = "fxmls/LeaderboardScene.fxml";
@@ -52,11 +48,8 @@ public class EndSceneController {
 
     /**
      * Method exits the game.
-     *
-     * @param event
-     * @throws IOException
      */
-    public void ExitGame(ActionEvent event) throws IOException{
+    public void ExitGame() {
         System.exit(0);
     }
 

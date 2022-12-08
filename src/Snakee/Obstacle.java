@@ -36,7 +36,7 @@ public class Obstacle {
         Image obstacleImage;
         switch (m_themeNumber) {
             case 2 -> obstacleImage = Theme.GeneratePacmanObstacle();
-            case 3 -> obstacleImage = Theme.GeneratePacmanObstacle();
+            case 3 -> obstacleImage = Theme.GenerateInvaderObstacle();
             default -> {
                 obstacleImage = new Image("Snakee/resources/images/snake/obstacle-one.png");
             }
