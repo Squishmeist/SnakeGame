@@ -24,10 +24,27 @@ public class Food {
         m_themeNumber = themeNumber;
     }
 
+    /**
+     * Method returns an image that is then used to setFill an object.
+     * <p>
+     * The image is set based on the themeNumber which is set by the player when they chose a theme.
+     * Depending on the themeNumber different methods are called from the Theme class that return a randomly chosen image.
+     *
+     * @return image generated based on themeNumber
+     */
+    private Image GenerateFoodImage(){
+        Image foodImage;
+        switch(m_themeNumber){
+            case 2 -> foodImage = Theme.GeneratePacmanFood();
+            case 3 -> foodImage = Theme.GenerateInvaderFood();
+            default -> foodImage = Theme.GenerateSnakeFood();
+        }
+        return foodImage;
+    }
 
     /**
      * This method generates a random x and y number.
-     * It checks that the genearated x and y ints are not within the snake.
+     * It checks that the generated x and y ints are not within the snake.
      * If the x and y are the same as a snakebody point it reruns the function.
      * <p>
      * The objects x and y are then set along with the width and height.
@@ -35,8 +52,8 @@ public class Food {
      */
     public void GenerateFood() {
         //Generates random x and y points for food to spawn
-        int foodX = (int) (Math.random() * (870) - 25);
-        int foodY = (int) (Math.random() * (560) - 25);
+        int foodX = (int) (Math.random() * (840) + 0);
+        int foodY = (int) (Math.random() * (530) + 0);
 
         int size = m_headPoints.size() - 1;
         if (size > 2) {
@@ -58,24 +75,6 @@ public class Food {
         //Loads image to fill rectangle object
         m_foodObject.setFill(new ImagePattern(GenerateFoodImage()));
         m_gameAnchorPane.getChildren().add(m_foodObject);
-    }
-
-    /**
-     * Method returns an image that is then used to setFill an object.
-     * <p>
-     * The image is set based on the themeNumber which is set by the player when they chose a theme.
-     * Depending on the themeNumber different methods are called from the Theme class that return a randomly chosen image.
-     *
-     * @return image generated based on themeNumber
-     */
-    private Image GenerateFoodImage(){
-        Image foodImage;
-        switch(m_themeNumber){
-            case 2 -> foodImage = Theme.GeneratePacmanFood();
-            case 3 -> foodImage = Theme.GenerateInvaderFood();
-            default -> foodImage = Theme.GenerateSnakeFood();
-        }
-        return foodImage;
     }
 
     /**

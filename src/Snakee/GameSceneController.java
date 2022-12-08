@@ -55,6 +55,7 @@ public class GameSceneController implements Initializable{
     Snake m_snake;
     Food m_food;
     Obstacle m_obstacle;
+    Leaderboard m_leaderboard;
     //Number of times snakes moved
     private int m_gameTicks;
     private int m_obstacleTicks;
@@ -85,7 +86,7 @@ public class GameSceneController implements Initializable{
             System.out.println("OUT OF BOUNDS or BODY HIT or SCORE BELOW 0");
             try {
                 m_gameTicks = -1;
-                Leaderboard.WriteLeaderboardFile(playerName, playerScore);
+                m_leaderboard.WriteLeaderboardFile(playerName, playerScore);
                 SwitchToEndScene();
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
@@ -164,6 +165,7 @@ public class GameSceneController implements Initializable{
         m_snake = new Snake(gameAnchorPane, snakeBody, snakeHead, snakeSize);
         m_food = new Food(gameAnchorPane, snakeHead, snakeBody, headPoints, themeNumber);
         m_obstacle = new Obstacle(gameAnchorPane, snakeHead, snakeBody, headPoints, themeNumber);
+        m_leaderboard = new Leaderboard();
 
         PlayerName(playerName);
         PlayerScore(playerScore);

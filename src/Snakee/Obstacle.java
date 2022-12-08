@@ -24,10 +24,37 @@ public class Obstacle {
         m_themeNumber = themeNumber;
     }
 
-    //Creates obstacle
+    /**
+     * Method returns an image that is then used to setFill an object.
+     * <p>
+     * The image is set based on the themeNumber which is set by the player when they chose a theme.
+     * Depending on the themeNumber different methods are called from the Theme class that return a randomly chosen image.
+     *
+     * @return image generated based on themeNumber
+     */
+    private Image GenerateObstacleImage(){
+        Image obstacleImage;
+        switch (m_themeNumber) {
+            case 2 -> obstacleImage = Theme.GeneratePacmanFood();
+            case 3 -> obstacleImage = Theme.GeneratePacmanFood();
+            default -> {
+                obstacleImage = new Image("Snakee/resources/images/snake/obstacle-one.png");
+            }
+        }
+        return obstacleImage;
+    }
+
+    /**
+     * This method generates a random x and y number.
+     * It checks that the generated x and y ints are not within the snake.
+     * If the x and y are the same as a snakebody point it reruns the function.
+     * <p>
+     * The objects x and y are then set along with the width and height.
+     * setFill is then used on the rectangle with the image returned by the GenerateObstacleImage method.
+     */
     public void GenerateObstacle(){
-        int obstacleX = (int) (Math.random() * (870) - 40);
-        int obstacleY = (int) (Math.random() * (560) - 40);
+        int obstacleX = (int) (Math.random() * (820) + 0);
+        int obstacleY = (int) (Math.random() * (510) + 0);
 
         int size = m_headPoints.size() - 1;
         if (size > 2){
@@ -47,26 +74,6 @@ public class Obstacle {
 
         m_obstacleObject.setFill(new ImagePattern(GenerateObstacleImage()));
         m_gameAnchorPane.getChildren().add(m_obstacleObject);
-    }
-
-    /**
-     * Method returns an image that is then used to setFill an object.
-     * <p>
-     * The image is set based on the themeNumber which is set by the player when they chose a theme.
-     * Depending on the themeNumber different methods are called from the Theme class that return a randomly chosen image.
-     *
-     * @return image generated based on themeNumber
-     */
-    private Image GenerateObstacleImage(){
-        Image obstacleImage;
-        switch (m_themeNumber) {
-            case 2 -> obstacleImage = Theme.GeneratePacmanFood();
-            case 3 -> obstacleImage = Theme.GeneratePacmanFood();
-            default -> {
-                obstacleImage = new Image("Snakee/resources/images/snake/obstacle-one.png");
-            }
-        }
-        return obstacleImage;
     }
 
 

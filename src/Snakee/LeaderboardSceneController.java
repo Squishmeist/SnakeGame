@@ -14,6 +14,10 @@ import java.util.ArrayList;
 
 public class LeaderboardSceneController {
 
+    Leaderboard m_leaderboard = new Leaderboard();
+    private ArrayList<String> m_playernameList;
+    private ArrayList<Integer> m_playerscoreList;
+
     @FXML
     Label firstnameLabel;
     @FXML
@@ -36,44 +40,38 @@ public class LeaderboardSceneController {
     Label fifthscoreLabel;
 
     public void initialize() {
-        Leaderboard.ReadLeaderboardFile();
-
-        ArrayList<String> playernameList = Leaderboard.playernameList;
-        ArrayList<Integer> playerscoreList = Leaderboard.playerscoreList;
-
-        ScoreArraySort(playerscoreList, playernameList);
+        m_leaderboard.ReadLeaderboardFile();
+        m_playernameList = m_leaderboard.playernameList;
+        m_playerscoreList = m_leaderboard.playerscoreList;
+        ScoreArraySort();
     }
 
-    public void ScoreArraySort(ArrayList<Integer> playerscoreList, ArrayList<String> playernameList) {
+    public void ScoreArraySort() {
 
-        for (int i = 0; i < playerscoreList.size() - 1; i++) {
-            for (int j = 0; j < playerscoreList.size() - i - 1; j++)
-                if (playerscoreList.get(j) < playerscoreList.get(j + 1)) {
-                    int tempScore = playerscoreList.get(j);
-                    playerscoreList.set(j, playerscoreList.get(j + 1));
-                    playerscoreList.set(j + 1, tempScore);
+        for (int i = 0; i < m_playerscoreList.size() - 1; i++) {
+            for (int j = 0; j < m_playerscoreList.size() - i - 1; j++)
+                if (m_playerscoreList.get(j) < m_playerscoreList.get(j + 1)) {
+                    int tempScore = m_playerscoreList.get(j);
+                    m_playerscoreList.set(j, m_playerscoreList.get(j + 1));
+                    m_playerscoreList.set(j + 1, tempScore);
 
-                    String tempName = playernameList.get(j);
-                    playernameList.set(j, playernameList.get(j+1));
-                    playernameList.set(j + 1, tempName);
+                    String tempName = m_playernameList.get(j);
+                    m_playernameList.set(j, m_playernameList.get(j+1));
+                    m_playernameList.set(j + 1, tempName);
                 }
         }
 
-        firstnameLabel.setText(playernameList.get(0));
-        firstscoreLabel.setText(String.valueOf(playerscoreList.get(0)));
+        firstnameLabel.setText(m_playernameList.get(0));
+        secondnameLabel.setText(m_playernameList.get(1));
+        thirdnameLabel.setText(m_playernameList.get(2));
+        fourthnameLabel.setText(m_playernameList.get(3));
+        fifthnameLabel.setText(m_playernameList.get(4));
 
-        secondnameLabel.setText(playernameList.get(1));
-        secondscoreLabel.setText(String.valueOf(playerscoreList.get(1)));
-
-        thirdnameLabel.setText(playernameList.get(2));
-        thirdscoreLabel.setText(String.valueOf(playerscoreList.get(2)));
-
-        fourthnameLabel.setText(playernameList.get(3));
-        fourthscoreLabel.setText(String.valueOf(playerscoreList.get(3)));
-
-        fifthnameLabel.setText(playernameList.get(4));
-        fifthscoreLabel.setText(String.valueOf(playerscoreList.get(4)));
-
+        firstscoreLabel.setText(String.valueOf(m_playerscoreList.get(0)));
+        secondscoreLabel.setText(String.valueOf(m_playerscoreList.get(1)));
+        thirdscoreLabel.setText(String.valueOf(m_playerscoreList.get(2)));
+        fourthscoreLabel.setText(String.valueOf(m_playerscoreList.get(3)));
+        fifthscoreLabel.setText(String.valueOf(m_playerscoreList.get(4)));
     }
 
     public void SwitchToStartScene(ActionEvent event) throws IOException {

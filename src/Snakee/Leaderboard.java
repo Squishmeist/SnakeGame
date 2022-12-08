@@ -12,7 +12,7 @@ public class Leaderboard {
     static ArrayList<String> playernameList = new ArrayList<>();
     static ArrayList<Integer> playerscoreList = new ArrayList<>();
 
-    public static void WriteLeaderboardFile(String playerName, int playerScore){
+    public void WriteLeaderboardFile(String playerName, int playerScore){
         try {
             FileWriter fw = new FileWriter("src/Snakee/resources/txt/leaderboard.txt", true);
             fw.write(playerName);
@@ -26,7 +26,7 @@ public class Leaderboard {
         }
     }
 
-    public static void ReadLeaderboardFile() {
+    public void ReadLeaderboardFile() {
         int i = 0;
         try {
             File fn = new File("src/Snakee/resources/txt/leaderboard.txt");
