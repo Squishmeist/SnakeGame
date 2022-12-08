@@ -1,12 +1,3 @@
-.backDay{
-    -fx-background-image:url("../background/backDay.png");
-    -fx-background-size: 100% 100%;
-}
-.backNight{
-    -fx-background-image:url("../background/backNight.png");
-    -fx-background-size: 100% 100%;
-}
-
 #startAnchorPane{
     -fx-background-color: #3E363F;
 }
@@ -47,3 +38,38 @@
     -fx-background-color: #1e1d1f;
 }
 
+#leaderboardPane{
+    -fx-background-color: #5c5b7f;
+}
+
+#leaderboardbackButton{
+    -fx-background-radius: 0 30 30 0;
+    -fx-background-color: #5c5b7f;
+}
+
+#levelPane{
+    -fx-background-color: blue;
+}
+
+#gamePane1{
+    -fx-background-image: url("resources/images/snake/snake-background.png");
+}
+
+#gamePane2{
+    -fx-background-image: url("resources/images/pacman/pacman-background.png");
+}
+
+#gamePane3{
+    -fx-background-image: url("resources/images/spaceinvaders/invader-background.png");
+}
+
+#backButton{
+    -fx-background-radius: 0 30 30 0;
+    -fx-background-color: white;
+}
+
+#darkbackButton{
+    -fx-background-radius: 0 30 30 0;
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}
