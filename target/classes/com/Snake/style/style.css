@@ -1,0 +1,75 @@
+#startAnchorPane{
+    -fx-background-color: #3E363F;
+}
+
+#leftsidePane{
+    -fx-background-color: #73A580;
+}
+
+#nameTextField{
+    -fx-background-radius: 0 30 30 0;
+}
+
+#startButton{
+    -fx-background-radius: 30 0 0 30;
+    -fx-background-color: white;
+}
+
+#themeComboBox{
+    -fx-background-radius: 30 0 0 30;
+    -fx-background-color: white;
+    -fx-font-family: Monospaced;
+    -fx-font-size: 32px;
+}
+
+#levelComboBox{
+    -fx-background-radius: 30 0 0 30;
+    -fx-background-color: white;
+    -fx-font-family: Monospaced;
+    -fx-font-size: 32px;
+}
+
+#rightButton {
+    -fx-background-radius: 30 0 0 30;
+    -fx-background-color: white;
+}
+
+#leaderboardAnchorPane{
+    -fx-background-color: #1e1d1f;
+}
+
+#leaderboardPane{
+    -fx-background-color: #5c5b7f;
+}
+
+#leaderboardbackButton{
+    -fx-background-radius: 0 30 30 0;
+    -fx-background-color: #5c5b7f;
+}
+
+#levelPane{
+    -fx-background-color: blue;
+}
+
+#gamePane1{
+    -fx-background-image: url("../images/snake/snake-background.png");
+}
+
+#gamePane2{
+    -fx-background-image: url("../images/pacman/pacman-background.png");
+}
+
+#gamePane3{
+    -fx-background-image: url("../images/spaceinvaders/invader-background.png");
+}
+
+#backButton{
+    -fx-background-radius: 0 30 30 0;
+    -fx-background-color: white;
+}
+
+#darkbackButton{
+    -fx-background-radius: 0 30 30 0;
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}
