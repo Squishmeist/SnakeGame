@@ -13,9 +13,9 @@ import static com.Snake.controller.GameSceneController.playerScore;
 
 
 public class EndSceneController {
+    SceneSwitch m_switchScene = new SceneSwitch();
     @FXML
     AnchorPane startAnchorPane;
-    SceneSwitch m_switchScene = new SceneSwitch();
     private String m_filename;
     @FXML
     Label playerscoreLabel;
@@ -34,17 +34,21 @@ public class EndSceneController {
     }
 
     /**
-     * Method loads the StartScene.fxml when an event occurs.
+     * Method called when startButton is pressed on the StartScene.
+     * m_filename variable set the deseried fxml file path.
+     * SwitchScene class called passing the current AnchorPane and desired path via m_filename variable.
      */
-    public void SwitchToStartScene(ActionEvent event) throws IOException {
+    public void SwitchToStartScene() throws IOException {
         m_filename = "fxml/StartScene.fxml";
         m_switchScene.SwitchScene(startAnchorPane, m_filename);
     }
 
     /**
-     * Method loads the LeaderboardScene.fxml when an event occurs.
+     * Method called when leaderboardButton is pressed on the StartScene.
+     * m_filename variable set the deseried fxml file path.
+     * SwitchScene class called passing the current AnchorPane and desired path via m_filename variable.
      */
-    public void SwitchToLeaderboardScene(ActionEvent event) throws IOException {
+    public void SwitchToLeaderboardScene() throws IOException {
         m_filename = "fxml/LeaderboardScene.fxml";
         m_switchScene.SwitchScene(startAnchorPane, m_filename);
     }

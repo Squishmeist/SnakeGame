@@ -14,7 +14,7 @@ public class Food {
     private ArrayList<Rectangle> m_snakeBody;
     private List<Position> m_headPoints;
     private int m_themeNumber;
-    private Rectangle m_foodObject = new Rectangle();
+    public Rectangle m_foodObject = new Rectangle();
 
     public Food(AnchorPane gameAnchorPane, Rectangle snakeHead, ArrayList<Rectangle> snakeBody, List<Position> headPoints, int themeNumber){
         m_gameAnchorPane = gameAnchorPane;
@@ -91,5 +91,9 @@ public class Food {
 
     public void RemoveFood(){
         m_gameAnchorPane.getChildren().remove(m_foodObject);
+    }
+
+    public Rectangle GetFoodObject(){
+        return m_foodObject;
     }
 }

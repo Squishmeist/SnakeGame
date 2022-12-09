@@ -36,9 +36,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class GameSceneController implements Initializable{
-    private Stage stage;
-    private Scene scene;
-
     static String playerName;
     static int playerScore;
     public static int themeNumber;
@@ -270,7 +267,7 @@ public class GameSceneController implements Initializable{
         m_sceneSwitch.SwitchScene(gameAnchorPane, m_filename);
     }
     //Switch to StartScene
-    public void SwitchToStartScene(ActionEvent event) throws IOException {
+    public void SwitchToStartScene() throws IOException {
         timeline.stop();
         String m_filename = "fxml/StartScene.fxml";
         m_sceneSwitch.SwitchScene(gameAnchorPane, m_filename);

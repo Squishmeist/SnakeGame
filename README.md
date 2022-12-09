@@ -13,18 +13,14 @@ Select device platform when downloading.
 
 * [IntelliJ](https://www.jetbrains.com/idea/download/)
 * [Java19](https://www.oracle.com/uk/java/technologies/downloads/#jdk19)
-* [JavaFx](https://gluonhq.com/products/javafx/)
 
 ### Run Steps:
 ```
-1. unzip the src folder
-2. open IntelliJ create new Project
-3. give project a name, set desired location, select JDK19 and untick 'Add sample code' box
-4. open the unzipped src folder and drag the contents into the IntelliJ projects src package
-5. at the top select File -> Project Structure
-6. select Libraries, click the "+" and select Java
-7. locate your javafx-sdk-19\lib directory and select this
-8. open the Main class and click the run button on the top right
+1. unzip the project folder
+2. load IntelliJ and open the Project
+3. at the top select File -> Project Structure -> SDks
+4. locate your javafx-sdk-19 directory and select this
+5. open the Main class and click the run button on the top right
 ```
 
 ## How to use the project

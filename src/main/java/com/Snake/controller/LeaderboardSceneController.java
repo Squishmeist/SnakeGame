@@ -15,7 +15,6 @@ public class LeaderboardSceneController {
     private ArrayList<Integer> m_playerscoreList;
     Leaderboard m_leaderboard = new Leaderboard();
     SceneSwitch m_sceneSwitch = new SceneSwitch();
-
     @FXML
     AnchorPane leaderboardAnchorPane;
     @FXML
@@ -39,6 +38,11 @@ public class LeaderboardSceneController {
     @FXML
     Label fifthscoreLabel;
 
+    /**
+     * Method called when LeaderboardScene.fxml file is loaded.
+     * Sets class arraylist variables to be the Leaderboard classes arrays.
+     * Calls ScoreArraySort function to sort and set labels for top five player score and associated names.
+     */
     public void initialize() {
         m_leaderboard.ReadLeaderboardFile();
         m_playernameList = m_leaderboard.playernameList;
@@ -46,6 +50,9 @@ public class LeaderboardSceneController {
         ScoreArraySort();
     }
 
+    /**
+     * Method
+     */
     public void ScoreArraySort() {
         for (int i = 0; i < m_playerscoreList.size() - 1; i++) {
             for (int j = 0; j < m_playerscoreList.size() - i - 1; j++)
@@ -74,7 +81,12 @@ public class LeaderboardSceneController {
     }
 
 
-    public void SwitchToStartScene(ActionEvent event) throws IOException {
+    /**
+     * Method called when backButton is pressed on the Leaderboard scene.
+     * m_filename variable set the deseried fxml file path.
+     * SwitchScene class called passing the current AnchorPane and desired path via m_filename variable.
+     */
+    public void SwitchToStartScene() throws IOException {
         String m_filename = "fxml/StartScene.fxml";
         m_sceneSwitch.SwitchScene(leaderboardAnchorPane, m_filename);
     }
