@@ -14,7 +14,7 @@ public class Leaderboard {
 
     public void WriteLeaderboardFile(String playerName, int playerScore){
         try {
-            FileWriter fw = new FileWriter("textfiles/leaderboard.txt", true);
+            FileWriter fw = new FileWriter("src/main/resources/com/Snake/textfiles/leaderboard.txt", true);
             fw.write(playerName);
             fw.write("\n");
             fw.write(playerScore + "");
@@ -29,7 +29,7 @@ public class Leaderboard {
     public void ReadLeaderboardFile() {
         int i = 0;
         try {
-            File fn = new File("textfiles/leaderboard.txt");
+            File fn = new File("src/main/resources/com/Snake/textfiles/leaderboard.txt");
             Scanner fs = new Scanner(fn);
             System.out.println("READ FROM FILE");
             while (fs.hasNextLine()) {

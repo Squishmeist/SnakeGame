@@ -19,7 +19,7 @@
             <Font name="Monospaced Regular" size="32.0" />
          </font>
       </TextField>
-      <Button fx:id="startButton" layoutX="45.0" layoutY="470.0" mnemonicParsing="false"  prefHeight="66.0" prefWidth="275.0" styleClass="button6" stylesheets="@../style/style.css" text="Start">
+      <Button fx:id="startButton" layoutX="45.0" layoutY="470.0" mnemonicParsing="false" onAction="#SwitchToGameScene" prefHeight="66.0" prefWidth="275.0" styleClass="button6" stylesheets="@../style/style.css" text="Start">
          <font>
             <Font name="Monospaced Regular" size="32.0" />
          </font>

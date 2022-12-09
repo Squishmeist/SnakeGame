@@ -1,6 +1,7 @@
-module com.siebers.pathdemo {
+module com.Snake {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.media;
 
     opens com.Snake to javafx.fxml;
     exports com.Snake;
@@ -10,6 +11,4 @@ module com.siebers.pathdemo {
 
     exports com.Snake.model;
     opens com.Snake.model to javafx.fxml;
-
-
 }
