@@ -107,7 +107,7 @@ public class GameSceneController implements Initializable{
             if(m_food.EatenFood()) {
                 m_foodExists = false;
                 playerScore += 521;
-                //m_music.MusicPlayer("src/Snakee/resources/sounds/foodeaten-bleep.mp3");
+                m_music.MusicPlayer("src/main/resources/com/Snake/sounds/foodeaten-bleep.mp3");
                 m_food.RemoveFood();
                 m_snake.AddSnakeTail();
             }
@@ -135,7 +135,7 @@ public class GameSceneController implements Initializable{
                         throw new RuntimeException(ex);
                     }
                 }
-                //m_music.MusicPlayer("src/Snakee/resources/sounds/obstaclehit-bleep.mp3");
+                m_music.MusicPlayer("src/main/resources/com/Snake/sounds/obstacle-hit.mp3");
                 m_obstacleExists = false;
                 m_snake.RemoveSnakeTail();
                 m_obstacle.RemoveObstacle();
