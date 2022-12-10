@@ -9,7 +9,7 @@ This project is based on the classic retro game called Snake. A new implementati
 ## How to install and run the project
 
 ### Installation:
-Select device platform when downloading.
+Select device platform when downloading, to run game your machine must be up to date with Java19.
 
 * [IntelliJ](https://www.jetbrains.com/idea/download/)
 * [Java19](https://www.oracle.com/uk/java/technologies/downloads/#jdk19)
@@ -18,9 +18,11 @@ Select device platform when downloading.
 ```
 1. unzip the project folder
 2. load IntelliJ and open the Project
-3. at the top select File -> Project Structure -> SDks
+3. at the top select File -> Project Structure -> Project -> SDk
 4. locate your javafx-sdk-19 directory and select this
-5. open the Main class and click the run button on the top right
+5. at the right click the maven tab 
+6. in this tab COMP2013-Courswork -> Plugins -> javafx -> javafx:run
+7. this will run the game!
 ```
 
 ## How to use the project
@@ -45,9 +47,9 @@ To grow in length and increase your score you need to eat the food objects.
 Avoid the obstacles generated as these reduce your score and length, be careful as the obstacles move often!
 
 Click below to view the different theme images for food and obstacles:
-* [Snake](src/Snakee/resources/images/snake)
-* [Pacman](src/Snakee/resources/images/pacman)
-* [SpaceInvaders](src/Snakee/resources/images/spaceinvaders)
+* [Snake](src/main/resources/com/Snake/images/snake)
+* [Pacman](src/main/resources/com/Snake/images/pacman)
+* [SpaceInvaders](src/main/resources/com/Snake/images/spaceinvaders)
 
 As you progress through the levels the target score and snake speed increases, good luck!
 
