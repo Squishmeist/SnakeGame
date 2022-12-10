@@ -8,6 +8,12 @@ import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @Project COMP2013-Coursework
+ * @Description Food Class
+ * @Author Ainsley Lee
+ */
+
 public class Food {
     private AnchorPane m_gameAnchorPane;
     private Rectangle m_snakeHead;
@@ -27,8 +33,8 @@ public class Food {
     /**
      * Method returns an image that is then used to setFill an object.
      * <p>
-     * The image is set based on the themeNumber which is set by the player when they chose a theme.
-     * Depending on the themeNumber different methods are called from the Theme class that return a randomly chosen image.
+     * The image is set based on the themeNumber variable which is set by the ThemeChoice method in the StartSceneController.
+     * Depending on the themeNumber different methods are called from the Theme class that return a randomly chosen image from within that theme.
      *
      * @return image generated based on themeNumber
      */
@@ -43,18 +49,21 @@ public class Food {
     }
 
     /**
-     * This method generates a random x and y number.
-     * It checks that the generated x and y ints are not within the snake.
-     * If the x and y are the same as a snakebody point it reruns the function.
+     * This method generates a random x and y number within the game scenes dimensions.
+     * These values are then checked against the headPoints list which stores all the points of the snake.
+     * If the combination of the generated numbers matches a snake point the function is rerun to ensure a
+     * food object is not spawned within the snakes body.
      * <p>
-     * The objects x and y are then set along with the width and height.
-     * setFill is then used on the rectangle with the image returned by the GenerateFoodImage method.
+     * The objects x and y coordinates are then set to the generated numbers along with the width and height
+     * being set to 25.
+     * The setFill function is then used to set the objects image to be one returned by the GenerateFoodImage method
+     * in the Food class. This randomly selects a food image from the theme category picked by the player.
+     * <p>
+     * The food object is then added to the scene.
      */
     public void GenerateFood() {
-        //Generates random x and y points for food to spawn
         int foodX = (int) (Math.random() * (840) + 0);
         int foodY = (int) (Math.random() * (530) + 0);
-
         int size = m_headPoints.size() - 1;
         if (size > 2) {
             for (int i = size - m_snakeBody.size(); i < size; i++) {
@@ -65,20 +74,17 @@ public class Food {
                 }
             }
         }
-
-        //Sets food objects x and y to randomly generated number
         m_foodObject.setX(foodX);
         m_foodObject.setY(foodY);
-        //Sets food objects size
         m_foodObject.setWidth(25);
         m_foodObject.setHeight(25);
-        //Loads image to fill rectangle object
         m_foodObject.setFill(new ImagePattern(GenerateFoodImage()));
         m_gameAnchorPane.getChildren().add(m_foodObject);
     }
 
     /**
-     * Method returns true if the snakeHead intersects the foodObject and returns false if not.
+     * Method returns true if the snake head intersects the food object and returns false if not.
+     *
      * @return true or false based on if intersections occurs between objects
      */
     public boolean EatenFood(){
@@ -89,11 +95,10 @@ public class Food {
         return false;
     }
 
+    /**
+     * Method removes the food object from the game scene.
+     */
     public void RemoveFood(){
         m_gameAnchorPane.getChildren().remove(m_foodObject);
-    }
-
-    public Rectangle GetFoodObject(){
-        return m_foodObject;
     }
 }

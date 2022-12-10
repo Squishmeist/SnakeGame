@@ -7,11 +7,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * @Project COMP2013-Coursework
+ * @Description Leaderboard Class
+ * @Author Ainsley Lee
+ */
+
 public class Leaderboard {
 
     public static ArrayList<String> playernameList = new ArrayList<>();
     public static ArrayList<Integer> playerscoreList = new ArrayList<>();
 
+    /**
+     * Method stores the players name and score to the specified text file.
+     * This is done by appending the text file with the variable playerName
+     * then adding a line, then adding the playerScore variable and another line.
+     *
+     * @param playerName variable set to the players inputted name in the StartSceneContoller class
+     * @param playerScore variable set to the players score in the GameSceneContoller class
+     */
     public void WriteLeaderboardFile(String playerName, int playerScore){
         try {
             FileWriter fw = new FileWriter("src/main/resources/com/Snake/textfiles/leaderboard.txt", true);
@@ -26,6 +40,10 @@ public class Leaderboard {
         }
     }
 
+    /**
+     * Method reads the specified text file and stores alternate lines to array lists.
+     * All even lines are stored to the playernameList and odd lines stored to the playerscoreList.
+     */
     public void ReadLeaderboardFile() {
         int i = 0;
         try {
@@ -34,10 +52,9 @@ public class Leaderboard {
             System.out.println("READ FROM FILE");
             while (fs.hasNextLine()) {
                 String data = fs.nextLine();
-                if(i % 2 == 0)
-                {
+                if(i % 2 == 0) {
                     playernameList.add(data);
-                } else{
+                }else{
                     playerscoreList.add(Integer.parseInt(data));
                 }
                 i++;

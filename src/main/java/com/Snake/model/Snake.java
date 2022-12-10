@@ -10,15 +10,19 @@ import java.util.List;
 
 import static com.Snake.controller.GameSceneController.themeNumber;
 
-public class Snake {
+/**
+ * @Project COMP2013-Coursework
+ * @Description Snake Class
+ * @Author Ainsley Lee
+ */
 
+public class Snake {
     private AnchorPane m_gameAnchorPane;
     private ArrayList<Rectangle> m_snakeBody;
     private Rectangle m_snakeHead;
     private Double m_snakeSize;
 
-
-    public Snake(AnchorPane gameAnchorPane, ArrayList<Rectangle> snakeBody, Rectangle snakeHead, Double snakeSize){
+    public Snake(AnchorPane gameAnchorPane, Double snakeSize, Rectangle snakeHead, ArrayList<Rectangle> snakeBody ){
         m_gameAnchorPane = gameAnchorPane;
         m_snakeBody = snakeBody;
         m_snakeHead = snakeHead;

@@ -8,6 +8,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * @Project COMP2013-Coursework
+ * @Description Main Class
+ * @Author Ainsley Lee
+ */
+
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
@@ -18,7 +24,6 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
     public static void main(String[] args) {
         launch();
     }

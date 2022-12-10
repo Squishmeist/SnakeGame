@@ -1,22 +1,26 @@
 package com.Snake.controller;
 
-import java.io.IOException;
-import java.util.Objects;
-
 import com.Snake.model.SceneSwitch;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
+import java.util.Objects;
+
+/**
+ * @Project COMP2013-Coursework
+ * @Description StartSceneController Class
+ * @Author Ainsley Lee
+ */
+
 public class StartSceneController {
-    @FXML
-    AnchorPane startAnchorPane;
     private final String[] m_themeList = {"Snake", "Pacman", "SpaceInvader"};
     private final String[] m_levelList = {"Easy", "Medium", "Hard"};
-    private String m_filename;
-    SceneSwitch m_sceneSwitch = new SceneSwitch();
+    SceneSwitch m_SceneSwitchClass = new SceneSwitch();
+    @FXML
+    AnchorPane startAnchorPane;
     @FXML
     TextField nameTextField;
     @FXML
@@ -24,12 +28,24 @@ public class StartSceneController {
     @FXML
     ComboBox levelComboBox;
 
+    /**
+     * Method called when Start scene is initially loaded.
+     * This method sets the theme combo box items to be those set in the m_themeList.
+     * It also sets the level combo box items to be those set in the m_levelList.
+     */
     @FXML
     private void initialize(){
         themeComboBox.getItems().addAll(m_themeList);
         levelComboBox.getItems().addAll(m_levelList);
     }
 
+    /**
+     * Method stores the players theme selection in the themeChoice variable which is then used to
+     * compare with the three given options; Snake, Pacman and SpaceInvaders.
+     * The themeNumber variable is then set depending on the players choice from the themeComboBox options.
+     *
+     * @return themeNumber variable depending on players choice.
+     */
     public int ThemeChoice(){
         String themeChoice = (String) themeComboBox.getValue();
         int themeNumber;
@@ -46,6 +62,14 @@ public class StartSceneController {
         }
         return themeNumber;
     }
+
+    /**
+     * Method stores the players level selection in the levelChoice variable which is then used to
+     * compare with the three given options; Easy, Medium and Hard.
+     * The levelNumber variable is then set depending on the players choice from the levelComboBox options.
+     *
+     * @return levelNumber variable depending on players choice
+     */
     public int LevelChoice(){
         String levelChoice = (String) levelComboBox.getValue();
         int levelNumber;
@@ -64,17 +88,25 @@ public class StartSceneController {
         return levelNumber;
     }
 
-    public void SwitchToGameScene(ActionEvent event) throws IOException {
+    /**
+     * Method called when startButton is pressed on the Start scene.
+     * This method sets the playerName variable in the GameSceneController to be the text inputted by the player in the nameTextField.
+     * It also sets the themeNumber and levelNumber variable to be the returned variables from the called methods.
+     * The SwitchScene class is then called to load the Game scene, passing the current AnchorPane and desired fxml.
+     */
+    public void SwitchToGameScene() throws IOException {
         GameSceneController.playerName = nameTextField.getText();
         GameSceneController.themeNumber = ThemeChoice();
         GameSceneController.levelNumber = LevelChoice();
-        m_filename = "fxml/GameScene.fxml";
-        m_sceneSwitch.SwitchScene(startAnchorPane, m_filename);
+        m_SceneSwitchClass.SwitchScene(startAnchorPane, "fxml/GameScene.fxml");
     }
 
-    public void SwitchToLeaderboardScene(ActionEvent event) throws IOException {
-        String m_filename = "fxml/LeaderboardScene.fxml";
-        m_sceneSwitch.SwitchScene(startAnchorPane, m_filename);
+    /**
+     * Method called when leaderboardButton is pressed on the Start scene.
+     * SwitchScene class called passing the current AnchorPane and desired fxml.
+     */
+    public void SwitchToLeaderboardScene() throws IOException {
+        m_SceneSwitchClass.SwitchScene(startAnchorPane, "fxml/LeaderboardScene.fxml");
     }
 
 

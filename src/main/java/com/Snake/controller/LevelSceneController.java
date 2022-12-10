@@ -1,26 +1,23 @@
 package com.Snake.controller;
 
 import com.Snake.model.SceneSwitch;
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
 import static com.Snake.controller.GameSceneController.levelNumber;
 import static com.Snake.controller.GameSceneController.playerScore;
 
+/**
+ * @Project COMP2013-Coursework
+ * @Description LevelSceneController Class
+ * @Author Ainsley Lee
+ */
 
 public class LevelSceneController {
-    SceneSwitch m_sceneSwitch = new SceneSwitch();
-
+    SceneSwitch m_SceneSwitchClass = new SceneSwitch();
     @FXML
     AnchorPane levelAnchorPane;
     @FXML
@@ -43,8 +40,11 @@ public class LevelSceneController {
         scoreLabel.setText("SCORE : " + playerScore);
     }
 
-    public void SwitchToGameScene(ActionEvent event) throws IOException {
-        String m_filename = "fxml/GameScene.fxml";
-        m_sceneSwitch.SwitchScene(levelAnchorPane, m_filename);
+    /**
+     * Method called when nextButton is pressed on the Level scene.
+     * The SwitchScene class is then called to load the Game scene, passing the current AnchorPane and desired fxml.
+     */
+    public void SwitchToGameScene() throws IOException {
+        m_SceneSwitchClass.SwitchScene(levelAnchorPane, "fxml/GameScene.fxml");
     }
 }

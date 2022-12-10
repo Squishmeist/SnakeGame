@@ -1,7 +1,6 @@
 package com.Snake.controller;
 
 import com.Snake.model.SceneSwitch;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -11,12 +10,17 @@ import java.io.IOException;
 import static com.Snake.controller.GameSceneController.playerName;
 import static com.Snake.controller.GameSceneController.playerScore;
 
+/**
+ * @Project COMP2013-Coursework
+ * @Description EndSceneController Class
+ * @Author Ainsley Lee
+ */
+
 
 public class EndSceneController {
-    SceneSwitch m_switchScene = new SceneSwitch();
+    SceneSwitch m_SwitchSceneClass = new SceneSwitch();
     @FXML
     AnchorPane startAnchorPane;
-    private String m_filename;
     @FXML
     Label playerscoreLabel;
     @FXML
@@ -34,30 +38,26 @@ public class EndSceneController {
     }
 
     /**
-     * Method called when startButton is pressed on the StartScene.
-     * m_filename variable set the deseried fxml file path.
-     * SwitchScene class called passing the current AnchorPane and desired path via m_filename variable.
+     * Method called when startButton is pressed on the EndScene.
+     * The SwitchScene class is then called to load the Start scene, passing the current AnchorPane and desired fxml.
      */
     public void SwitchToStartScene() throws IOException {
-        m_filename = "fxml/StartScene.fxml";
-        m_switchScene.SwitchScene(startAnchorPane, m_filename);
+        m_SwitchSceneClass.SwitchScene(startAnchorPane, "fxml/StartScene.fxml");
     }
 
     /**
-     * Method called when leaderboardButton is pressed on the StartScene.
-     * m_filename variable set the deseried fxml file path.
-     * SwitchScene class called passing the current AnchorPane and desired path via m_filename variable.
+     * Method called when leaderboardButton is pressed on the EndScene.
+     * The SwitchScene class is then called to load the Leaderboard scene, passing the current AnchorPane and desired fxml.
      */
     public void SwitchToLeaderboardScene() throws IOException {
-        m_filename = "fxml/LeaderboardScene.fxml";
-        m_switchScene.SwitchScene(startAnchorPane, m_filename);
+        m_SwitchSceneClass.SwitchScene(startAnchorPane, "fxml/LeaderboardScene.fxml");
     }
 
     /**
-     * Method exits the game.
+     * Method called when exitButton is pressed on the EndScene.
+     * Method exits game and closes game window.
      */
     public void ExitGame() {
         System.exit(0);
     }
-
 }

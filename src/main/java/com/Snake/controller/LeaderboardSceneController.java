@@ -2,7 +2,6 @@ package com.Snake.controller;
 
 import com.Snake.model.Leaderboard;
 import com.Snake.model.SceneSwitch;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -10,11 +9,17 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * @Project COMP2013-Coursework
+ * @Description LeaderboardSceneController Class
+ * @Author Ainsley Lee
+ */
+
 public class LeaderboardSceneController {
     private ArrayList<String> m_playernameList;
     private ArrayList<Integer> m_playerscoreList;
-    Leaderboard m_leaderboard = new Leaderboard();
-    SceneSwitch m_sceneSwitch = new SceneSwitch();
+    Leaderboard m_LeaderboardClass = new Leaderboard();
+    SceneSwitch m_SceneSwitchClass = new SceneSwitch();
     @FXML
     AnchorPane leaderboardAnchorPane;
     @FXML
@@ -40,18 +45,20 @@ public class LeaderboardSceneController {
 
     /**
      * Method called when LeaderboardScene.fxml file is loaded.
-     * Sets class arraylist variables to be the Leaderboard classes arrays.
-     * Calls ScoreArraySort function to sort and set labels for top five player score and associated names.
+     * The ReadLeaderboardFile method is called from the Leaderboard class and class array lists set to be
+     * the array lists generated in the Leaderboard class.
+     * The ScoreArraySort method is then called to sort and set the labels for top five player scores and associated names.
      */
     public void initialize() {
-        m_leaderboard.ReadLeaderboardFile();
-        m_playernameList = m_leaderboard.playernameList;
-        m_playerscoreList = m_leaderboard.playerscoreList;
+        m_LeaderboardClass.ReadLeaderboardFile();
+        m_playernameList = m_LeaderboardClass.playernameList;
+        m_playerscoreList = m_LeaderboardClass.playerscoreList;
         ScoreArraySort();
     }
 
     /**
-     * Method
+     * Method performs a bubble sort, working through each element and swapping it with the next element if they are in the wrong order.
+     * The sorted lists are then used to set the labels for the top 5 player scores and names.
      */
     public void ScoreArraySort() {
         for (int i = 0; i < m_playerscoreList.size() - 1; i++) {
@@ -66,7 +73,6 @@ public class LeaderboardSceneController {
                     m_playernameList.set(j + 1, tempName);
                 }
         }
-
         firstnameLabel.setText(m_playernameList.get(0));
         secondnameLabel.setText(m_playernameList.get(1));
         thirdnameLabel.setText(m_playernameList.get(2));
@@ -83,11 +89,9 @@ public class LeaderboardSceneController {
 
     /**
      * Method called when backButton is pressed on the Leaderboard scene.
-     * m_filename variable set the deseried fxml file path.
-     * SwitchScene class called passing the current AnchorPane and desired path via m_filename variable.
+     * The SwitchScene class is then called to load the Start scene, passing the current AnchorPane and desired fxml.
      */
     public void SwitchToStartScene() throws IOException {
-        String m_filename = "fxml/StartScene.fxml";
-        m_sceneSwitch.SwitchScene(leaderboardAnchorPane, m_filename);
+        m_SceneSwitchClass.SwitchScene(leaderboardAnchorPane, "fxml/StartScene.fxml");
     }
 }
