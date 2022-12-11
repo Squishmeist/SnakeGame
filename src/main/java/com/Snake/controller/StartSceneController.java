@@ -46,7 +46,7 @@ public class StartSceneController {
      *
      * @return themeNumber variable depending on players choice.
      */
-    public int ThemeChoice(){
+    public int ThemeSelected(){
         String themeChoice = (String) themeComboBox.getValue();
         int themeNumber;
         if(Objects.equals(themeChoice, "Snake")){
@@ -70,22 +70,22 @@ public class StartSceneController {
      *
      * @return levelNumber variable depending on players choice
      */
-    public int LevelChoice(){
+    public int LevelSelected(){
         String levelChoice = (String) levelComboBox.getValue();
-        int levelNumber;
+        int levelSpeed;
 
         if(Objects.equals(levelChoice, "Easy")){
-            levelNumber = 120;
+            levelSpeed = 120;
         } else if (Objects.equals(levelChoice, "Medium")) {
-            levelNumber = 80;
+            levelSpeed = 80;
         }
         else if (Objects.equals(levelChoice, "Hard")){
-            levelNumber = 40;
+            levelSpeed = 40;
         }
         else{
-            levelNumber = 120;
+            levelSpeed = 120;
         }
-        return levelNumber;
+        return levelSpeed;
     }
 
     /**
@@ -96,8 +96,8 @@ public class StartSceneController {
      */
     public void SwitchToGameScene() throws IOException {
         GameSceneController.playerName = nameTextField.getText();
-        GameSceneController.themeNumber = ThemeChoice();
-        GameSceneController.levelNumber = LevelChoice();
+        GameSceneController.themeNumber = ThemeSelected();
+        GameSceneController.levelSpeed = LevelSelected();
         m_SceneSwitchClass.SwitchScene(startAnchorPane, "fxml/GameScene.fxml");
     }
 

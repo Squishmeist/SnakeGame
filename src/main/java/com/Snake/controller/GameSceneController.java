@@ -11,6 +11,7 @@ import com.Snake.model.Theme;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -39,10 +40,10 @@ import java.util.ResourceBundle;
  */
 
 public class GameSceneController implements Initializable{
-    static String playerName;
-    static int playerScore;
+    public static String playerName;
+    public static int playerScore;
     public static int themeNumber;
-    static int levelNumber;
+    public static int levelSpeed;
 
     private final Double m_snakeSize = 25.;
     private final Rectangle m_snakeHead = new Rectangle(250,250, m_snakeSize, m_snakeSize);
@@ -51,8 +52,8 @@ public class GameSceneController implements Initializable{
     private double m_snakeHeadX = m_snakeHead.getLayoutX();
     private double m_snakeHeadY = m_snakeHead.getLayoutY();
     boolean m_UP, m_DOWN, m_LEFT, m_RIGHT;
-    private boolean m_foodExists, m_obstacleExists;
-    private int m_gameTicks, m_obstacleTicks;
+    private boolean m_foodExists, m_obstacleExists, m_nextLevelPossible;
+    private int m_gameTicks, m_obstacleTicks, m_foodTicks, m_levelNumber, m_obstacleSpeed = 55, m_foodSpeed = 65;
     Snake m_SnakeClass;
     Food m_FoodClass;
     Obstacle m_ObstacleClass;
@@ -64,6 +65,12 @@ public class GameSceneController implements Initializable{
     @FXML
     private Pane gamePane1;
     @FXML
+    private Pane levelPane;
+    @FXML
+    Label levelLabel;
+    @FXML
+    Label scoreLabel;
+    @FXML
     Label playernameLabel;
     @FXML
     Label playerscoreLabel;
@@ -71,7 +78,7 @@ public class GameSceneController implements Initializable{
     Button backButton;
 
     //Depending on users level choice runs game every 120, 80 or 40 milliseconds
-    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(levelNumber),e ->{
+    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(levelSpeed),e ->{
         m_headPoints.add(new Position(m_snakeHead.getX() + m_snakeHeadX, m_snakeHead.getY() + m_snakeHeadY));
         MoveSnakeHead(m_snakeHead);
         for (int i = 1; i < m_snakeBody.size(); i++) {
@@ -79,32 +86,41 @@ public class GameSceneController implements Initializable{
         }
         m_gameTicks++;
         m_obstacleTicks++;
+        m_foodTicks++;
 
-        //if snake is out of bounds or hits itself calls GameEnd method
         try {
+            //check if snake object out of bounds, has hit itself or score is below 0
             GameEnd();
-            //removes obstacle after 40 ticks and generates a new one or decreases playerscore if obstacle hit
+            //generates obstacle object, checks if it has been hit - decreasing score + snake length and regenerates a new obstacle object after 40 ticks (snake movements)
             GameObstacle();
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
 
-        //if food does not exist generate food
-        //if food does exist checks if its eaten
+        //check if food exists, if not a food object is generated and if it does exist, checks object has been hit by the snake and increases score
         GameFood();
-        PlayerScore(playerScore);
 
-        /*if(playerScore ==  1042 && levelNumber == 120 || playerScore == 2084 && levelNumber == 80 || playerScore == 3117 && levelNumber == 40){
-            try {
-                levelPopup();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
+        if (m_nextLevelPossible){
+            LevelPopup();
         }
-        */
+
+        //updates players score
+        PlayerScore(playerScore);
     }));
 
-    //Called after stage loaded
+    /**
+     * Method called when Game scene is loaded.
+     * This method sets the starting values for various variables within the class.
+     * Initialises Class objects by passing the necessary variables.
+     * Calls the PlayerName and PlayerScore methods to set labels to display the players name and score.
+     * Sets the background and backButton ID by calling the method in the Theme class.
+     * Adds the created snake head rectangle object to the snake body array list.
+     * Sets the snake head object fill to be the return image from the Theme class.
+     * Starts the timeline and adds all children to the game scene Anchor Pane.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         m_headPoints.clear();
@@ -113,6 +129,7 @@ public class GameSceneController implements Initializable{
         playerScore = 0;
         m_foodExists = false;
         m_obstacleExists = false;
+        m_nextLevelPossible = true;
         m_gameTicks = 0;
         m_obstacleTicks = 0;
 
@@ -134,6 +151,17 @@ public class GameSceneController implements Initializable{
         timeline.play();
         gameAnchorPane.getChildren().add(m_snakeHead);
     }
+
+    /**
+     * Method called when a key is pressed by the player.
+     * This method check if the key press is "WASD" and that the opposite key
+     * is false. This ensures that the snake does not go in on itself.
+     * The associated variable is then set to true and the rest false.
+     * It also rotates the snake head accordingly in the direction
+     * of the key press.
+     *
+     * @param event key pressed by the player
+     */
     @FXML
     public void KeyPressed(KeyEvent event){
         if(event.getCode() == KeyCode.W && !m_DOWN){
@@ -165,7 +193,15 @@ public class GameSceneController implements Initializable{
             m_snakeHead.setRotate(0);
         }
     }
-    //Called to moveSnakeHead
+
+    /**
+     * Method called at the start of the timeline to move the snake head object.
+     * This method checks the m_UP, m_DOWN, m_LEFT, m_RIGHT variables to see which is true.
+     * Whichever boolean is true dictates the direction the snake head needs to move.
+     * The snake head object is then moved accordingly in that direction.
+     *
+     * @param snakeHead rectangle object at the start of the snake body
+     */
     private void MoveSnakeHead(Rectangle snakeHead){
         int speed_XY = 25;
         if(m_UP){
@@ -185,6 +221,15 @@ public class GameSceneController implements Initializable{
             snakeHead.setTranslateX(m_snakeHeadX);
         }
     }
+
+    /**
+     * Method called at the start of the timeline to move the objects following the snake head object.
+     * The snake tail objects x and y are then set, moving the tail to the heads previous movement based
+     * on its position within the body.
+     *
+     * @param snakeTail rectangle object for the snake tail
+     * @param tailNumber number associate with passed rectangle object
+     */
     private void MoveSnakeTail(Rectangle snakeTail, int tailNumber){
         double y = m_headPoints.get(m_gameTicks - tailNumber + 1).getY() - snakeTail.getY();
         double x = m_headPoints.get(m_gameTicks - tailNumber + 1).getX() - snakeTail.getX();
@@ -203,12 +248,18 @@ public class GameSceneController implements Initializable{
         }
     }
     private void GameFood(){
+        if (m_foodTicks == m_foodSpeed){
+            m_foodTicks = 0;
+            m_foodExists = false;
+            m_FoodClass.RemoveFood();
+        }
         if (!m_foodExists){
             m_foodExists = true;
             m_FoodClass.GenerateFood();
         }else{
             if (m_FoodClass.EatenFood()){
                 m_foodExists = false;
+                m_nextLevelPossible = true;
                 playerScore += 521;
                 m_MusicClass.MusicPlayer("src/main/resources/com/Snake/sounds/foodeaten-bleep.mp3");
                 m_FoodClass.RemoveFood();
@@ -217,7 +268,7 @@ public class GameSceneController implements Initializable{
         }
     }
     private void GameObstacle() throws IOException {
-        if (m_obstacleTicks == 40){
+        if (m_obstacleTicks == m_obstacleSpeed){
             m_obstacleTicks = 0;
             m_obstacleExists = false;
             m_ObstacleClass.RemoveObstacle();
@@ -239,30 +290,60 @@ public class GameSceneController implements Initializable{
         }
     }
 
-    //Displays playerScore in scene
+    /**
+     * Method sets the playerscoreLabel text to be white if theme 2 or 3 is chosen as the background is darker.
+     * This method also sets the playerscoreLabel to display the players score.
+     *
+     * @param playerScore variable containing players score
+     */
     private void PlayerScore(int playerScore) {
         if(themeNumber == 2 || themeNumber == 3){
             playerscoreLabel.setTextFill(Color.WHITE);
         }
         playerscoreLabel.setText("SCORE : " + playerScore);
     }
-    //Displays playerName in scene
+
+    /**
+     * Method sets the playernameLabel text to be white if theme 2 or 3 is chosen as the background is darker.
+     * This method also sets the playernameLabel to display the players name.
+     *
+     * @param playerName variable containing player inputted name
+     */
     private void PlayerName(String playerName) {
         if(themeNumber == 2 || themeNumber == 3){
             playernameLabel.setTextFill(Color.WHITE);
         }
         playernameLabel.setText("PLAYER : " + playerName);
     }
-    private void levelPopup() throws IOException{
-        timeline.stop();
-        String m_filename = "fxml/LevelScene.fxml";
-        m_SceneSwitchClass.SwitchScene(gameAnchorPane, m_filename);
+    private void LevelPopup(){
+        if(playerScore ==  1042 || playerScore == 2084 || playerScore == 3126 || playerScore == 4168){
+            timeline.pause();
+            m_nextLevelPossible = false;
+            levelPane.toFront();
+            levelPane.setVisible(true);
+            m_levelNumber += 1;
+            levelLabel.setText("LEVEL COMPLETE : " + m_levelNumber);
+            scoreLabel.setText("LEVEL SCORE : " + playerScore);
+            m_obstacleSpeed -= 10;
+            m_foodSpeed -= 10;
+            m_obstacleTicks = 0;
+            m_foodTicks = 0;
+            PauseTransition pause = new PauseTransition(Duration.seconds(2));
+            pause.setOnFinished(f -> levelPane.setVisible(false));
+            PauseTransition player = new PauseTransition(Duration.seconds(2));
+            player.setOnFinished(f -> timeline.play());
+            pause.play();
+            player.play();
+        }
     }
 
-    //Switch to StartScene
+
+    /**
+     * Method called when backButton is pressed on the Game scene.
+     * Timeline is stopped and SwitchScene class called passing the current AnchorPane and desired fxml.
+     */
     public void SwitchToStartScene() throws IOException {
         timeline.stop();
         m_SceneSwitchClass.SwitchScene(gameAnchorPane, "fxml/StartScene.fxml");
     }
-
 }
