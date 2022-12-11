@@ -25,12 +25,12 @@
    </Button>
    <Pane fx:id="levelPane" blendMode="SRC_ATOP" prefHeight="560.0" prefWidth="870.0" visible="false">
       <children>
-         <Label fx:id="levelLabel" layoutX="182.0" layoutY="191.0" prefHeight="80.0" prefWidth="507.0" text="LEVEL :">
+         <Label fx:id="levelLabel" layoutX="182.0" layoutY="195.0" prefHeight="80.0" prefWidth="507.0" text="LEVEL :">
             <font>
                <Font name="Monospaced Regular" size="37.0" />
             </font>
          </Label>
-         <Label fx:id="scoreLabel" layoutX="182.0" layoutY="289.0" prefHeight="80.0" prefWidth="507.0" text="SCORE :">
+         <Label fx:id="scoreLabel" layoutX="182.0" layoutY="285.0" prefHeight="80.0" prefWidth="507.0" text="SCORE :">
             <font>
                <Font name="Monospaced Regular" size="37.0" />
             </font>

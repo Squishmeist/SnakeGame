@@ -17,11 +17,11 @@ public class Theme {
      * For example, gamePane2 displays the background for the Pacman scene so if the themeNumber
      * variable is 2 this ID is set.
      *
-     * @param themeNumber variable set by ThemeChoice method in the StartSceneController based on players comboBox selection
+     * @param gameTheme variable set by ThemeSelected method in the StartSceneController based on players comboBox selection
      * @return ID of a gamePane depending on players theme selection
      */
-    public static String GenerateGameBackground(int themeNumber){
-        return switch (themeNumber) {
+    public static String GenerateGameBackground(int gameTheme){
+        return switch (gameTheme) {
             case 2 -> "gamePane2";
             case 3 -> "gamePane3";
             default -> "gamePane1";
@@ -29,10 +29,10 @@ public class Theme {
     }
 
     /**
-     * Method returns image based on the themeNumber variable.
+     * Method returns image based on the gameTheme variable.
      *
-     * @param themeNumber variable set by ThemeChoice method in the StartSceneController based on players comboBox selection
-     * @return image based on themeNumber variable
+     * @param themeNumber variable set by ThemeSelected method in the StartSceneController based on players comboBox selection
+     * @return image based on gameTheme variable
      */
     static Image GenerateSnakeTailImage(int themeNumber) {
         return switch (themeNumber) {
@@ -43,13 +43,13 @@ public class Theme {
     }
 
     /**
-     * Method returns image based on the themeNumber variable.
+     * Method returns image based on the gameTheme variable.
      *
-     * @param themeNumber variable set by ThemeChoice method in the StartSceneController based on players comboBox selection
-     * @return image based on themeNumber variable
+     * @param gameTheme variable set by ThemeSelection method in the StartSceneController based on players comboBox selection
+     * @return image based on gameTheme variable
      */
-    public static Image GenerateSnakeHeadImage(int themeNumber) {
-        return switch (themeNumber) {
+    public static Image GenerateSnakeHeadImage(int gameTheme) {
+        return switch (gameTheme) {
             case 2 -> new Image(Objects.requireNonNull(Theme.class.getResource("/com/Snake/images/pacman/pacman-head.png")).toString());
             case 3 -> new Image(Objects.requireNonNull(Theme.class.getResource("/com/Snake/images/spaceinvaders/invader-head.png")).toString());
             default -> new Image(Objects.requireNonNull(Theme.class.getResource("/com/Snake/images/snake/snake-head.png")).toString());
@@ -57,11 +57,11 @@ public class Theme {
     }
 
     /**
-     * @param themeNumber variable set by ThemeChoice method in the StartSceneController based on players comboBox selection
-     * @return image based on themeNumber variable
+     * @param gameTheme variable set by ThemeSelection method in the StartSceneController based on players comboBox selection
+     * @return image based on gameTheme variable
      */
-    public static String GenerateBackButton(int themeNumber) {
-        return switch (themeNumber) {
+    public static String GenerateBackButton(int gameTheme) {
+        return switch (gameTheme) {
             case 2, 3 -> "darkbackButton";
             default -> "backButton";
         };

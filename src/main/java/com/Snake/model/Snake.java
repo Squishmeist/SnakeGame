@@ -8,7 +8,7 @@ import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.Snake.controller.GameSceneController.themeNumber;
+import static com.Snake.controller.GameSceneController.gameTheme;
 
 /**
  * @Project COMP2013-Coursework
@@ -80,7 +80,7 @@ public class Snake {
         if (m_snakeBody.size() == 1) {
             Rectangle snakeFirstTail = new Rectangle(m_snakeHead.getX() - m_snakeSize, m_snakeHead.getY(), m_snakeSize, m_snakeSize);
             m_snakeBody.add(snakeFirstTail);
-            Image snakeTailImage = Theme.GenerateSnakeTailImage(themeNumber);
+            Image snakeTailImage = Theme.GenerateSnakeTailImage(gameTheme);
             snakeFirstTail.setFill(new ImagePattern(snakeTailImage));
             m_gameAnchorPane.getChildren().add(snakeFirstTail);
         }
@@ -90,7 +90,7 @@ public class Snake {
             double snakeTailY = m_snakeBody.get(1).getY() + m_snakeHead.getY();
             Rectangle snakeTail = new Rectangle(snakeTailX, snakeTailY, m_snakeSize, m_snakeSize);
             m_snakeBody.add(snakeTail);
-            Image snakeTailImage = Theme.GenerateSnakeTailImage(themeNumber);
+            Image snakeTailImage = Theme.GenerateSnakeTailImage(gameTheme);
             snakeTail.setFill(new ImagePattern(snakeTailImage));
             m_gameAnchorPane.getChildren().add(snakeTail);
         }

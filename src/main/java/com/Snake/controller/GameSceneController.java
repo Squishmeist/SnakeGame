@@ -42,8 +42,8 @@ import java.util.ResourceBundle;
 public class GameSceneController implements Initializable{
     public static String playerName;
     public static int playerScore;
-    public static int themeNumber;
-    public static int levelSpeed;
+    public static int gameTheme;
+    public static int gameSpeed;
 
     private final Double m_snakeSize = 25.;
     private final Rectangle m_snakeHead = new Rectangle(250,250, m_snakeSize, m_snakeSize);
@@ -78,7 +78,7 @@ public class GameSceneController implements Initializable{
     Button backButton;
 
     //Depending on users level choice runs game every 120, 80 or 40 milliseconds
-    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(levelSpeed),e ->{
+    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(gameSpeed), e ->{
         m_headPoints.add(new Position(m_snakeHead.getX() + m_snakeHeadX, m_snakeHead.getY() + m_snakeHeadY));
         MoveSnakeHead(m_snakeHead);
         for (int i = 1; i < m_snakeBody.size(); i++) {
@@ -134,17 +134,17 @@ public class GameSceneController implements Initializable{
         m_obstacleTicks = 0;
 
         m_SnakeClass = new Snake(gameAnchorPane, m_snakeSize, m_snakeHead, m_snakeBody);
-        m_FoodClass = new Food(gameAnchorPane, m_snakeHead, m_snakeBody, m_headPoints, themeNumber);
-        m_ObstacleClass = new Obstacle(gameAnchorPane, m_snakeHead, m_snakeBody, m_headPoints, themeNumber);
+        m_FoodClass = new Food(gameAnchorPane, m_snakeHead, m_snakeBody, m_headPoints, gameTheme);
+        m_ObstacleClass = new Obstacle(gameAnchorPane, m_snakeHead, m_snakeBody, m_headPoints, gameTheme);
 
         PlayerName(playerName);
         PlayerScore(playerScore);
 
-        gamePane1.setId(Theme.GenerateGameBackground(themeNumber));
-        backButton.setId(Theme.GenerateBackButton(themeNumber));
+        gamePane1.setId(Theme.GenerateGameBackground(gameTheme));
+        backButton.setId(Theme.GenerateBackButton(gameTheme));
 
         m_snakeBody.add(m_snakeHead);
-        Image snakeHeadImage = Theme.GenerateSnakeHeadImage(themeNumber);
+        Image snakeHeadImage = Theme.GenerateSnakeHeadImage(gameTheme);
         m_snakeHead.setFill(new ImagePattern(snakeHeadImage));
 
         timeline.setCycleCount(Animation.INDEFINITE);
@@ -297,7 +297,7 @@ public class GameSceneController implements Initializable{
      * @param playerScore variable containing players score
      */
     private void PlayerScore(int playerScore) {
-        if(themeNumber == 2 || themeNumber == 3){
+        if(gameTheme == 2 || gameTheme == 3){
             playerscoreLabel.setTextFill(Color.WHITE);
         }
         playerscoreLabel.setText("SCORE : " + playerScore);
@@ -310,7 +310,7 @@ public class GameSceneController implements Initializable{
      * @param playerName variable containing player inputted name
      */
     private void PlayerName(String playerName) {
-        if(themeNumber == 2 || themeNumber == 3){
+        if(gameTheme == 2 || gameTheme == 3){
             playernameLabel.setTextFill(Color.WHITE);
         }
         playernameLabel.setText("PLAYER : " + playerName);

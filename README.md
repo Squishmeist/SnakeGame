@@ -34,7 +34,7 @@ When the game first loads you will be greeted with the start screen.
 To customise your experience fill in the first box with your player name - this will be displayed on the screen as you play
 and used when storing your score on the leaderboard.
 
-Chose a theme and level from the dropdowns and press start to play!
+Chose a theme and speed from the dropdowns and press start to play!
 
 The leaderboard button can be pressed to view the top five players.
 
@@ -51,7 +51,7 @@ Click below to view the different theme images for food and obstacles:
 * [Pacman](src/main/resources/com/Snake/images/pacman)
 * [SpaceInvaders](src/main/resources/com/Snake/images/spaceinvaders)
 
-As you progress through the levels the target score and snake speed increases, good luck!
+As you progress through the levels the target score increases as well as the spawn speed of the food and obstacle objects, good luck!
 
 
 ## Credits [if any third-party element were used]

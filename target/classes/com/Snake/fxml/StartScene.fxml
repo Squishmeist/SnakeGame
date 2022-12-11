@@ -30,7 +30,7 @@
          </font>
       </Button>
       <ComboBox fx:id="themeComboBox" layoutX="45.0" layoutY="290.0" prefHeight="66.0" prefWidth="275.0" promptText="Theme" />
-      <ComboBox fx:id="levelComboBox" layoutX="45.0" layoutY="380.0" prefHeight="66.0" prefWidth="275.0" promptText="Level" />
+      <ComboBox fx:id="speedComboBox" layoutX="45.0" layoutY="380.0" prefHeight="66.0" prefWidth="275.0" promptText="Speed" />
    </Pane>
    <Label fx:id="gametitleLabel" layoutX="74.0" layoutY="175.0" prefHeight="96.0" prefWidth="302.0" text="Snakee" textAlignment="CENTER" textFill="WHITE">
       <font>

@@ -19,28 +19,28 @@ public class Food {
     private Rectangle m_snakeHead;
     private ArrayList<Rectangle> m_snakeBody;
     private List<Position> m_headPoints;
-    private int m_themeNumber;
+    private int m_gameTheme;
     public Rectangle m_foodObject = new Rectangle();
 
-    public Food(AnchorPane gameAnchorPane, Rectangle snakeHead, ArrayList<Rectangle> snakeBody, List<Position> headPoints, int themeNumber){
+    public Food(AnchorPane gameAnchorPane, Rectangle snakeHead, ArrayList<Rectangle> snakeBody, List<Position> headPoints, int gameTheme){
         m_gameAnchorPane = gameAnchorPane;
         m_snakeHead = snakeHead;
         m_snakeBody = snakeBody;
         m_headPoints = headPoints;
-        m_themeNumber = themeNumber;
+        m_gameTheme = gameTheme;
     }
 
     /**
      * Method returns an image that is then used to setFill an object.
      * <p>
-     * The image is set based on the themeNumber variable which is set by the ThemeChoice method in the StartSceneController.
-     * Depending on the themeNumber different methods are called from the Theme class that return a randomly chosen image from within that theme.
+     * The image is set based on the gameTheme variable which is set by the ThemeSelection method in the StartSceneController.
+     * Depending on the gameTheme different methods are called from the Theme class that return a randomly chosen image from within that theme.
      *
-     * @return image generated based on themeNumber
+     * @return image generated based on gameTheme
      */
     private Image GenerateFoodImage(){
         Image foodImage;
-        switch(m_themeNumber){
+        switch(m_gameTheme){
             case 2 -> foodImage = Theme.GeneratePacmanFood();
             case 3 -> foodImage = Theme.GenerateInvaderFood();
             default -> foodImage = Theme.GenerateSnakeFood();
