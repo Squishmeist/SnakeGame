@@ -16,11 +16,11 @@ import java.util.Objects;
 public class SceneSwitch {
     /**
      * Method loads desired scene by storing the passed fxml Anchor Pane to nextAnchorPane.
-     * The method then removes all the children from the current scene and adds all of the children
+     * The method then removes all the children from the current scene and adds all the children
      * from the new scene using the nextAnchorPane variable.
      *
      * @param currentAnchorPane variable passed from scene loading new scene
-     * @param fxml variable storing path to desried fxml file
+     * @param fxml variable storing path to desired fxml file
      * @throws IOException
      */
     public void SwitchScene(AnchorPane currentAnchorPane, String fxml) throws IOException {

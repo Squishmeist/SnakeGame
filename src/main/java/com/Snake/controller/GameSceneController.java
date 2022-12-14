@@ -100,6 +100,7 @@ public class GameSceneController implements Initializable{
         //check if food exists, if not a food object is generated and if it does exist, checks object has been hit by the snake and increases score
         GameFood();
 
+        //check if boolean is true (food has been eaten since last level) and call LevelPopup method
         if (m_nextLevelPossible){
             LevelPopup();
         }
@@ -236,9 +237,19 @@ public class GameSceneController implements Initializable{
         snakeTail.setTranslateX(x);
         snakeTail.setTranslateY(y);
     }
+
+    /**
+     * Method called from within the timeline to check if certain criteria is met to switch to the end scene.
+     * The first if statement checks if the snake is out of bounds, has hit itself or the score is below 0.
+     * If any of the called methods return true a second if statements checks the score is below 0 and sets it to 0.
+     * The WriteLeaderboardFile method is called from the Leaderboard class to stores the players name and score to the
+     * text file and the timeline is stopped. The SwitchScene method is then called from the SceneSwitch class to
+     * change the scene to the end scene.
+     *
+     * @throws IOException
+     */
     private void GameEnd() throws IOException {
         if (m_SnakeClass.OutOfBounds(m_snakeHeadX, m_snakeHeadY) || m_SnakeClass.BodyHit(m_headPoints, m_snakeBody) || playerScore < 0){
-            System.out.println("OUT OF BOUNDS or BODY HIT or SCORE BELOW 0");
             if(playerScore < 0){
                 playerScore = 0;
             }
@@ -247,6 +258,21 @@ public class GameSceneController implements Initializable{
             m_SceneSwitchClass.SwitchScene(gameAnchorPane, "fxml/EndScene.fxml");
         }
     }
+
+    /**
+     * Method called from within the timeline.
+     * This method first checks if the m_foodTicks variable matches the m_foodSpeed variable.
+     * If this is the case the food ticks are set to 0, food exists is false and the food object is removed
+     * from by calling the RemoveFood method from Food Class.
+     * <p>
+     * The next if statement checks and runs the GenerateFood method from the Food Class if the food object
+     * does not exist i.e. m_foodExists is false.
+     * <p>
+     * If the food object does exist, from within the else state an if statement checks if the food is eaten by
+     * calling the EatenFood method from within the Food Class. If this class returns true the players score
+     * is increased, a sound is played by the Music class MusicPlayer method and the food object is removed
+     * from the scene. The AddSnakeTail method is also called from the Snake Class to add a snake tail.
+     */
     private void GameFood(){
         if (m_foodTicks == m_foodSpeed){
             m_foodTicks = 0;
@@ -267,6 +293,23 @@ public class GameSceneController implements Initializable{
             }
         }
     }
+
+    /**
+     * Method called from within the timeline.
+     * This method first checks if the m_obstacleTicks variable matches the m_obstacleSpeed variable.
+     * If this is the case the obstacle ticks are set to 0, obstacle exists is false and the obstacle object is removed
+     * from by calling the RemoveObstacle method from Obstacle Class.
+     * <p>
+     * The next if statement checks and runs the GenerateObstacle method from the Obstacle Class if the obstacle object
+     * does not exist i.e. m_obstacleExists is false.
+     * <p>
+     * If the obstacle object does exist, from within the else state an if statement checks if the obstacle is hit by
+     * calling the ObstacleHit method from within the Obstacle Class. If this class returns true the players score
+     * is decreases, a sound is played by the Music class MusicPlayer method and the obstacle object is removed
+     * from the scene. The RemoveSnakeTail method is also called from the Snake Class to remove a snake tail.
+     *
+     * @throws IOException
+     */
     private void GameObstacle() throws IOException {
         if (m_obstacleTicks == m_obstacleSpeed){
             m_obstacleTicks = 0;
@@ -287,6 +330,41 @@ public class GameSceneController implements Initializable{
                 m_ObstacleClass.RemoveObstacle();
                 m_snakeBody.remove(snakeBodySize-1);
             }
+        }
+    }
+
+    /**
+     * Method called from within the timeline if m_nextLevelPossible is true.
+     * <p>
+     * This method checks the players score against 4 possible values, if any of these values
+     * are met the timeline is paused, the levelPane is set to visible and the two labels
+     * display the level completed and level score.
+     * <p>
+     * The food and obstacles speed are decreased (this in turn speeds up the respawn of objects),
+     * the pause timeline is set to a duration of 2 seconds and turns the levelPane invisible afterwards.
+     * <p>
+     * The game timeline is then set to play after 2 seconds as well, meaning the player can continue
+     * from the point they were before leveling up.
+     */
+    private void LevelPopup(){
+        if(playerScore ==  1042 || playerScore == 2084 || playerScore == 3126 || playerScore == 4168){
+            timeline.pause();
+            m_nextLevelPossible = false;
+            levelPane.toFront();
+            levelPane.setVisible(true);
+            m_levelNumber += 1;
+            levelLabel.setText("LEVEL COMPLETE : " + m_levelNumber);
+            scoreLabel.setText("LEVEL SCORE : " + playerScore);
+            m_obstacleSpeed -= 10;
+            m_foodSpeed -= 10;
+            m_obstacleTicks = 0;
+            m_foodTicks = 0;
+            PauseTransition pause = new PauseTransition(Duration.seconds(2));
+            pause.setOnFinished(f -> levelPane.setVisible(false));
+            PauseTransition player = new PauseTransition(Duration.seconds(2));
+            player.setOnFinished(f -> timeline.play());
+            pause.play();
+            player.play();
         }
     }
 
@@ -315,28 +393,6 @@ public class GameSceneController implements Initializable{
         }
         playernameLabel.setText("PLAYER : " + playerName);
     }
-    private void LevelPopup(){
-        if(playerScore ==  1042 || playerScore == 2084 || playerScore == 3126 || playerScore == 4168){
-            timeline.pause();
-            m_nextLevelPossible = false;
-            levelPane.toFront();
-            levelPane.setVisible(true);
-            m_levelNumber += 1;
-            levelLabel.setText("LEVEL COMPLETE : " + m_levelNumber);
-            scoreLabel.setText("LEVEL SCORE : " + playerScore);
-            m_obstacleSpeed -= 10;
-            m_foodSpeed -= 10;
-            m_obstacleTicks = 0;
-            m_foodTicks = 0;
-            PauseTransition pause = new PauseTransition(Duration.seconds(2));
-            pause.setOnFinished(f -> levelPane.setVisible(false));
-            PauseTransition player = new PauseTransition(Duration.seconds(2));
-            player.setOnFinished(f -> timeline.play());
-            pause.play();
-            player.play();
-        }
-    }
-
 
     /**
      * Method called when backButton is pressed on the Game scene.

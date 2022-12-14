@@ -19,7 +19,7 @@ Select device platform when downloading, to run game your machine must be up to 
 1. unzip the project folder
 2. load IntelliJ and open the Project
 3. at the top select File -> Project Structure -> Project -> SDk
-4. locate your javafx-sdk-19 directory and select this
+4. locate your jdk-19 directory and select this
 5. at the right click the maven tab 
 6. in this tab COMP2013-Courswork -> Plugins -> javafx -> javafx:run
 7. this will run the game!

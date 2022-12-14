@@ -23,8 +23,8 @@ public class Leaderboard {
      * This is done by appending the text file with the variable playerName
      * then adding a line, then adding the playerScore variable and another line.
      *
-     * @param playerName variable set to the players inputted name in the StartSceneContoller class
-     * @param playerScore variable set to the players score in the GameSceneContoller class
+     * @param playerName variable set to the players inputted name in the StartSceneController class
+     * @param playerScore variable set to the players score in the GameSceneController class
      */
     public void WriteLeaderboardFile(String playerName, int playerScore){
         try {
@@ -34,7 +34,6 @@ public class Leaderboard {
             fw.write(playerScore + "");
             fw.write("\n");
             fw.close();
-            System.out.println("WRITTEN TO FILE");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -49,7 +48,6 @@ public class Leaderboard {
         try {
             File fn = new File("src/main/resources/com/Snake/textfiles/leaderboard.txt");
             Scanner fs = new Scanner(fn);
-            System.out.println("READ FROM FILE");
             while (fs.hasNextLine()) {
                 String data = fs.nextLine();
                 if(i % 2 == 0) {

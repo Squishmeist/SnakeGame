@@ -61,7 +61,6 @@ public class Snake {
             for (int i = size - snakeBody.size(); i < size; i++){
                 if(headPoints.get(size).getX() == (headPoints.get(i).getX())
                         && headPoints.get(size).getY() == (headPoints.get(i).getY())){
-                    System.out.println("BODY HIT");
                     return true;
                 }
             }
@@ -101,7 +100,7 @@ public class Snake {
      * The method stores the size of the snake body array in the snakeBodySize variable.
      * This variable is then used when creating a new rectangle object snakeTailRemove by setting
      * it to be the last tail in the snakeBody.
-     * The smakeTailRemove rectangle then removed from the game scenes anchor pane.
+     * The snakeTailRemove rectangle then removed from the game scenes anchor pane.
      */
     public void RemoveSnakeTail(){
         int snakeBodySize = m_snakeBody.size();

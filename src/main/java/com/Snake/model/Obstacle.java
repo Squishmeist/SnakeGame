@@ -70,7 +70,6 @@ public class Obstacle {
             for (int i = size - m_snakeBody.size(); i < size; i++) {
                 if (obstacleX == (m_headPoints.get(i).getX())
                         && obstacleY == (m_headPoints.get(i).getY())) {
-                    System.out.println("OBSTACLE SPAWNS IN BODY");
                     GenerateObstacle();
                 }
             }
@@ -90,7 +89,6 @@ public class Obstacle {
      */
     public boolean HitObstacle(){
         if(m_snakeHead.getBoundsInParent().intersects(m_obstacleObject.getBoundsInParent())){
-            System.out.println("OBSTACLE HIT");
             return true;
         }
         return false;

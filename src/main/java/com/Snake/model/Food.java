@@ -69,7 +69,6 @@ public class Food {
             for (int i = size - m_snakeBody.size(); i < size; i++) {
                 if (foodX == (m_headPoints.get(i).getX())
                         && foodY == (m_headPoints.get(i).getY())) {
-                    System.out.println("FOOD SPAWNS IN BODY");
                     GenerateFood();
                 }
             }
@@ -89,7 +88,6 @@ public class Food {
      */
     public boolean EatenFood(){
         if(m_snakeHead.getBoundsInParent().intersects(m_foodObject.getBoundsInParent())){
-            System.out.println("FOOD EATEN");
             return true;
         }
         return false;
