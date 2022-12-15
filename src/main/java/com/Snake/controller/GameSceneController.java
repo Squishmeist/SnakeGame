@@ -58,8 +58,6 @@ public class GameSceneController implements Initializable{
     Food m_FoodClass;
     Obstacle m_ObstacleClass;
     Leaderboard m_LeaderboardClass = new Leaderboard();
-    Music m_MusicClass = new Music();
-    SceneSwitch m_SceneSwitchClass = new SceneSwitch();
     @FXML
     private AnchorPane gameAnchorPane;
     @FXML
@@ -255,7 +253,7 @@ public class GameSceneController implements Initializable{
             }
             m_LeaderboardClass.WriteLeaderboardFile(playerName, playerScore);
             timeline.stop();
-            m_SceneSwitchClass.SwitchScene(gameAnchorPane, "fxml/EndScene.fxml");
+            new SceneSwitch(gameAnchorPane, "fxml/EndScene.fxml");
         }
     }
 
@@ -287,7 +285,7 @@ public class GameSceneController implements Initializable{
                 m_foodExists = false;
                 m_nextLevelPossible = true;
                 playerScore += 521;
-                m_MusicClass.MusicPlayer("src/main/resources/com/Snake/sounds/foodeaten-bleep.mp3");
+                new Music("src/main/resources/com/Snake/sounds/foodeaten-bleep.mp3", false);
                 m_FoodClass.RemoveFood();
                 m_SnakeClass.AddSnakeTail();
             }
@@ -324,7 +322,7 @@ public class GameSceneController implements Initializable{
                 int snakeBodySize = m_snakeBody.size();
                 playerScore -= 521;
                 GameEnd();
-                m_MusicClass.MusicPlayer("src/main/resources/com/Snake/sounds/obstaclehit-bleep.mp3");
+                new Music("src/main/resources/com/Snake/sounds/obstaclehit-bleep.mp3", false);
                 m_obstacleExists = false;
                 m_SnakeClass.RemoveSnakeTail();
                 m_ObstacleClass.RemoveObstacle();
@@ -400,6 +398,6 @@ public class GameSceneController implements Initializable{
      */
     public void SwitchToStartScene() throws IOException {
         timeline.stop();
-        m_SceneSwitchClass.SwitchScene(gameAnchorPane, "fxml/StartScene.fxml");
+        new SceneSwitch(gameAnchorPane, "fxml/StartScene.fxml");
     }
 }

@@ -19,7 +19,6 @@ public class LeaderboardSceneController {
     private ArrayList<String> m_playernameList;
     private ArrayList<Integer> m_playerscoreList;
     Leaderboard m_LeaderboardClass = new Leaderboard();
-    SceneSwitch m_SceneSwitchClass = new SceneSwitch();
     @FXML
     AnchorPane leaderboardAnchorPane;
     @FXML
@@ -92,6 +91,6 @@ public class LeaderboardSceneController {
      * The SwitchScene class is then called to load the Start scene, passing the current AnchorPane and desired fxml.
      */
     public void SwitchToStartScene() throws IOException {
-        m_SceneSwitchClass.SwitchScene(leaderboardAnchorPane, "fxml/StartScene.fxml");
+        new SceneSwitch(leaderboardAnchorPane, "fxml/StartScene.fxml");
     }
 }

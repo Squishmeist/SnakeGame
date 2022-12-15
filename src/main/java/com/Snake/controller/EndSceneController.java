@@ -18,7 +18,6 @@ import static com.Snake.controller.GameSceneController.playerScore;
 
 
 public class EndSceneController {
-    SceneSwitch m_SwitchSceneClass = new SceneSwitch();
     @FXML
     AnchorPane startAnchorPane;
     @FXML
@@ -42,7 +41,7 @@ public class EndSceneController {
      * The SwitchScene class is then called to load the Start scene, passing the current AnchorPane and desired fxml.
      */
     public void SwitchToStartScene() throws IOException {
-        m_SwitchSceneClass.SwitchScene(startAnchorPane, "fxml/StartScene.fxml");
+        new SceneSwitch(startAnchorPane, "fxml/StartScene.fxml");
     }
 
     /**
@@ -50,7 +49,7 @@ public class EndSceneController {
      * The SwitchScene class is then called to load the Leaderboard scene, passing the current AnchorPane and desired fxml.
      */
     public void SwitchToLeaderboardScene() throws IOException {
-        m_SwitchSceneClass.SwitchScene(startAnchorPane, "fxml/LeaderboardScene.fxml");
+        new SceneSwitch(startAnchorPane, "fxml/LeaderboardScene.fxml");
     }
 
     /**

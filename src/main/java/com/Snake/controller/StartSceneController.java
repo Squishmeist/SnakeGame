@@ -1,5 +1,6 @@
 package com.Snake.controller;
 
+import com.Snake.model.Music;
 import com.Snake.model.SceneSwitch;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -18,7 +19,7 @@ import java.util.Objects;
 public class StartSceneController {
     private final String[] m_themeList = {"Snake", "Pacman", "SpaceInvader"};
     private final String[] m_speedList = {"Easy", "Medium", "Hard"};
-    SceneSwitch m_SceneSwitchClass = new SceneSwitch();
+    Music m_MusicClass;
     @FXML
     AnchorPane startAnchorPane;
     @FXML
@@ -32,11 +33,14 @@ public class StartSceneController {
      * Method called when Start scene is initially loaded.
      * This method sets the theme combo box items to be those set in the m_themeList.
      * It also sets the level combo box items to be those set in the m_levelList.
+     * The Music class is created, passing the file path of the sound and true as it
+     * needs to be repeated for background music.
      */
     @FXML
     private void initialize(){
         themeComboBox.getItems().addAll(m_themeList);
         speedComboBox.getItems().addAll(m_speedList);
+        m_MusicClass = new Music("src/main/resources/com/Snake/sounds/frogger.mp3", true);
     }
 
     /**
@@ -90,23 +94,27 @@ public class StartSceneController {
 
     /**
      * Method called when startButton is pressed on the Start scene.
-     * This method sets the playerName variable in the GameSceneController to be the text inputted by the player in the nameTextField.
+     * This method calls the MusicStop method in the Music Class to stop playing the background music.
+     * The playerName variable is also set in the GameSceneController to be the text inputted by the player in the nameTextField.
      * It also sets the themeNumber and levelNumber variable to be the returned variables from the called methods.
      * The SwitchScene class is then called to load the Game scene, passing the current AnchorPane and desired fxml.
      */
     public void SwitchToGameScene() throws IOException {
+        m_MusicClass.MusicStop();
         GameSceneController.playerName = nameTextField.getText();
         GameSceneController.gameTheme = ThemeSelected();
         GameSceneController.gameSpeed = SpeedSelected();
-        m_SceneSwitchClass.SwitchScene(startAnchorPane, "fxml/GameScene.fxml");
+        new SceneSwitch(startAnchorPane, "fxml/GameScene.fxml");
     }
 
     /**
      * Method called when leaderboardButton is pressed on the Start scene.
+     * MusicStop method called from the Music class to stop playing the background music.
      * SwitchScene class called passing the current AnchorPane and desired fxml.
      */
     public void SwitchToLeaderboardScene() throws IOException {
-        m_SceneSwitchClass.SwitchScene(startAnchorPane, "fxml/LeaderboardScene.fxml");
+        m_MusicClass.MusicStop();
+        new SceneSwitch(startAnchorPane, "fxml/LeaderboardScene.fxml");
     }
 
 

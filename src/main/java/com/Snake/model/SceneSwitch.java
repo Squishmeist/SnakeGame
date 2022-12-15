@@ -23,7 +23,7 @@ public class SceneSwitch {
      * @param fxml variable storing path to desired fxml file
      * @throws IOException
      */
-    public void SwitchScene(AnchorPane currentAnchorPane, String fxml) throws IOException {
+    public SceneSwitch(AnchorPane currentAnchorPane, String fxml) throws IOException {
         AnchorPane nextAnchorPane = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource(fxml)));
         currentAnchorPane.getChildren().removeAll();
         currentAnchorPane.getChildren().setAll(nextAnchorPane);

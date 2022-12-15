@@ -12,14 +12,29 @@ import javafx.scene.media.Media;
  */
 
 public class Music {
+    MediaPlayer player;
+
+
     /**
      * Method plays the file passed in when called.
+     * This method also repeats the sound playing if true is passed,
+     * setting the CycleCount to be indefinite.
      *
      * @param filename variable specifying path to desired sound to play
      */
-    public void MusicPlayer(String filename) {
+    public Music(String filename, boolean repeat) {
         Media media = new Media(Paths.get(filename).toUri().toString());
-        MediaPlayer player = new MediaPlayer(media);
+        player = new MediaPlayer(media);
+        if(repeat){
+            player.setCycleCount(MediaPlayer.INDEFINITE);
+        }
         player.play();
+    }
+
+    /**
+     * Method stops the music player.
+     */
+    public void MusicStop(){
+        player.stop();
     }
 }
