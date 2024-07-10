@@ -70,13 +70,16 @@ As you progress through the levels the target score increases as well as the spa
 
 #### Player:
 
+<p>
 <img src="src/main/resources/com/Snake/images/snake/snake-body.png" width="40" height="40">
 <img src="src/main/resources/com/Snake/images/snake/snake-body.png" width="40" height="40">
 <img src="src/main/resources/com/Snake/images/snake/snake-body.png" width="40" height="40">
 <img src="src/main/resources/com/Snake/images/snake/snake-head.png" width="40" height="40">
+</p>
 
 #### Food:
 
+<p>
 <img src="src/main/resources/com/Snake/images/snake/snake-food-apple.png" width="60" height="60">
 <img src="src/main/resources/com/Snake/images/snake/snake-food-banana.png" width="60" height="60">
 <img src="src/main/resources/com/Snake/images/snake/snake-food-blueberry.png" width="60" height="60">
@@ -85,6 +88,7 @@ As you progress through the levels the target score increases as well as the spa
 <img src="src/main/resources/com/Snake/images/snake/snake-food-grape.png" width="60" height="60">
 <img src="src/main/resources/com/Snake/images/snake/snake-food-grapefruit.png" width="60" height="60">
 <img src="src/main/resources/com/Snake/images/snake/snake-food-kiwi.png" width="60" height="60">
+</p>
 
 #### Obstables:
 
@@ -99,24 +103,30 @@ As you progress through the levels the target score increases as well as the spa
 
 #### Player:
 
+<p> 
 <img src="src/main/resources/com/Snake/images/pacman/pacman-body.png" width="40" height="40">
 <img src="src/main/resources/com/Snake/images/pacman/pacman-body.png" width="40" height="40">
 <img src="src/main/resources/com/Snake/images/pacman/pacman-body.png" width="40" height="40">
 <img src="src/main/resources/com/Snake/images/pacman/pacman-head.png" width="40" height="40">
+</p>
 
 #### Food:
 
+<p>
 <img src="src/main/resources/com/Snake/images/pacman/pacman-food-apple.png" width="60" height="60">
 <img src="src/main/resources/com/Snake/images/pacman/pacman-food-cherry.png" width="60" height="60">
 <img src="src/main/resources/com/Snake/images/pacman/pacman-food-grape.png" width="60" height="60">
 <img src="src/main/resources/com/Snake/images/pacman/pacman-food-orange.png" width="60" height="60">
 <img src="src/main/resources/com/Snake/images/pacman/pacman-food-strawberry.png" width="60" height="60">
+</p>
 
 #### Obstacles
 
+<p>
 <img src="src/main/resources/com/Snake/images/pacman/pacman-blinky.png" width="55" height="55">
 <img src="src/main/resources/com/Snake/images/pacman/pacman-clyde.png" width="60" height="60">
 <img src="src/main/resources/com/Snake/images/pacman/pacman-inky.png" width="60" height="60">
+</p>
 
 #### Background:
 
@@ -126,24 +136,30 @@ As you progress through the levels the target score increases as well as the spa
 
 #### Player:
 
+<p>
 <img src="src/main/resources/com/Snake/images/spaceinvaders/invader-body.png" width="40" height="40">
 <img src="src/main/resources/com/Snake/images/spaceinvaders/invader-body.png" width="40" height="40">
 <img src="src/main/resources/com/Snake/images/spaceinvaders/invader-body.png" width="40" height="40">
 <img src="src/main/resources/com/Snake/images/spaceinvaders/invader-head.png" width="40" height="40">
+</p>
 
 #### Food:
 
+<p>
 <img src="src/main/resources/com/Snake/images/spaceinvaders/invader-food-one.png" width="60" height="60">
 <img src="src/main/resources/com/Snake/images/spaceinvaders/invader-food-two.png" width="60" height="60">
 <img src="src/main/resources/com/Snake/images/spaceinvaders/invader-food-three.png" width="60" height="60">
 <img src="src/main/resources/com/Snake/images/spaceinvaders/invader-food-four.png" width="60" height="60">
 <img src="src/main/resources/com/Snake/images/spaceinvaders/invader-food-five.png" width="60" height="60">
 <img src="src/main/resources/com/Snake/images/spaceinvaders/invader-food-six.png" width="60" height="60">
+</p>
 
 #### Obstacles
 
+<p>
 <img src="src/main/resources/com/Snake/images/spaceinvaders/invader-blue.png" width="60" height="60">
 <img src="src/main/resources/com/Snake/images/spaceinvaders/invader-green.png" width="60" height="60">
+</p>
 
 #### Background:
 
